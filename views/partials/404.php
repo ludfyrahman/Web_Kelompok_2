@@ -1,0 +1,3 @@
+<div style="font-family: 'Century Gothic'; font-size: 40px; text-align: center; display: table; color: #777; height: 100%; width: 100%">
+    <div style="display: table-cell; vertical-align: middle">404 Page Not Found<br><a href="<?php echo BASEURL ?>"><button style="background: #3eaadf; cursor: pointer; color: #fff; padding: 15px; font-size: 18px; border: none; margin-top: 15px;">Kembali Ke Home</button></a></div>
+</div>
