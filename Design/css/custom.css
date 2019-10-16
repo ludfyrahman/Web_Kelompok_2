@@ -1,0 +1,159 @@
+@font-face {
+    font-family: "quicksand";
+    src: url("../fonts/Quicksand-Regular.otf");
+}
+body{
+    font-family: "quicksand";
+}
+/* navbar */
+.navbar-nav .nav-item{
+    margin-left: 50px;
+}
+/* banner */
+.banner{
+    background: #f6f6fc;
+}
+.banner-title{
+    font-size: 70px;
+}
+.subtitle{
+    font-size: 18px!important;
+}
+.padding{
+    padding: 16px 0;
+}
+.social .btn:first-child{
+    margin: 0px 0 0 0!important;
+}
+.social .btn{
+    margin-left: 16px;
+}
+.social a{
+    color: #8d9fc9;
+}
+.about{
+    padding: 12px;
+}
+.about p{
+    padding: 15px;
+}
+/* color */
+.bg-light{
+    background: #f6f6fc!important;
+}
+.bg-primary{
+    background: #2bc5b4!important;
+}
+.bg-gray{
+    background: #f6f6fc;
+}
+/* text */
+.color-primary{
+    color: #2bc5b4;
+}
+.color-gray{
+    color: #8d9fc9;
+}
+.title-small{
+    font-size: 25px;
+}
+.text-small{
+    font-size: 13px;
+}
+/* button */
+.btn-primary{
+    background:#2bc5b4;
+    border-radius: 50px;
+    border: 1px solid #2bc5b4;
+}
+.btn-primary:hover{
+    background: #fff;
+    border: 1px solid #2bc5b4;
+    color: #2bc5b4;
+}
+.btn-banner{
+    padding: 13px 30px;
+    font-size: 15px;
+}
+.btn-white{
+    background: #fff;
+}
+.btn-circle{
+    border-radius: 50%;
+}
+.btn-shadow{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+/* feature */
+.feature{
+    padding: 15px;
+}
+@media only screen and (min-width: 768px) {
+    .features .col-md-3:nth-child(even){
+        margin-top:80px;
+    }
+    
+}
+@media only screen and (max-width: 768px) {
+    .target .col-md-4{
+        margin-top: 80px!important;
+    }   
+}
+.radius{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+/* target */
+.target-title{
+    margin-bottom: 50px;
+}
+.card{
+    border: none;
+}
+.card img{
+    height: 170px;
+    
+}
+.card-img{
+    padding: 20px;
+}
+
+/* contact */
+.contact{
+    margin-top: 80px;
+    padding-top: 10px;
+    padding-bottom: 80px;
+}
+.contact .title{
+    margin: 40px 0 ;
+}
+.contact input{
+    padding: 20px;
+}
+footer .footer-top{
+    padding: 20px;
+}
+footer ul li{
+    list-style: none;
+    padding: 12px;
+}
+.footer-bottom{
+    padding:20px;
+    color: #fff;
+}
+.kos > .row {
+    overflow-x: auto;
+    padding: 12px;
+    white-space: nowrap;
+}
+::-webkit-scrollbar-thumb {
+    background: #2bc5b4; 
+    border-radius: 10px;
+  }
+.kos > .row > .col-md-4 {
+    display: inline-block;
+    float: none;
+    margin-top: 20px;
+}
