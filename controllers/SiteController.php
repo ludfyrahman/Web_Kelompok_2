@@ -14,35 +14,18 @@ class SiteController {
     }
 
     public function home() {
-        $slider = $this->slider->Select('*', "", "ORDER BY position ASC LIMIT 0, 5")[1];
-        $pariwisata = $this->pariwisata->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 4")[1];
-        $restoran = $this->restoran->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
-        $hotel = $this->hotel->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
-        $event = $this->event->Select('*', "", "ORDER BY id DESC LIMIT 0, 4")[1];
+        echo "home";
+        // $slider = $this->slider->Select('*', "", "ORDER BY position ASC LIMIT 0, 5")[1];
+        // $pariwisata = $this->pariwisata->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 4")[1];
+        // $restoran = $this->restoran->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
+        // $hotel = $this->hotel->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
+        // $event = $this->event->Select('*', "", "ORDER BY id DESC LIMIT 0, 4")[1];
 
-        Response::render('front/index', ['title' => 'Jelajahin Homepage', 'content' => 'site/home', 'pariwisata' => $pariwisata, 'restoran' => $restoran, 'hotel' => $hotel, 'event' => $event, 'slider' => $slider]);
+        // Response::render('front/index', ['title' => 'Jelajahin Homepage', 'content' => 'site/home', 'pariwisata' => $pariwisata, 'restoran' => $restoran, 'hotel' => $hotel, 'event' => $event, 'slider' => $slider]);
     }
 
     public function filter() {
-        $kw = Input::getOr('kw');
-        $ty = strtolower(Input::getOr('ty'));
-
-        $lists = [0, []];
-
-        if($ty == 'pariwisata') {
-            $lists = $this->pariwisata->Select('*', "WHERE title LIKE '%$kw%'", "ORDER BY id DESC");
-        }
-        else if($ty == 'event') {
-            $lists = $this->event->Select('*', "WHERE title LIKE '%$kw%'", "ORDER BY id DESC");
-        }
-        else if($ty == 'hotel') {
-            $lists = $this->hotel->Select('*', "WHERE title LIKE '%$kw%'", "ORDER BY id DESC");
-        }
-        else if($ty == 'restaurant') {
-            $lists = $this->restoran->Select('*', "WHERE title LIKE '%$kw%'", "ORDER BY id DESC");
-        }
-
-        Response::render('front/index', ['title' => 'Jelajahin Filter', 'content' => 'site/filter', 'lists' => $lists[1], 'type' => $ty]);
+        echo "filter";
     }
 
     public function sitemap() {

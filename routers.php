@@ -6,8 +6,9 @@
  * Time: 9:31
  */
 
-Router::resource('/admin/account', 'AkunController', 'login:1');
+Router::resource('/admin/pengguna', 'PenggunaController');
 
+Router::get('/admin/dashboard', 'DashboardController@index');
 Router::get('/admin/profile', 'AkunController@profile', 'login:1');
 Router::post('/admin/profile', 'AkunController@proses_profile', 'login:1');
 Router::get('/admin/password', 'AkunController@password', 'login:1');

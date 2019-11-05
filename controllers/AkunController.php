@@ -10,7 +10,6 @@ class AkunController {
 
     public function index() {
         $lists = $this->akun->Select('*', "", "ORDER BY id DESC");
-
         Response::render('back/index', ['title' => 'Daftar Akun', 'content' => 'account/index', 'lists' => $lists[1]]);
     }
 
@@ -31,7 +30,11 @@ class AkunController {
         $d = $_POST;
 
         try {
-            $arr = ['name' => $d['name'], 'email' => $d['email'], 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 'level' => $d['level']];
+            $arr = [
+                'name' => $d['name'], 
+                'email' => $d['email'], 
+                'password' => password_hash($d['password'], PASSWORD_DEFAULT), 
+                'level' => $d['level']];
 
             $this->akun->Insert($arr);
 
@@ -67,7 +70,7 @@ class AkunController {
     }
 
     public function delete($id) {
-        $this->akun->Delete("WHERE id = $id");
+        $this->akun->CustomQuery("SELECT DISTINCT(id) from pemesanan where tanggal BETWEEN '2019-02-02' and '2019-02-06'");
         Response::redirectWithAlert('admin/account/', ['info', "Berhasil menghapus akun"]);
     }
 

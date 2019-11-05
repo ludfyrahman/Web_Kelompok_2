@@ -1,129 +1,80 @@
-<aside>
-    <div class="top">
-        <img src="<?php echo BASEASSET ?>img/site/ic_adm.png" alt="Icon">
-        <span>Jelajahin</span>
+<div class="sidebar">
+    <div class="user-profile">
+        <div class="display-avatar animated-avatar">
+        <img class="profile-img img-lg rounded-circle" src="../assets/images/profile/male/image_1.png" alt="profile image">
+        </div>
+        <div class="info-wrapper">
+        <p class="user-name">Mochamad Ludfi Rahman</p>
+        <h6 class="display-income">ludfyr@gmail.com</h6>
+        </div>
     </div>
-
-    <div class="bottom">
-        <ul class="sidebar-menu">
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Akun</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>account/">List Akun</a></li>
-                    <li><a href="<?php echo BASEADM ?>account/add">Add Akun</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Event</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>event/">List Event</a></li>
-                    <li><a href="<?php echo BASEADM ?>event/add">Add Event</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Hotel</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>hotel/">List Hotel</a></li>
-                    <li><a href="<?php echo BASEADM ?>hotel/add">Add Hotel</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Kamar Hotel</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>room/">List Kamar</a></li>
-                    <li><a href="<?php echo BASEADM ?>room/add">Add Kamar</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Restoran</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>restaurant/">List Restoran</a></li>
-                    <li><a href="<?php echo BASEADM ?>restaurant/add">Add Restoran</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Pariwisata</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>pariwisata/">List Pariwisata</a></li>
-                    <li><a href="<?php echo BASEADM ?>pariwisata/add">Add Pariwisata</a></li>
-                </ul>
-            </li>
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img src="--><?php //echo BASEASSET ?><!--img/site/ic_fragment.png" alt="Icon">-->
-<!--                    <span>Paket Pariwisata</span>-->
-<!--                </a>-->
-<!---->
-<!--                <ul class="sidebar-submenu">-->
-<!--                    <li><a href="--><?php //echo BASEADM ?><!--packet/">List Paket</a></li>-->
-<!--                    <li><a href="--><?php //echo BASEADM ?><!--packet/add">Add Paket</a></li>-->
-<!--                </ul>-->
-<!--            </li>-->
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Slider</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>slider/">List Slider</a></li>
-                    <li><a href="<?php echo BASEADM ?>slider/add">Add Slider</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Review</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>review/">List Review</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Transaksi</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>transaction/">List Transaksi</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="<?php echo BASEASSET ?>img/site/ic_fragment.png" alt="Icon">
-                    <span>Report</span>
-                </a>
-
-                <ul class="sidebar-submenu">
-                    <li><a href="<?php echo BASEADM ?>reportGeneral/">Report Umum</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</aside>
+    <ul class="navigation-menu">
+        <li class="nav-category-divider">MAIN</li>
+        <li>
+            <a href="<?= BASEADM ?>">
+                <span class="link-title">Dashboard</span>
+                <i class="mdi mdi-gauge link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="<?= BASEADM."kos" ?>">
+                <span class="link-title">Kos</span>
+                <i class="mdi mdi-clipboard-outline link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#fasilitas" data-toggle="collapse" aria-expanded="false">
+                <span class="link-title">Fasilitas</span>
+                <i class="mdi mdi-flask link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu" id="fasilitas">
+                <li>
+                <a href="pages/sample-pages/login_1.html" target="_blank">Fasilitas</a>
+                </li>
+                <li>
+                <a href="pages/sample-pages/error_2.html" target="_blank">Sub Fasilitas</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#kategori" data-toggle="collapse" aria-expanded="false">
+                <span class="link-title">Kategori</span>
+                <i class="mdi mdi-flask link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu" id="kategori">
+                <li>
+                <a href="pages/sample-pages/login_1.html" target="_blank">Kategori</a>
+                </li>
+                <li>
+                <a href="pages/sample-pages/error_2.html" target="_blank">Sub Kategori</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#pengguna" data-toggle="collapse" aria-expanded="false">
+                <span class="link-title">Pengguna</span>
+                <i class="mdi mdi-flask link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu" id="pengguna">
+                <li>
+                <a href="pages/sample-pages/login_1.html" target="_blank">Pemilik Kos</a>
+                </li>
+                <li>
+                <a href="pages/sample-pages/error_2.html" target="_blank">Penyewa Kos</a>
+                </li>
+            </ul>
+        </li>
+        
+        <li class="nav-category-divider">DOCS</li>
+        <li>
+            <a href="../docs/docs.html">
+                <span class="link-title">Documentation</span>
+                <i class="mdi mdi-asterisk link-icon"></i>
+            </a>
+        </li>
+    </ul>
+    <!-- <div class="sidebar-upgrade-banner">
+        <p class="text-gray">Upgrade to <b class="text-primary">PRO</b> for more exciting features</p>
+        <a class="btn upgrade-btn" target="_blank" href="http://www.uxcandy.co/product/label-pro-admin-template/">Upgrade to PRO</a>
+    </div> -->
+</div>
