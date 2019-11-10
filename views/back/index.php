@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?php echo BASEASSET ?>/css/shared/style.css">
     <!-- endinject -->
     <!-- Layout style -->
+    <link rel="stylesheet" href="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.css">
     <link rel="stylesheet" href="<?php echo BASEASSET ?>/css/demo_1/style.css">
     <!-- Layout style -->
 </head>
@@ -35,6 +36,8 @@
     <!-- build:js -->
     <script src="<?php echo BASEASSET ?>/js/template.js"></script>
     <script src="<?php echo BASEASSET ?>/js/dashboard.js"></script>
+    <script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
+    <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
     <!-- endbuild -->
 
 </body>

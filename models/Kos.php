@@ -4,8 +4,8 @@
  * Created by PhpStorm.
  * User: RPL
  * Date: 05/11/2016
- * Time: 13:05
+ * Time: 10:02
  */
-class Slider extends ORM {
+class Kos extends ORM {
 
 }

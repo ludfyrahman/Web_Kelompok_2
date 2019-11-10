@@ -7,6 +7,11 @@
  */
 
 Router::resource('/admin/pengguna', 'PenggunaController');
+Router::resource('/admin/kos', 'KosController');
+Router::resource('/admin/fasilitas', 'FasilitasController');
+Router::resource('/admin/fasilitas/sub_fasilitas', 'SubFasilitasController');
+Router::resource('/admin/kategori', 'KategoriController');
+Router::resource('/admin/kategori/sub_kategori', 'SubKategoriController');
 
 Router::get('/admin/dashboard', 'DashboardController@index');
 Router::get('/admin/profile', 'AkunController@profile', 'login:1');

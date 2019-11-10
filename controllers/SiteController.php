@@ -1,7 +1,6 @@
 <?php
 
 
-App::LoadModels(['Restoran', 'Hotel', 'Event', 'Pariwisata', 'Slider']);
 class SiteController {
     private $restoran, $hotel, $event, $pariwisata, $slider;
 
