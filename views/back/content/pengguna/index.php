@@ -51,9 +51,6 @@
                               </a>
 
                             </td>
-                            <td class="actions">
-                              <i class="mdi mdi-dots-vertical"></i>
-                            </td>
                           </tr>
                         <?php $no++;} ?>
                         </tbody>

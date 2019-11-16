@@ -154,7 +154,8 @@ class PenggunaController {
     }
 
     public function login() {
-        Response::render('front/index', ['title' => 'Login Jelajahin', 'content' => 'user/login']);
+        // echo password_hash('1', PASSWORD_DEFAULT);
+        Response::render('front/index', ['title' => 'Login Papikos', 'content' => 'user/login']);
     }
 
     public function register() {
@@ -168,14 +169,14 @@ class PenggunaController {
             $a = $this->pengguna->Select('*', "WHERE email = '$d[email]'")[1];
 
             if(count($a) < 1) {
-                $_SESSION['alert'] = ['danger', "Login gagal, silahkan cek kembali"];
+                $_SESSION['alert'] = ['danger', "Login gagal, email anda tidak terdaftar silahkan cek kembali"];
                 return $this->login();
             }
 
             $a = $a[0];
 
             if(!password_verify($d['password'], $a['password'])) {
-                $_SESSION['alert'] = ['danger', "Login gagal, silahkan cek kembali"];
+                $_SESSION['alert'] = ['danger', "Login gagal, password anda salah silahkan cek kembali"];
                 return $this->login();
             }
 
@@ -216,6 +217,6 @@ class PenggunaController {
         unset($_SESSION['userid']);
         unset($_SESSION['userlevel']);
 
-        Response::redirectWithAlert('login/', ['info', 'Logout berhasil']);
+        Response::redirectWithAlert('/', ['info', 'Logout berhasil']);
     }
 }

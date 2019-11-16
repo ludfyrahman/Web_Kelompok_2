@@ -1,57 +1,63 @@
-<nav class="<?php echo ($content != 'site/home' ? 'navbar-style navbar-fixed' : '') ?>">
-    <div class="container">
-        <div class="navbar-logo">
-            <a href="<?php echo BASEURL ?>">
-                <img src="<?php echo BASEASSET ?>img/site/logo-white.png" alt="Logo" class="logo-white">
-                <img src="<?php echo BASEASSET ?>img/site/logo-gray.png" alt="Logo" class="logo-gray">
-            </a>
-        </div>
-
-        <div class="navbar-nav">
-            <ul class="menu">
-                <li><a href="<?php echo BASEURL ?>" data-target="#" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">Home</a></li>
-                <li><a href="<?php echo BASEURL ?>#about" data-target="#about" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">About</a></li>
-                <li><a href="<?php echo BASEURL ?>#pariwisata" data-target="#pariwisata" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">Pariwisata</a></li>
-                <li><a href="<?php echo BASEURL ?>#event" data-target="#event" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">Event</a></li>
-                <li><a href="<?php echo BASEURL ?>#hotel" data-target="#hotel" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">Hotel</a></li>
-                <li><a href="<?php echo BASEURL ?>#restaurant" data-target="#restaurant" class="<?php echo $content == 'site/home' ? 'nav-slide' : '' ?>">Restoran</a></li>
-
-                <?php
-                if(isset($_SESSION['userlevel'])) {
-                    echo "<li>
-                        <a href='#' class='toggle'>".explode(' ', Account::Get('name'))[0]."</a>
-                        <ul class='submenu'>";
-
-                    if($_SESSION['userlevel'] == 1) {
-                        echo "<li><a href='".BASEURL."admin/account/'>Control Panel</a></li>";
-                    }
-                    else {
-                        echo "<li><a href='".BASEURL."user/profile/'>Ubah Profil</a></li>";
-                        echo "<li><a href='".BASEURL."user/password/'>Ubah Password</a></li>";
-                        echo "<li><a href='".BASEURL."user/transaction/'>Daftar Transaksi</a></li>";
-                    }
-
-                    echo "<li><a href='".BASEURL."logout/'>Logout</a></li>
-                        </ul>
-                    </li>";
-                }
-                else {
-                    echo "<li>
-                        <a href='#' class='toggle'>Akun</a>
-                        <ul class='submenu'>
-                            <li><a href='".BASEURL."login/'>Login</a></li>
-                            <li><a href='".BASEURL."register/'>Register</a></li>
-                        </ul>
-                    </li>";
-                }
-                ?>
-            </ul>
-        </div>
-
-        <div class="toggle-bar">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+<header class="section header-area">
+    <div id="appo-header" class="main-header-area">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="<?= BASEASSET ?>/images/logo.svg" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appo-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Appo Menu -->
+                <div class="collapse navbar-collapse" id="appo-menu">
+                    <!-- Header Items -->
+                    <ul class="navbar-nav header-items ml-auto">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#">Beranda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#about">Tentang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#features">Fitur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#kos">Kos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link scroll" href="#team">Tim</a>
+                        </li>
+                        <?php 
+                            if(isset($_SESSION['userid'])){
+                        ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-2" role="button" data-toggle="dropdown">
+                                <?= Account::Get('email')?>
+                            </a>
+                            <!-- Blog Menu -->
+                            <div class="dropdown-menu mega-menu blog-menu px-3 py-md-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="single-menu">
+                                            <?php 
+                                                if($_SESSION['userlevel'] != 3){
+                                            ?>
+                                            <li><a href="<?= BASEURL."admin/dashboard" ?>" class="dropdown-item" href="blog-two-column.html">Dashboard</a></li>
+                                            <?php } ?>
+                                            <li><a href="<?= BASEURL."pengguna/profile" ?>" class="dropdown-item" href="blog-two-column.html">Profil</a></li>
+                                            <li><a href="<?= BASEURL."pengguna/keluar" ?>" class="dropdown-item" href="blog-two-column.html">Keluar</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
-</nav>
+</header>

@@ -28,6 +28,25 @@ class KosController {
         Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'kategori' => $kategori[1]]);
     }
 
+    public function storeFile($id){
+        $f = $_FILES;
+        foreach ($f["file"] as $key => $arrDetail) 
+        {
+            foreach ($arrDetail as $index => $detail) {
+                $targetDir = BASEPATH."assets/images/upload/kos/";
+                $fileName = $_FILES["file"]['name'][$index];
+                $targetFile = $targetDir.$fileName;
+
+                if(move_uploaded_file($_FILES["file"]['tmp_name'][$index],$targetFile))
+                {
+                    return "file uploaded"; 
+                }else{
+                    return "File not uploaded.";
+                }
+            }
+        }
+    }
+
     public function store() {
         $d = $_POST;
 
@@ -39,7 +58,7 @@ class KosController {
                 'harga' => $d['harga'],
                 'id_kategori' => $d['kategori'],
                 'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-                'ditambahkan_oleh' => 7
+                'ditambahkan_oleh' =>  Account::Get('id')
             ];
 
             $this->kos->Insert($arr);

@@ -17,7 +17,7 @@
       
       <div class="col-lg-12">
         <div class="grid">
-          <p class="grid-header">Daftar Kos <a href="<?=BASEADM."kos/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
+          <p class="grid-header">Daftar Kos <a href="<?=BASEADM."kost/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
           <?php Response::part('alert');?>
           <div class="item-wrapper">
             <div class="table-responsive">
@@ -43,11 +43,11 @@
                     <td><?=$l['nama_kategori']?></td>
                     <td><?= App::price($l['harga'])?></td>
                     <td>
-                      <a href="<?=BASEADM.'kos/'.$l['id'].'/edit' ?>" >
+                      <a href="<?=BASEADM.'kost/'.$l['id'].'/edit' ?>" >
                         <i class="mdi mdi-pencil-box-outline"></i>
                       </a>
                       
-                      <a href="<?=BASEADM.'kos/'.$l['id'].'/delete' ?>" >
+                      <a href="<?=BASEADM.'kost/'.$l['id'].'/delete' ?>" >
                         <i class="mdi mdi-delete-forever"></i>
                       </a>
 

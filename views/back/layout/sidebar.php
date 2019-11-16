@@ -17,9 +17,15 @@
             </a>
         </li>
         <li>
-            <a href="<?= BASEADM."kos" ?>">
+            <a href="<?= BASEADM."kost" ?>">
                 <span class="link-title">Kos</span>
-                <i class="mdi mdi-clipboard-outline link-icon"></i>
+                <i class="mdi mdi-account link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="<?= BASEADM."pengguna" ?>">
+                <span class="link-title">Pengguna</span>
+                <i class="mdi mdi-account link-icon"></i>
             </a>
         </li>
         <li>
@@ -49,12 +55,6 @@
                 <a href="pages/sample-pages/error_2.html" target="_blank">Sub Kategori</a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="<?= BASEADM."pengguna" ?>">
-                <span class="link-title">Pengguna</span>
-                <i class="mdi mdi-account link-icon"></i>
-            </a>
         </li>
         
         <li class="nav-category-divider">Transaksi</li>

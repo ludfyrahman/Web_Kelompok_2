@@ -40,7 +40,7 @@
                                 <?php } ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-sm btn-primary"><?=$type?></button>
+                            <button type="button" id="simpan" class="btn btn-sm btn-primary"><?=$type?></button>
                         </form>
                     </div>
                 </div>
@@ -51,7 +51,8 @@
                 <p class="grid-header">Foto/Video</p>
                 <div class="grid-body">
                     <div class="item-wrapper">
-                    <form action="file-upload.php" class="dropzone">
+                    <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg untuk video dengan type mp4 dengan ukuran maksimal 4MB</div>
+                    <form action="<?= BASEADM."kos/uploadFile" ?>" class="dropzone dropzone-previews">
                         <div class="fallback">
                             <input name="file" type="file" multiple />
                         </div>

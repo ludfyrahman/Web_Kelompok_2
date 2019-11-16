@@ -6,6 +6,6 @@
  * Date: 05/11/2016
  * Time: 10:02
  */
-class Akun extends ORM {
+class Pengguna extends ORM {
 
 }

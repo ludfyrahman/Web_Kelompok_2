@@ -8,7 +8,7 @@ class App {
     }
 
     public static function UploadImage($img, $path) {
-        move_uploaded_file($img['tmp_name'], BASEPATH . "assets/$path/$img[name]");
+        move_uploaded_file($img['tmp_name'], BASEPATH . "assets/images/upload/$path/$img[name]");
     }
 
     public static function RandomString($length) {
