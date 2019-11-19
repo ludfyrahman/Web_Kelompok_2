@@ -46,7 +46,7 @@
                                                     <i class="fab fa-twitter"></i>
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
-                                                <a class="google-plus" href="#">
+                                                <a class="google-plus" href="<?= $gmail ?>">
                                                     <i class="fab fa-google-plus-g"></i>
                                                     <i class="fab fa-google-plus-g"></i>
                                                 </a>

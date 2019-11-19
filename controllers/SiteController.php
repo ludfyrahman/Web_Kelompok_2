@@ -1,9 +1,10 @@
 <?php
 
-
+App::loadModels(['Kos']);
 class SiteController {
-
+    private $kos;
     public function __construct() {
+        $this->kos = new Kos();
     }
 
     public function home() {
@@ -11,9 +12,8 @@ class SiteController {
         // $pariwisata = $this->pariwisata->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 4")[1];
         // $restoran = $this->restoran->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
         // $hotel = $this->hotel->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
-        // $event = $this->event->Select('*', "", "ORDER BY id DESC LIMIT 0, 4")[1];
-
-        Response::render('front/index', ['title' => 'Papikos Homepage', 'content' => 'site/home']);
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id", "ORDER BY id DESC LIMIT 0, 3")[1];
+        Response::render('front/index', ['title' => 'Papikos Homepage', 'content' => 'site/home', 'kos' => $kos]);
     }
 
     public function filter() {

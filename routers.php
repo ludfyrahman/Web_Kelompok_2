@@ -9,7 +9,7 @@
     Router::resource('/admin/pengguna', 'PenggunaController');
     // kos
     Router::resource('/admin/kost', 'KosController');
-    Router::post('/admin/kos/uploadFile', 'KosController@storeFile');
+    Router::post('/admin/kos/uploadFile/:id', 'KosController@storeFile');
     // end kos
     Router::resource('/admin/fasilitas', 'FasilitasController');
     Router::resource('/admin/fasilitas/sub_fasilitas', 'SubFasilitasController');
@@ -27,6 +27,9 @@
     Router::get('/', 'SiteController@home');
     Router::get('/filter', 'SiteController@filter');
     Router::get('/pengguna/login', 'PenggunaController@login');
+    Router::get('/pengguna/profil', 'PenggunaController@profil');
+    Router::get('/pengguna/gmail', 'PenggunaController@gmail');
+    Router::get('/pengguna/lupaPasssword', 'PenggunaController@password');
     Router::get('/pengguna/keluar', 'PenggunaController@logout');
     Router::post('/pengguna/proses_login', 'PenggunaController@proses_login');
 // end front end

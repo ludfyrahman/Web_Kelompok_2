@@ -1,30 +1,22 @@
-<div id="content-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-lg-offset-3">
-                <div class="panel">
-                    <div class="panel-heading"><?php echo $title ?></div>
-                    <div class="panel-body">
-                        <form action="" method="post">
-                            <?php Response::part('alert') ?>
-
-                            <div class="form-group">
-                                <label for="old_password">Password Lama</label>
-                                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Old Password..." required>
+<div class="inner-wrapper d-flex flex-column align-items-center justify-content-between p-4">
+    <a href="index.html">
+        <img src="<?= BASEASSET ?>/images/logo/logo-3.png" alt="">
+    </a>
+    <!-- ***** Forgot Area Start ***** -->
+    <div class="forgot-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 mb-5 mb-md-0 mx-auto pt-4 pt-md-0">
+                    <img src="<?= BASEASSET ?>/images/welcome/forgot-thumb.png" alt="">
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 mb-5 mb-md-0">
+                    <h2 class="text-primary">Lupa Password Kamu?</h2>
+                    <p class="mt-3 mb-4">Masukkan email akun anda yang terdaftar di aplikasi kami. maka kami akan mengirimkan kode verifikasi ke email anda untuk mengubah password</p>
+                    <div class="input-group reset-password">
+                        <input type="email" class="form-control" placeholder="Enter your Email">
+                        <div class="input-group-append mt-3 mt-sm-0">
+                            <button type="button" class="btn btn-primary">Reset</button>
                         </div>
-
-                            <div class="form-group">
-                                <label for="password">Password Baru</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password_confirmation">Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation..." required>
-                            </div>
-
-                            <button class="btn btn-blue btn-block">Ubah</button>
-                        </form>
                     </div>
                 </div>
             </div>

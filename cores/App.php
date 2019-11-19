@@ -10,6 +10,15 @@ class App {
     public static function UploadImage($img, $path) {
         move_uploaded_file($img['tmp_name'], BASEPATH . "assets/images/upload/$path/$img[name]");
     }
+    public static function uri($index){
+        $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+        return $var[$index];
+    }
+    
+    public static function url(){
+        $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+        return $var;
+    }
 
     public static function RandomString($length) {
         $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -29,5 +38,8 @@ class App {
 
     public static function price($harga) {
         return "Rp. " . number_format($harga, 0, '', '.');
+    }
+    public static function breadcrumb(){
+        Response::part('breadcrumb');
     }
 }

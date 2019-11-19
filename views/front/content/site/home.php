@@ -380,13 +380,17 @@
                 <div class="col-12 col-md-10 col-lg-6">
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
-                        <h2 class="text-capitalize">Rekomendasi Kos</h2>
+                        <h2 class="text-capitalize">Kos Terbaru</h2>
                         <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
                         <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati.</p>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <?php 
+                foreach ($kos as $k) {
+                    // $link = BASEURL."kos/detail/".
+                ?>
                 <div class="col-12 col-md-6 col-lg-4">
                     <!-- Single Blog -->
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
@@ -398,58 +402,18 @@
                         <div class="blog-content p-4">
                             <!-- Meta Info -->
                             <ul class="meta-info d-flex justify-content-between">
-                                <li>By <a href="#">Anna Sword</a></li>
-                                <li><a href="#">Feb 05, 2019</a></li>
+                                <li>By <a href="#"><?= $k['nama_pemilik'] ?></a></li>
+                                <li><a href="#"><?= App::Date($k['tanggal_ditambahkan'], 'd M Y') ?></a></li>
                             </ul>
                             <!-- Blog Title -->
-                            <h3 class="blog-title my-3"><a href="#">Blog Title Here</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione obcaecati, animi vitae recusandae, praesentium quae.</p>
+                            <h3 class="blog-title my-3"><a href="#"><?= substr($k['nama'], 0,20)."..." ?></a></h3>
+                            <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
+                            <p><?= App::price($k['harga']) ?></p>
                             <a href="#" class="blog-btn mt-3">Read More</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog -->
-                    <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s" data-wow-delay="0.2s">
-                        <!-- Blog Thumb -->
-                        <div class="blog-thumb">
-                            <a href="#"><img src="<?=BASEASSET?>/images/bg/blog-thumb.jpg" alt=""></a>
-                        </div>
-                        <!-- Blog Content -->
-                        <div class="blog-content p-4">
-                            <!-- Meta Info -->
-                            <ul class="meta-info d-flex justify-content-between">
-                                <li>By <a href="#">Jassica William</a></li>
-                                <li><a href="#">Feb 05, 2019</a></li>
-                            </ul>
-                            <!-- Blog Title -->
-                            <h3 class="blog-title my-3"><a href="#">Blog Title Here</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione obcaecati, animi vitae recusandae, praesentium quae.</p>
-                            <a href="#" class="blog-btn mt-3">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog -->
-                    <div class="single-blog wow fadeIn" data-wow-duration="2s" data-wow-delay="0.4s">
-                        <!-- Blog Thumb -->
-                        <div class="blog-thumb">
-                            <a href="#"><img src="<?=BASEASSET?>/images/bg/blog-thumb.jpg" alt=""></a>
-                        </div>
-                        <!-- Blog Content -->
-                        <div class="blog-content p-4">
-                            <!-- Meta Info -->
-                            <ul class="meta-info d-flex justify-content-between">
-                                <li>By <a href="#">John Doe</a></li>
-                                <li><a href="#">Mar 05, 2019</a></li>
-                            </ul>
-                            <!-- Blog Title -->
-                            <h3 class="blog-title my-3"><a href="#">Blog Title Here</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione obcaecati, animi vitae recusandae, praesentium quae.</p>
-                            <a href="#" class="blog-btn mt-3">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </section>

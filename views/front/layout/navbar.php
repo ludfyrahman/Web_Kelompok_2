@@ -3,8 +3,8 @@
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
-                <a class="navbar-brand" href="#">
-                    <img class="logo" src="<?= BASEASSET ?>/images/logo.svg" alt="">
+                <a class="navbar-brand" href="<?= BASEURL ?>">
+                    <img class="logo" src="<?= BASEASSET ?>/images/logo.png" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appo-menu">
                     <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,7 @@
                                             ?>
                                             <li><a href="<?= BASEURL."admin/dashboard" ?>" class="dropdown-item" href="blog-two-column.html">Dashboard</a></li>
                                             <?php } ?>
-                                            <li><a href="<?= BASEURL."pengguna/profile" ?>" class="dropdown-item" href="blog-two-column.html">Profil</a></li>
+                                            <li><a href="<?= BASEURL."pengguna/profil" ?>" class="dropdown-item" href="blog-two-column.html">Profil</a></li>
                                             <li><a href="<?= BASEURL."pengguna/keluar" ?>" class="dropdown-item" href="blog-two-column.html">Keluar</a></li>
                                         </ul>
                                     </div>

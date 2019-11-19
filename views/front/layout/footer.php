@@ -9,7 +9,7 @@
                     <div class="footer-items">
                         <!-- Logo -->
                         <a class="navbar-brand" href="#">
-                            <img class="logo" src="<?=BASEASSET?>/images/logo/logo-white.png" alt="">
+                            <img class="logo" src="<?=BASEASSET?>/images/logo-white.png" alt="">
                         </a>
                         <p class="text-white-50 mt-2 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.</p>
                         <!-- Social Icons -->

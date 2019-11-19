@@ -39,8 +39,8 @@
     <script src="<?php echo BASEASSET ?>/js/template.js"></script>
     <script src="<?php echo BASEASSET ?>/js/dashboard.js"></script>
     <script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/fh-3.1.6/r-2.2.3/datatables.min.js"></script>
     <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/fh-3.1.6/r-2.2.3/datatables.min.js"></script>
     <!-- endbuild -->
 
 </body>

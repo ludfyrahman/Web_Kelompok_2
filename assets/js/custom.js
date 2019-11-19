@@ -1,10 +1,10 @@
-$(".table").DataTable();
+// setting dropzone for upload multiple image
 var currentFile = null;
 var formData = new FormData();
 Dropzone.autoDiscover = false;
 var myDropzone = new Dropzone(".dropzone", {
   addRemoveLinks: true,
-  url: BASEADM+"/kos/uploadFile",
+  url: BASEADM+"/kos/uploadFile/2",
   maxFiles:6,
   paramName: 'file',
   clickable: true,
@@ -34,19 +34,16 @@ var myDropzone = new Dropzone(".dropzone", {
     this.on("addedfile", function(file) {
         console.log(file);
         formData.append("file", file); 
-    //   if (currentFile) {
-    //     this.removeFile(currentFile);
-    //   }
-    //   currentFile = file;
     });
     this.on("removedfile", function(file) { 
         formData.delete('file');
       });
   }   
 });
-
+// process dropzone after click button
 $("#simpan").click(function(e){
     e.preventDefault();
     alert();
     myDropzone.processQueue();
-})	
+})
+$(".table").DataTable();

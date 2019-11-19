@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title><?php echo $title ?></title>
     
-
+    <link rel="icon" href="<?= BASEASSET ?>/images/favicon.png">
     <!-- ***** All CSS Files ***** -->
 
     <!-- Style css -->
