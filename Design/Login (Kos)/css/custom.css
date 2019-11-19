@@ -1,0 +1,14 @@
+.slides{
+    padding: 150px;
+    border: 1px black;  
+}
+.btn-primary{
+    float: right;
+
+}
+.copyright{
+    text-align: center;
+    padding: 0px;
+    margin: 0cm;
+    background-color: #c6c6c6;
+}
