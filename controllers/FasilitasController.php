@@ -39,7 +39,7 @@ class FasilitasController {
                 'harga' => $d['harga'],
                 'id_kategori' => $d['kategori'],
                 'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-                'ditambahkan_oleh' => 7
+                'ditambahkan_oleh' =>  Account::Get('id')
             ];
 
             $this->kos->Insert($arr);

@@ -17,6 +17,40 @@ class PenggunaController {
         Response::render('back/index', ['title' => 'Tambah pengguna', 'content' => 'pengguna/_form', 'type' => 'Tambah', 'data' => null]);
     }
 
+    function GetAccessToken($client_id, $redirect_uri, $client_secret, $code) {	
+        $url = 'https://www.googleapis.com/oauth2/v4/token';			
+    
+        $curlPost = 'client_id=' . $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
+        $ch = curl_init();		
+        curl_setopt($ch, CURLOPT_URL, $url);		
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		
+        curl_setopt($ch, CURLOPT_POST, 1);		
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);	
+        $data = json_decode(curl_exec($ch), true);
+        $http_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);		
+        if($http_code != 200) 
+            throw new Exception('Error : Failed to receieve access token');
+        
+        return $data;
+    }
+
+    function GetUserProfileInfo($access_token) {	
+        $url = 'https://www.googleapis.com/oauth2/v2/userinfo?fields=name,email,gender,id,picture,verified_email';	
+        
+        $ch = curl_init();		
+        curl_setopt($ch, CURLOPT_URL, $url);		
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer '. $access_token));
+        $data = json_decode(curl_exec($ch), true);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);		
+        if($http_code != 200) 
+            throw new Exception('Error : Failed to get user information');
+            
+        return $data;
+    }
+
     public function edit($id) {
         $data = $this->pengguna->Select("*", "WHERE id = $id")[1];
 
@@ -90,17 +124,14 @@ class PenggunaController {
         Response::redirectWithAlert('admin/pengguna/', ['info', "Berhasil menghapus pengguna"]);
     }
 
-    public function profile() {
-        if($_SESSION['userlevel'] == 1)
-            Response::render('back/index', ['title' => 'Ubah Profil', 'content' => 'profile']);
-        else if($_SESSION['userlevel'] == 2)
-            Response::render('front/index', ['title' => 'Ubah Profil', 'content' => 'user/profile']);
+    public function profil() {
+        Response::render('front/index', ['title' => 'Ubah Profil', 'content' => 'user/profil']);
     }
 
     public function password() {
-        if($_SESSION['userlevel'] == 1)
-            Response::render('back/index', ['title' => 'Ubah Password', 'content' => 'password']);
-        else if($_SESSION['userlevel'] == 2)
+        // if($_SESSION['userlevel'] == 1)
+        //     Response::render('back/index', ['title' => 'Ubah Password', 'content' => 'password']);
+        // else if($_SESSION['userlevel'] == 2)
             Response::render('front/index', ['title' => 'Ubah Password', 'content' => 'user/password']);
     }
 
@@ -154,7 +185,18 @@ class PenggunaController {
     }
 
     public function login() {
-        Response::render('front/index', ['title' => 'Login Jelajahin', 'content' => 'user/login']);
+        $gmail_url = 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online';
+        Response::render('front/index', ['title' => 'Login Papikos', 'content' => 'user/login', 'gmail' => $gmail_url]);
+    }
+
+    public function gmail(){
+        $gapi = new GoogleLoginApi();
+        $data = $gapi->GetAccessToken(CLIENT_ID, CLIENT_REDIRECT_URL, CLIENT_SECRET, $_GET['code']);
+		
+		// Get user information
+        $user_info = $gapi->GetUserProfileInfo($data['access_token']);
+        print_r($user_info);
+        echo "works";
     }
 
     public function register() {
@@ -168,14 +210,14 @@ class PenggunaController {
             $a = $this->pengguna->Select('*', "WHERE email = '$d[email]'")[1];
 
             if(count($a) < 1) {
-                $_SESSION['alert'] = ['danger', "Login gagal, silahkan cek kembali"];
+                $_SESSION['alert'] = ['danger', "Login gagal, email anda tidak terdaftar silahkan cek kembali"];
                 return $this->login();
             }
 
             $a = $a[0];
 
             if(!password_verify($d['password'], $a['password'])) {
-                $_SESSION['alert'] = ['danger', "Login gagal, silahkan cek kembali"];
+                $_SESSION['alert'] = ['danger', "Login gagal, password anda salah silahkan cek kembali"];
                 return $this->login();
             }
 
@@ -216,6 +258,6 @@ class PenggunaController {
         unset($_SESSION['userid']);
         unset($_SESSION['userlevel']);
 
-        Response::redirectWithAlert('login/', ['info', 'Logout berhasil']);
+        Response::redirectWithAlert('/', ['info', 'Logout berhasil']);
     }
 }

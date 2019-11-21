@@ -1,23 +1,11 @@
 <div class="page-content-wrapper-inner">
-  <div class="viewport-header">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb has-arrow">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <!-- <li class="breadcrumb-item">
-          <a href="#">UI Elements</a>
-        </li> -->
-        <li class="breadcrumb-item active" aria-current="page">Kos</li>
-      </ol>
-    </nav>
-  </div>
+  <?php App::breadcrumb()?>
   <div class="content-viewport">
     <div class="row">
       
       <div class="col-lg-12">
         <div class="grid">
-          <p class="grid-header">Daftar Kos <a href="<?=BASEADM."kos/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
+          <p class="grid-header">Daftar Kos <a href="<?=BASEADM."kost/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
           <?php Response::part('alert');?>
           <div class="item-wrapper">
             <div class="table-responsive">
@@ -43,11 +31,11 @@
                     <td><?=$l['nama_kategori']?></td>
                     <td><?= App::price($l['harga'])?></td>
                     <td>
-                      <a href="<?=BASEADM.'kos/'.$l['id'].'/edit' ?>" >
+                      <a href="<?=BASEADM.'kost/'.$l['id'].'/edit' ?>" >
                         <i class="mdi mdi-pencil-box-outline"></i>
                       </a>
                       
-                      <a href="<?=BASEADM.'kos/'.$l['id'].'/delete' ?>" >
+                      <a href="<?=BASEADM.'kost/'.$l['id'].'/delete' ?>" >
                         <i class="mdi mdi-delete-forever"></i>
                       </a>
 

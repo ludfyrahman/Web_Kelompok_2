@@ -1,14 +1,5 @@
 <div class="page-content-wrapper-inner">
-    <div class="viewport-header">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb has-arrow">
-        <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Kos</li>
-        </ol>
-    </nav>
-    </div>
+    <?php App::breadcrumb()?>
     <div class="content-viewport">
     <div class="row">
         <div class="col-lg-6 equel-grid">
@@ -40,7 +31,7 @@
                                 <?php } ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-sm btn-primary"><?=$type?></button>
+                            <button type="submit" id="simpan" class="btn btn-sm btn-primary pull-right"><?=$type?></button>
                         </form>
                     </div>
                 </div>
@@ -51,7 +42,8 @@
                 <p class="grid-header">Foto/Video</p>
                 <div class="grid-body">
                     <div class="item-wrapper">
-                    <form action="file-upload.php" class="dropzone">
+                    <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg untuk video dengan type mp4 dengan ukuran maksimal 4MB</div>
+                    <form action="#" class="dropzone dropzone-previews">
                         <div class="fallback">
                             <input name="file" type="file" multiple />
                         </div>
@@ -60,6 +52,7 @@
                 </div>
             </div>
         </div>
+        
         
         
     </div>

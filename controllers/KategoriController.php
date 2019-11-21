@@ -31,7 +31,7 @@ class KategoriController {
             $arr = [
                 'nama' => $d['nama'], 
                 'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-                'ditambahkan_oleh' => 7
+                'ditambahkan_oleh' => Account::Get('id')
             ];
 
             $this->kategori->Insert($arr);
