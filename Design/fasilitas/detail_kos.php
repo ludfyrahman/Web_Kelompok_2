@@ -26,7 +26,7 @@
             <div calss="col-md-6"></div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a href="" class="navbar-brand">
-                    <img src="Tugas PPL.png" style="width: 60px;" />
+                    <img src="Papi Kos tok.png" style="width: 200px;" />
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
@@ -60,6 +60,7 @@
                                 <button class="btn btn-primary float-right">Delete</button>
                             </div>
                             <div class="col-md-4">
+                                <p>Deskripsi Kos</p>
                                 <p>Lantai 1 (6 kamar)</p>
                                 <p>Lantai 2 (7 kamar)</p>
                                 <p>lantai 1 (Rp 400.000 - Rp 800.000</p>
@@ -84,7 +85,7 @@
                                         <p>Ruang Tamu</p>
                                     </div>
                                     <div class="col-md-12">
-                                    <p>Fasilitas umum terdekat</p>
+                                        <p>Fasilitas umum terdekat</p>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <img src="masjid.png" style="width: 15%" />
@@ -104,17 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-<!--                                     
-                                        <div class="col-md-4">
-                                        <p>Fasilitas umum terdekat</p>
-                                        <div class="col-md-6">
-                                            <img src="dapur.png" style="width: 15%" />
-                                            <p>Dapur Bersama</p>
-                                            <img src="kamar mandi.png" style="width: 15%" />
-                                            <p>kamar mandi bersama</p>
-                                        </div>
-                                    </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>

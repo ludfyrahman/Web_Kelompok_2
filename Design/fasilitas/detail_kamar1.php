@@ -26,7 +26,7 @@
             <div calss="col-md-6"></div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a href="" class="navbar-brand">
-                    <img src="Tugas PPL.png" style="width: 60px;" />
+                    <img src="Papi Kos tok.png" style="width: 200px;" />
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
