@@ -22,7 +22,7 @@ Kos murah, nyaman, berkualitas dan strategis</p>
                 </div>
                 <!-- Video Icon -->
                 <div class="video-icon d-none d-lg-block">
-                    <a class="play-btn" data-fancybox href="https://www.youtube.com/watch?v=hs1HoLs4SD0">
+                    <a class="play-btn" data-fancybox href="https://youtu.be/bvxf5IfntD0">
                         <i class="icofont-ui-play"></i>
                     </a>
                 </div>

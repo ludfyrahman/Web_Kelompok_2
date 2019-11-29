@@ -32,6 +32,8 @@
     Router::get('/pengguna/lupaPasssword', 'PenggunaController@password');
     Router::get('/pengguna/keluar', 'PenggunaController@logout');
     Router::post('/pengguna/proses_login', 'PenggunaController@proses_login');
+
+    Router::get('/kos/detail/:id', 'KosController@detail');
 // end front end
 
 

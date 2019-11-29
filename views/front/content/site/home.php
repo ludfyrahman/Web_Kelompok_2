@@ -402,14 +402,14 @@
                         <div class="blog-content p-4">
                             <!-- Meta Info -->
                             <ul class="meta-info d-flex justify-content-between">
-                                <li>By <a href="#"><?= $k['nama_pemilik'] ?></a></li>
-                                <li><a href="#"><?= App::Date($k['tanggal_ditambahkan'], 'd M Y') ?></a></li>
+                                <li>By <a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= $k['nama_pemilik'] ?></a></li>
+                                <li><a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= App::Date($k['tanggal_ditambahkan'], 'd M Y') ?></a></li>
                             </ul>
                             <!-- Blog Title -->
                             <h3 class="blog-title my-3"><a href="#"><?= substr($k['nama'], 0,20)."..." ?></a></h3>
                             <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
                             <p><?= App::price($k['harga']) ?></p>
-                            <a href="#" class="blog-btn mt-3">Read More</a>
+                            <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya</a>
                         </div>
                     </div>
                 </div>

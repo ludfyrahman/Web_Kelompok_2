@@ -99,10 +99,16 @@ class KosController {
     }
 
     public function delete($id) {
-        // $this->akun->CustomQuery("SELECT DISTINCT(id) from pemesanan where tanggal BETWEEN '2019-02-02' and '2019-02-06'");
         $this->kos->delete("WHERE id='$id'");
         Response::redirectWithAlert('admin/kos/', ['info', "Berhasil menghapus akun"]);
     }
 
-    
+    public function detail($id){
+        $data = $this->kos->Select("k.id, k.nama as nama_kos, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id]'")[1];
+        // echo "<pre>";
+        // print_r($media);
+        // echo "</pre>";
+        Response::render('front/index', ['title' => 'Detail', 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media]);
+    }
 }
