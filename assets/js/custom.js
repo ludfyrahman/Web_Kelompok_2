@@ -1,4 +1,5 @@
 // setting dropzone for upload multiple image
+$(".table").DataTable();
 var currentFile = null;
 var formData = new FormData();
 Dropzone.autoDiscover = false;
@@ -46,4 +47,3 @@ $("#simpan").click(function(e){
     alert();
     myDropzone.processQueue();
 })
-$(".table").DataTable();

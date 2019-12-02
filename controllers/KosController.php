@@ -1,6 +1,6 @@
 <?php
 
-App::loadModels(['kategori', 'media']);
+App::loadModels(['kategori', 'media', 'fasilitas', 'sub_fasilitas']);
 class KosController {
     private $kos, $kategori, $media;
 
@@ -8,6 +8,8 @@ class KosController {
         $this->kos = new Kos;
         $this->kategori = new Kategori;
         $this->media = new Media;
+        $this->fasilitas = new Fasilitas;
+        $this->sub_fasilitas = new Sub_fasilitas;
         // echo App::uri(4);
     }
 
@@ -104,11 +106,41 @@ class KosController {
     }
 
     public function detail($id){
-        $data = $this->kos->Select("k.id, k.nama as nama_kos, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
+        $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
         $media = $this->media->Select("*", "WHERE id_kos='$data[id]'")[1];
+        $fasilitas = $this->fasilitas->Select("*", "WHERE id_kos='$data[id]'")[1];
         // echo "<pre>";
-        // print_r($media);
+        $index = 0;
+        $index = 0;
+        $subfas = array();
+        foreach($fasilitas as $f){
+            $subfas[$index] = $f;
+            $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
+            $in = 0;
+            foreach($sub_fasilitas as $sub){
+                $subfas[$index]['sub'][$in] = $sub;
+                $in++;
+            }
+            $index++;
+        }
+        // print_r($subfas);
+        
         // echo "</pre>";
-        Response::render('front/index', ['title' => 'Detail', 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media]);
+        Response::render('front/index', ['title' => $data['nama_kos'], 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media, 'subfas' => $subfas]);
     }
+    public function pesan($id){
+        $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id]' LIMIT 1")[1][0];
+        if(!isset($_SESSION['userid'])){
+            Response::render('front/index', ['title' => 'Login Jelajahin', 'content' => 'user/login']);
+        }else{
+            Response::render('front/index', ['title' => "Pesan ".$data['nama_kos'], 'content' => 'kos/pesan', 'type' => 'Tambah', 'data' => $data, 'media' => $media]);
+        }
+    }
+    public function semua(){
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
+
+        Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1]]);
+    }
+    
 }

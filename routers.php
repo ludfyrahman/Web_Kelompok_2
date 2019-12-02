@@ -28,12 +28,18 @@
     Router::get('/filter', 'SiteController@filter');
     Router::get('/pengguna/login', 'PenggunaController@login');
     Router::get('/pengguna/profil', 'PenggunaController@profil');
-    Router::get('/pengguna/gmail', 'PenggunaController@gmail');
+    Router::get('/pengguna/gmail?:code', 'PenggunaController@gmail');
     Router::get('/pengguna/lupaPasssword', 'PenggunaController@password');
-    Router::get('/pengguna/keluar', 'PenggunaController@logout');
+    Router::get('/keluar', 'PenggunaController@logout');
     Router::post('/pengguna/proses_login', 'PenggunaController@proses_login');
 
     Router::get('/kos/detail/:id', 'KosController@detail');
+    
+    // pemesanan
+    Router::get('/kos/pesan/:id', 'KosController@pesan');
+    Router::get('/kos/semua', 'KosController@semua');
+    Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
+
 // end front end
 
 

@@ -17,10 +17,10 @@
                         <div class="modal-header p-0 border-0">
                             <ul class="nav nav-pills" id="pills-tab">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="login-tab" data-toggle="pill" href="#login">Login</a>
+                                    <a class="nav-link active" id="login-tab" data-toggle="pill" href="#login">Masuk</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="signup-tab" data-toggle="pill" href="#signup">Sign Up</a>
+                                    <a class="nav-link" id="signup-tab" data-toggle="pill" href="#signup">Daftar</a>
                                 </li>
                             </ul>
                             <button type="button" class="close m-0" data-dismiss="modal" aria-label="Close">
@@ -35,7 +35,7 @@
                                     <form action="<?= BASEURL."pengguna/proses_login" ?>" method="post" class="login-form">
                                         <!-- Social Login -->
                                         <div class="social-login text-center">
-                                            <h5 class="fw-4 mt-2 mb-3">with your social network</h5>
+                                            <h5 class="fw-4 mt-2 mb-3">Masuk dengan akun sosial media anda</h5>
                                             <!-- Social Icons -->
                                             <div class="social-icons d-flex justify-content-center">
                                                 <a class="facebook" href="#">
@@ -46,7 +46,7 @@
                                                     <i class="fab fa-twitter"></i>
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
-                                                <a class="google-plus" href="#" onclick="login()">
+                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>">
                                                     <i class="fab fa-google-plus-g"></i>
                                                     <i class="fab fa-google-plus-g"></i>
                                                 </a>
@@ -87,7 +87,7 @@
                                     <form action="#" class="login-form signup-form">
                                         <!-- Social Login -->
                                         <div class="social-login text-center">
-                                            <h5 class="fw-4 mt-2 mb-3">with your social network</h5>
+                                            <h5 class="fw-4 mt-2 mb-3">Daftar dengan akun sosial media anda</h5>
                                             <!-- Social Icons -->
                                             <div class="social-icons d-flex justify-content-center">
                                                 <a class="facebook" href="#">
@@ -98,7 +98,7 @@
                                                     <i class="fab fa-twitter"></i>
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
-                                                <a class="google-plus" href="#">
+                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>">
                                                     <i class="fab fa-google-plus-g"></i>
                                                     <i class="fab fa-google-plus-g"></i>
                                                 </a>
@@ -112,13 +112,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon3">
+                                            <input type="text" class="form-control"name="nama" placeholder="Nama" aria-label="Nama" aria-describedby="basic-addon3" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon4"><i class="fas fa-envelope"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon4">
+                                            <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon4" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">

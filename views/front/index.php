@@ -12,6 +12,9 @@
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?=BASEASSET?>css/responsive.css">
+    <link rel="stylesheet" href="<?=BASEASSET?>css/custom.css">
+    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+    <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
 <body class="miami">
     <!--====== Preloader Area Start ======-->
@@ -44,7 +47,6 @@ if($content != 'user/login')
 
 <script>var BASEURL = '<?php echo BASEURL ?>'; var BASEADM = '<?php echo BASEADM ?>';</script>
 <script src="<?php echo BASEASSET ?>js/jquery-3.3.1.min.js"></script>
-<script src="<?php echo BASEASSET ?>js/script.js"></script>
 
 <!-- Bootstrap js -->
 <script src="<?php echo BASEASSET ?>vendors/bootstrap/popper.min.js"></script>
@@ -55,6 +57,25 @@ if($content != 'user/login')
 
 <!-- Active js -->
 <script src="<?php echo BASEASSET ?>/js/active.js"></script>
+<script src="<?php echo BASEASSET ?>js/script.js"></script>
+
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
+</script>
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: <?=$data['latitude']?>, lng: <?= $data['longitude']?>};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+</script>
+
 
 
 </body>

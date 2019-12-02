@@ -10,8 +10,14 @@
                     <p class="my-3">Sekarang gak perlu repot lagi, dapatkan infonya di papi kos
 Kos murah, nyaman, berkualitas dan strategis</p>
                     <div class="button-group">
+                    <?php
+                    if(isset($_SESSION['userlevel'])){
+                    ?>
+                        <a href="<?= BASEURL ?>#kos" class="btn btn-bordered"><span>Cari Kos</span></a>
+                    <?php }else{?>
                         <a href="<?= BASEURL."pengguna/login"?>" class="btn btn-bordered"><span>Bergabung</span></a>
-                        <a href="<?= BASEURL."pengguna/login"?>"" class="btn btn-bordered d-none d-sm-inline-block">Masuk</a>
+                        <a href="<?= BASEURL."pengguna/login"?>" class="btn btn-bordered d-none d-sm-inline-block">Masuk</a>
+                    <?php } ?>
                     </div>
                 </div>
             </div>

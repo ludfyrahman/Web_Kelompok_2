@@ -6,7 +6,22 @@ class App {
             if(!class_exists($a))
                 include BASEPATH . "models/$a.php";
     }
-
+    public static function validateTypeUpload($array, $file){
+            
+        if(in_array($file['type'], $array)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function validateSizeUpload($limit, $file){
+        // 39092  = 39 kb
+        if($file['size'] > $limit){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public static function UploadImage($img, $path) {
         move_uploaded_file($img['tmp_name'], BASEPATH . "assets/images/upload/$path/$img[name]");
     }

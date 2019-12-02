@@ -13,8 +13,8 @@
                         </div>
                         <!-- Benifits Text -->
                         <div class="benifits-text">
-                            <h3 class="mb-2">Mudah Digunakan</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, ipsum.</p>
+                            <h3 class="mb-2">Aman</h3>
+                            <p>Keamanan kos yang terjamin dengan adanya satpam atau pengamanan di setiap tempat kos</p>
                         </div>
                     </div>
                 </div>
@@ -26,8 +26,8 @@
                         </div>
                         <!-- Benifits Text -->
                         <div class="benifits-text">
-                            <h3 class="mb-2">Praktis</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, ipsum.</p>
+                            <h3 class="mb-2">Nyaman</h3>
+                            <p>Kenyamanan kos yang Harga yang terjangkau dengan fasilitas yang lengkap</p>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         </div>
                         <!-- Benifits Text -->
                         <div class="benifits-text">
-                            <h3 class="mb-2">Lengkap</h3>
+                            <h3 class="mb-2">Berkualitas</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, ipsum.</p>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                         </div>
                         <!-- Benifits Text -->
                         <div class="benifits-text">
-                            <h3 class="mb-2">Berkualitas</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, ipsum.</p>
+                            <h3 class="mb-2">Strategis</h3>
+                            <p>Tempat kos yang dekat dengan tempat - tempat yang menunjang kebutuhan,seperti lokasi kampus ataupun tempat kerja</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                         <!-- Single Work -->
                         <div class="single-work d-inline-block text-center p-4">
                             <h3 class="mb-2">Register</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fugit labore delectus odio nisi eaque?</p>
+                            <p>fitur ini digunakan untuk mendaftar sebagai pengguna atau pemilik dan diperuntukkan bagi yang belum memiliki akun</p>
                         </div>
                     </a>
                 </div>
@@ -113,7 +113,7 @@
                         <!-- Single Work -->
                         <div class="single-work d-inline-block text-center p-4">
                             <h3 class="mb-2">Login</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fugit labore delectus odio nisi eaque?</p>
+                            <p>Fitur log in diperlukan untuk mengakses website lebih luas dan melakukan pemesanan kos</p>
                         </div>
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                         <!-- Single Work -->
                         <div class="single-work d-inline-block text-center p-4">
                             <h3 class="mb-2">Cari Kos</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fugit labore delectus odio nisi eaque?</p>
+                            <p>Fitur cari kos untuk melakukan pencarian kos berdasarkan kampus terdekat atau tempat kerja dari kota yang dipilih.</p>
                         </div>
                     </a>
                 </div>
@@ -131,7 +131,7 @@
                         <!-- Single Work -->
                         <div class="single-work d-inline-block text-center p-4">
                             <h3 class="mb-2">Pesan Kos</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fugit labore delectus odio nisi eaque?</p>
+                            <p>Fitur ini untuk memesan kos atau melakukan pembookingan kos sebelum pembayaran DP. Fitur ini mengharuskan pengguna untuk log in terlebih dahulu.</p>
                         </div>
                     </a>
                 </div>
@@ -167,7 +167,7 @@
                                         </div>
                                         <!-- Counter Text -->
                                         <div class="counter-text">
-                                            <span class="counter d-inline-block mt-3 mb-2">2350</span>
+                                            <span class="counter d-inline-block mt-3 mb-2"><?= $jumlahkos ?></span>
                                             <h5>Kos</h5>
                                         </div>
                                     </div>
@@ -181,7 +181,7 @@
                                         </div>
                                         <!-- Counter Text -->
                                         <div class="counter-text">
-                                            <span class="counter d-inline-block mt-3 mb-2">1895</span>
+                                            <span class="counter d-inline-block mt-3 mb-2"><?= $jumlahkategori ?></span>
                                             <h5>Kategori</h5>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                         </div>
                                         <!-- Counter Text -->
                                         <div class="counter-text">
-                                            <span class="counter d-inline-block mt-3 mb-2">1580</span>
+                                            <span class="counter d-inline-block mt-3 mb-2"><?= $jumlahpengguna ?></span>
                                             <h5>Pengguna</h5>
                                         </div>
                                     </div>
@@ -382,10 +382,12 @@
                     <div class="section-heading text-center">
                         <h2 class="text-capitalize">Kos Terbaru</h2>
                         <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
-                        <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati.</p>
+                        <!-- <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet,/ consectetur adipisicing elit. Laborum obcaecati.</p> -->
                     </div>
                 </div>
             </div>
+            <a href="<?=BASEURL."kos/semua"?>" style="margin:12px;float:right">Lihat Semua</a>
+            <div style="clear:both"></div>
             <div class="row">
                 <?php 
                 foreach ($kos as $k) {
@@ -396,7 +398,7 @@
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                         <!-- Blog Thumb -->
                         <div class="blog-thumb">
-                            <a href="#"><img src="<?=BASEASSET?>/images/bg/blog-thumb.jpg" alt=""></a>
+                            <a href="#"><img src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a>
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content p-4">
@@ -445,7 +447,6 @@
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Nevarida Sindyka Diliana Putri </h3>
                             <h5 class="team-post mb-2">Product Owner</h5>
-                            <p class="team-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, ex quibusdam aliquid dicta a explicabo.</p>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">
@@ -476,7 +477,6 @@
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Mochamad Ludfi Rahman </h3>
                             <h5 class="team-post mb-2">Scrum Master dan dev team</h5>
-                            <p class="team-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, ex quibusdam aliquid dicta a explicabo.</p>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">
@@ -507,7 +507,6 @@
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Mochamad Satria Maulana</h3>
                             <h5 class="team-post mb-2">Editing dan dev team</h5>
-                            <p class="team-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, ex quibusdam aliquid dicta a explicabo.</p>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">
@@ -537,8 +536,7 @@
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Ihya Reza Mufti</h3>
-                            <h5 class="team-post mb-2">Dokumentasi dan dev team</h5>
-                            <p class="team-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, ex quibusdam aliquid dicta a explicabo.</p>
+                            <h5 class="team-post mb-2">tester dan dev team</h5>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">
@@ -569,7 +567,6 @@
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Sri Wahyuni</h3>
                             <h5 class="team-post mb-2">Dokumentasi dan dev team</h5>
-                            <p class="team-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, ex quibusdam aliquid dicta a explicabo.</p>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">

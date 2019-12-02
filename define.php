@@ -20,7 +20,11 @@ define('BASEPATH', str_replace('\\', '/', dirname(__FILE__)) . '/');
 define('CLIENT_ID', '381036941652-c840m0csbpp1fb22108i1vkeeg4t9r6i.apps.googleusercontent.com');
 
 /* Google App Client Secret */
-define('CLIENT_SECRET', 'wALbRhhB4vWGoXDsoI7JcRAh');
+define('CLIENT_SECRET', '1A96xemFAeRUWNZXp-FAvkWV');
 
 /* Google App Redirect Url */
-define('CLIENT_REDIRECT_URL', 'http://localhost/papikos/pengguna/gmail');
+define('CLIENT_REDIRECT_URL', BASEURL.'helpers/gauth.php');
+define('host', 'localhost');
+define('dbname', 'papikos');
+define('username', 'root');
+define('password', '051299');

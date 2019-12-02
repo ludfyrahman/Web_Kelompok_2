@@ -15,20 +15,20 @@
                     <ul class="navbar-nav header-items ml-auto">
                         
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#">Beranda</a>
+                            <a class="nav-link scroll" href="<?= BASEURL ?>#">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#about">Tentang</a>
+                            <a class="nav-link scroll" href="<?= BASEURL ?>#about">Tentang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#features">Fitur</a>
+                            <a class="nav-link scroll" href="<?= BASEURL ?>#features">Fitur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#kos">Kos</a>
+                            <a class="nav-link scroll" href="<?= BASEURL ?>#kos">Kos</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link scroll" href="#team">Tim</a>
+                            <a class="nav-link scroll" href="<?= BASEURL ?>#team">Tim</a>
                         </li>
                         <?php 
                             if(isset($_SESSION['userid'])){
@@ -48,7 +48,7 @@
                                             <li><a href="<?= BASEURL."admin/dashboard" ?>" class="dropdown-item" href="blog-two-column.html">Dashboard</a></li>
                                             <?php } ?>
                                             <li><a href="<?= BASEURL."pengguna/profil" ?>" class="dropdown-item" href="blog-two-column.html">Profil</a></li>
-                                            <li><a href="<?= BASEURL."pengguna/keluar" ?>" class="dropdown-item" href="blog-two-column.html">Keluar</a></li>
+                                            <li><a href="<?= BASEURL."keluar" ?>" class="dropdown-item" href="blog-two-column.html">Keluar</a></li>
                                         </ul>
                                     </div>
                                 </div>

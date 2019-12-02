@@ -1,5 +1,8 @@
 <?php
 require_once('google-login-api.php');
+require_once('db.php');
+require_once('../cores/Response.php');
+
 
 // Google passes a parameter 'code' in the Redirect Url
 if(isset($_GET['code'])) {
@@ -11,6 +14,22 @@ if(isset($_GET['code'])) {
 		
 		// Get user information
 		$user_info = $gapi->GetUserProfileInfo($data['access_token']);
+		// if()
+		// $_SESSION['userdata'] = $user_info;
+		$q = $pdo->query("SELECT * FROM pengguna where email='$user_info[email]'");
+		$pengguna = $q->fetchAll(PDO::FETCH_ASSOC);
+		echo count($pengguna);
+		if(count($pengguna) < 1){
+			Response::redirectWithAlert('pengguna/login/', ['danger', 'Anda masih belum register. harap register terlebih dahulu']);
+		}else{
+			// print_r($pengguna[0]);
+			$_SESSION['userid'] = $pengguna[0]['id'];
+			$_SESSION['userlevel'] = $pengguna[0]['level'];
+			Response::redirect('');
+		}
+		// echo "<pre>";
+		// print_r($pengguna);
+		
 	}
 	catch(Exception $e) {
 		echo $e->getMessage();
@@ -18,7 +37,7 @@ if(isset($_GET['code'])) {
 	}
 }
 ?>
-<head>
+<!-- <head>
 <style type="text/css">
 
 #information-container {
@@ -74,4 +93,4 @@ if(isset($_GET['code'])) {
 </div>
 
 </body>
-</html>
+</html> -->
