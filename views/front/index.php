@@ -16,7 +16,7 @@
     <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
     <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
-<body class="miami">
+<body class="miami" onload="initGeolocation();">
     <!--====== Preloader Area Start ======-->
     <div id="loader">
         <div class="spinner">
@@ -65,6 +65,26 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDe
 </script>
 <script>
 // Initialize and add the map
+function initGeolocation() {
+   if (navigator.geolocation) {
+      // Call getCurrentPosition with success and failure callbacks
+      navigator.geolocation.getCurrentPosition(success, fail);
+   }
+   else {
+      alert("Sorry, your browser does not support geolocation services.");
+   }
+}
+
+function success(position) {
+   console.log("long " + position.coords.longitude);
+   console.log("lat " + position.coords.latitude);
+   // document.getElementById('long').value = position.coords.longitude;
+   // document.getElementById('lat').value = position.coords.latitude;
+}
+
+function fail() {
+   // Could not obtain location
+}
 function initMap() {
   // The location of Uluru
   var uluru = {lat: <?=$data['latitude']?>, lng: <?= $data['longitude']?>};

@@ -138,9 +138,54 @@ class KosController {
         }
     }
     public function semua(){
-        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
-
-        Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1]]);
+        $d = $_POST;
+        $pencarian = " ";
+        if(isset($d['search'])){
+            $pencarian = "Where ";
+            $cari = "";
+            if(isset($d['cari']) != ""){
+                $cari = (isset($d['cari']) ? " k.nama like  '%".$d['cari']."%'" : '');
+            }
+            $kategori = "";
+            if(isset($d['kategori'])){
+                if($d['kategori'] != ""){
+                    $kategori = (isset($d['kategori']) ? " and k.id_kategori ='".$d['kategori']."'" : '');
+                }
+            }
+            $tipe = "";
+            if(isset($d['tipe']) != ""){
+                if($d['tipe'] != ""){
+                    $tipe = (isset($d['tipe']) ? " and k.jenis ='".$d['tipe']."'" : '');
+                }
+            }
+            $urut = " ORDER By ";
+            if (isset($d['urut'])) {
+                if ($d['urut'] == 1) {
+                    $urut .= " k.id desc";
+                }else if($d['urut'] = 2){
+                    $urut .= " k.harga asc";
+                }else if($d['urut'] = 3){
+                    $urut .= " k.harga desc";
+                }
+            }
+            $harga = "";
+            if(isset($d['harga_awal'])){
+                if(($d['harga_awal'] !="" ) && ($d['harga_tertinggi'] != "")){
+                    $harga = " AND k.harga BETWEEN '$d[harga_awal]' AND '$d[harga_tertinggi]'";
+                }
+            }
+            
+            $pencarian.=" $cari $kategori $tipe $harga $urut";
+            // SELECT *, ( 3959 * acos ( cos ( radians($key) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($user) ) + sin ( radians($key) ) * sin( radians( latitude ) ) ) ) AS distance FROM outlet HAVING distance < 500 order by distance asc
+            // SELECT *, ( 3959 * acos ( cos ( radians(-7.1786496) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(113.4657536) ) + sin ( radians(-7.1786496) ) * sin( radians( latitude ) ) ) ) AS distance FROM kos HAVING distance < 500 order by distance asc
+            // 1 mile = 1,609 
+            //key latitude and $user longitude
+        }
+        // echo "id kategori ".$d['kategori']."<br>";
+        // echo $pencarian;
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", " $pencarian ");
+        $kategori = $this->kategori->Select("*", '')[1];
+        Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);
     }
     
 }

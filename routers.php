@@ -21,6 +21,10 @@
     Router::post('/admin/profile', 'AkunController@proses_profile', 'login:1');
     Router::get('/admin/password', 'AkunController@password', 'login:1');
     Router::post('/admin/password', 'AkunController@proses_password', 'login:1');
+
+
+    Router::resource('/admin/pemesanan', 'PemesananController', 'login:1');
+    Router::resource('/admin/pembayaran', 'PembayaranController', 'login:1');
 // end backend
 
 // front end 
@@ -38,6 +42,7 @@
     // pemesanan
     Router::get('/kos/pesan/:id', 'KosController@pesan');
     Router::get('/kos/semua', 'KosController@semua');
+    Router::post('/kos/semua', 'KosController@semua');
     Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
 
 // end front end

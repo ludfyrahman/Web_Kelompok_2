@@ -18,7 +18,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword1">Deskripsi</label>
-                                <textarea name="deskripsi" name="deskripsi" class="form-control" id="" cols="30" rows="10"><?=Input::postOrOr('deskripsi', $data['deskripsi'])?></textarea>
+                                <textarea name="deskripsi" id="ckedtor" name="deskripsi" class=" ckeditor form-control" id="" cols="30" rows="10"><?=Input::postOrOr('deskripsi', $data['deskripsi'])?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword1">Kategori</label>
@@ -39,15 +39,26 @@
         </div>
         <div class="col-lg-6 equel-grid">
             <div class="grid">
-                <p class="grid-header">Foto/Video</p>
+                <p class="grid-header">Foto / Video</p>
                 <div class="grid-body">
                     <div class="item-wrapper">
-                    <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg untuk video dengan type mp4 dengan ukuran maksimal 4MB</div>
-                    <form action="#" class="dropzone dropzone-previews">
-                        <div class="fallback">
-                            <input name="file" type="file" multiple />
-                        </div>
-                    </form>
+                        <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg untuk video dengan type mp4 dengan ukuran maksimal 4MB</div>
+                        <form action="#" class="dropzone dropzone-previews">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                        
+                    
+                    </div>
+                </div>
+                <p class="grid-header">Foto / Video</p>
+                <div class="grid-body">
+                    <div class="item-wrapper">
+                        <div class="alert alert-info"><b>Info</b>. pilih lokasi kos anda</div>
+                        <div id="map">
+                                                
+                        </div>                    
                     </div>
                 </div>
             </div>

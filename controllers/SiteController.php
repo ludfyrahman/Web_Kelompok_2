@@ -10,7 +10,7 @@ class SiteController {
     }
 
     public function home() {
-        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
         $kategori = $this->kategori->Select('*', "ORDER BY id DESC");
         $pengguna = $this->pengguna->Select('*', "ORDER BY id DESC");
         // echo "<pre>";

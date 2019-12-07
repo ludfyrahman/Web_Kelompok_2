@@ -59,7 +59,7 @@
         
         <li class="nav-category-divider">Transaksi</li>
         <li>
-            <a href="../docs/docs.html">
+            <a href="<?= BASEADM."pemesanan" ?>">
                 <span class="link-title">Pemesanan</span>
                 <i class="mdi mdi-asterisk link-icon"></i>
             </a>

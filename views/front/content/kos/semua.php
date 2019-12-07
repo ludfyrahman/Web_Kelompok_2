@@ -7,48 +7,59 @@
                     <div class="single-widget">
                         <!-- Search Widget -->
                         <div class="widget-content search-widget">
-                            <form action="#">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="">Nama Kos</label>
-                                    <input type="text" placeholder="cari">
+                                    <input type="text" placeholder="cari" name="cari" value="<?= Input::postOrOr('cari') ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Kategori Kos</label>
-                                    <input type="text" placeholder="cari">
+                                    <select name="tipe" id="" class="form-control">
+                                        <option value="">Semua</option>
+                                    <?php
+                                    $tp = Input::postOrOr('tipe');
+                                    foreach ($kategori as $k) {
+                                    ?>
+                                        <option value="<?= $k['id'] ?>" <?= ($tp == $k['id'] ? 'selected' : '') ?>><?= $k['nama'] ?></option>
+                                    <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tipe Kos</label>
+                                    <?php
+                                    $tp = Input::postOrOr('tipe');
+                                    ?>
                                     <select name="tipe" id="" class="form-control">
                                         <option value="">Semua</option>
-                                        <option value="1">Laki-Laki</option>
-                                        <option value="2">Perempuan</option>
+                                        <option value="1" <?= $tp == "1" ? 'selected' : '' ?>>Laki-Laki</option>
+                                        <option value="2" <?= $tp == "2" ? 'selected' : '' ?>>Perempuan</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Urutkan</label>
-                                    <select name="order" id="" class="form-control">
+                                    <select name="urut" id="" class="form-control">
                                         <option value="">Semua</option>
-                                        <option value="1">Rekomendasi</option>
+                                        <option value="1">Terbaru</option>
                                         <option value="2">Termurah</option>
-                                        <option value="2">Tertinggi</option>
+                                        <option value="3">Tertinggi</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Rentang Harga</label>
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <input type="text" placeholder="harga awal" class="form-control" >
+                                            <input type="text" placeholder="harga awal" name="harga_awal" class="form-control" value="<?= Input::postOrOr('harga_awal') ?>">
                                         </div>
                                         <div class="col-md-1">
                                             -
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" placeholder="harga tertinggi" class="form-control">
+                                            <input type="text" placeholder="harga tertinggi" name="harga_tertinggi" value="<?= Input::postOrOr('harga_tertinggi') ?>" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-block">Cari</button>
+                                    <button type="submit" name="search" class="btn btn-success btn-block">Cari</button>
                                 </div>
                             </form>
                         </div>
@@ -61,7 +72,7 @@
                 foreach ($data as $k) {
                     // $link = BASEURL."kos/detail/".
                 ?>
-                <div class="col-12 col-md-6 col-lg-4">
+                <div class="col-12 col-md-6 col-lg-4"  style="margin-top:20px;">
                     <!-- Single Blog -->
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                         <!-- Blog Thumb -->

@@ -1,15 +1,15 @@
 <?php
-class PemesananController {
-    private $pemesanan;
+class pembayaranController {
+    private $pembayaran;
 
     public function __construct() {
-        $this->pemesanan = new pemesanan;
+        $this->pembayaran = new pembayaran;
     }
 
     public function index() {
-        $lists = $this->pemesanan->dataPemesanan()[1];
+        $lists = $this->pembayaran->datapembayaran()[1];
         // print_r($lists);
-        Response::render('back/index', ['title' => 'Daftar pemesanan', 'content' => 'pemesanan/index', 'list' => $lists]);
+        Response::render('back/index', ['title' => 'Daftar pembayaran', 'content' => 'pembayaran/index', 'list' => $lists]);
 
     }
 
@@ -22,9 +22,9 @@ class PemesananController {
             ];
 
 
-            $this->pemesanan->Update($arr, "WHERE id = $id");
+            $this->pembayaran->Update($arr, "WHERE id = $id");
 
-            Response::redirectWithAlert('admin/pemesanan/', ['info', 'pemesanan berhasil diedit']);
+            Response::redirectWithAlert('admin/pembayaran/', ['info', 'pembayaran berhasil diedit']);
         }
         catch(Exception $e) {
 

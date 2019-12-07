@@ -1,3 +1,3 @@
-$('.rating').on('change', function(){
-    alert("Changed: " + $(this).val())
+$('.rating').on('change', function () {
+   alert("Changed: " + $(this).val())
 });
