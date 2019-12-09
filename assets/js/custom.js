@@ -44,6 +44,5 @@ var myDropzone = new Dropzone(".dropzone", {
 // process dropzone after click button
 $("#simpan").click(function(e){
     e.preventDefault();
-    alert();
     myDropzone.processQueue();
 })

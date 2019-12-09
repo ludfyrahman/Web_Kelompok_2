@@ -7,17 +7,30 @@
                 <!-- Single Blog Details -->
                 <article class="single-blog-details">
                     <!-- Blog Thumb -->
-                    <nav aria-label="breadcrumb">
+                    <!-- <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Kos Jomblo</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Pemesanan Kos Jomblo</li>
                         </ol>
-                    </nav>
+                    </nav> -->
+                    <h2 class="margin-top-bottom-12">Detail Pesanan</h2>
                     <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="margin-top-bottom-12"><?= Account::Get('nama') ?></h3>
-                            <p class="margin-top-bottom-12"><?= Account::Get('no_hp') ?></p>
+                        <div class="col-md-12 margin-top-bottom-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="margin-top-bottom-12">Nomor Invoice</p>
+                                    <p class="margin-top-bottom-12  font-weight-bold"><a class="color-primary" target="_blank" href="<?= BASEURL."invoice/$data[id]" ?>"><?= invoice_code."".$data['id'] ?></a></p>
+                                    <p class="margin-top-bottom-12">Nama Pemesan Kos</p>
+                                    <p class="margin-top-bottom-12 font-weight-bold"><?= $data['nama_pemilik'] ?></p>    
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="margin-top-bottom-12">Tanggal Pemesanan</p>
+                                    <p class="margin-top-bottom-12 font-weight-bold"><?= App::Date($data['tanggal_pemesanan'], 'd M Y H:i:s') ?></p>
+                                    <p class="margin-top-bottom-12">No Hp</p>
+                                    <p class="margin-top-bottom-12 font-weight-bold"><?= Account::Get('no_hp') ?></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-5">
                             <div class="blog-thumb">
@@ -37,15 +50,14 @@
                                             Pembayaran DP 
                                             <!-- <span>*dp yang harus dibayarkan</span> -->
                                         </div>
-                                        <div class="col-md-3">
-                                            <h3 class="float-right color-primary "><?= App::price(25/100 * $data['harga']) ?></h3>
+                                        <div class="col-md-4">
+                                            <h3 class="float-right color-primary"><?= App::price(25/100 * $data['harga']) ?></h3>
                                         </div>
                                     </div>
                                     <div class="meta-info d-flex flex-wrap align-items-center py-2">
                                         <ul>
-                                            <li class="d-inline-block p-2">Pemilik Kos <b><?= $data['nama'] ?></b></li>
-                                            <li class="d-inline-block p-2">Diubah <?= App::date($data['tanggal_diubah'], "d M Y, H:i") ?></li>
-                                            <li class="d-inline-block p-2"><a href="#">2 Comments</a></li>
+                                            <li class="d-inline-block p-2">Pemilik Kos <b><?= $data['nama_pemilik'] ?></b></li>
+                                            <li class="d-inline-block p-2">Tanggal Pemesanan <?= App::date($data['tanggal_pemesanan'], "d M Y, H:i") ?></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -53,14 +65,32 @@
                         </div>
                         <div class="col-md-12">
                             <div class="row">
+                                <?php 
+                                if($data['status_code']  == '1'){
+                                ?>
                                 <div class="col-md-6">
                                     <h3 class="margin-top-bottom-12">Pembayaran Melalui Rekening</h3>
                                     <p class="margin-top-bottom-12"><?=Account::Get('nama_bank')." ".Account::Get('no_rekening')."(".Account::Get('nama_rekening').")"?></p>
                                 </div>
                                 <div class="col-md-6">
                                     <p style="text-align:right">Batas maksimal pembayaran dp 1 x 24 jam</p>
-                                    <a href="<?= BASEURL."kos/pesanAction/".$data['id'] ?>" class='pesan'><button class="btn btn-success float-right" >Pesan Kos</button></a>
+                                    <a href="<?= BASEURL."pemesanan/bayar/".$data['id'] ?>" class='bayar'><button class="btn btn-success float-right" >Bayar Dp</button></a>
                                 </div>
+                                <?php }else{
+                                $pesan = "";
+                                $alert = "";
+                                if($data['status_code'] == '0'){
+                                    $pesan = "Pesanan anda ditolak oleh pemilik kos";
+                                    $alert = "danger";
+                                }else{
+                                    $pesan = "Terimakasih anda sudah membayar dp kos";
+                                    $alert = "success";
+                                }
+                                ?>
+                                <div style="margin-top:12px;" class="col-md-12 text-center font-weight-bold alert alert-<?= $alert ?>">
+                                    <?= $pesan ?>
+                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

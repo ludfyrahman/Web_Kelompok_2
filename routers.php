@@ -44,7 +44,15 @@
     Router::get('/kos/semua', 'KosController@semua');
     Router::post('/kos/semua', 'KosController@semua');
     Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
+    Router::get('/akun/pemesanan/detail/:id', 'PemesananController@detailPemesananUser');
 
+    // pembayaran
+    Router::get('/pemesanan/bayar/:id', 'PembayaranController@bayar');
+    Router::post('/bayar/uploadBukti/:id', 'PembayaranController@doPay');
+    Router::get('/invoice/:id', 'PemesananController@invoice');
+
+    // transaksi
+    Router::get('/transaksi', 'PemesananController@transaction');
 // end front end
 
 

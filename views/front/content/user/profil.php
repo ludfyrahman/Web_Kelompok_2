@@ -2,77 +2,53 @@
 <section id="blog" class="section blog-area ptb_100">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-3">
-                <aside class="sidebar">
-                    
-                    <div class="single-widget">
-                        <!-- Category Widget -->
-                        <div class="accordions widget catagory-widget" id="cat-accordion">
-                            <div class="single-accordion blog-accordion">
-                                <h5>
-                                    <a role="button" class="collapse show text-uppercase d-block p-3" data-toggle="collapse" href="#accordion1">Categories
-                                    </a>
-                                </h5>
-                                <!-- Category Widget Content -->
-                                <div id="accordion1" class="accordion-content widget-content collapse show" data-parent="#cat-accordion">
-                                    <!-- Category Widget Items -->
-                                    <ul class="widget-items">
-                                        <li><a href="#" class="d-flex p-3"><span>Umum</span></a></li>
-                                        <li><a href="<?= BASEURL."pengguna/lupaPasssword" ?>" class="d-flex p-3"><span>Ubah Password</span></a></li>
-                                        <li><a href="#" class="d-flex p-3"><span>Disukai</span><span class="ml-auto">(27)</span></a></li>
-                                        <li><a href="#" class="d-flex p-3"><span>Testimoni</span><span class="ml-auto">(18)</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-            </div>
+            <?php
+            Response::part('sidebar_profile');
+            ?>
             <div class="col-12 col-lg-9">
                 <!-- Single Blog Details -->
-                <article class="single-blog-details">
+                <article class="single-blog-details ">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Nama</label>
+                        <div class="col-md-4">
+                            <div class="" >
+                                <div>
+                                    <img src="<?= BASEASSET."images/avatar/avatar-3.png" ?>" alt="" class="img-fluid">
                                 </div>
-                                <div class="col-md-6">
-                                    <?= Account::Get("nama") ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= Account::Get("email") ?>
+                                <div class="card-body">
+                                    <a href="#" class="btn  btn-block btn-sm">Ubah Password</a>
+                                    <a href="#" class="btn  btn-block btn-sm">Edit Profile</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">No HP</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= Account::Get("no_hp") ?>
-                                </div>
+                        <div class="col-md-8">
+                            <h5 class="margin-top-bottom-12">Ubah Biodata Diri</h5>
+                            <div class="margin-top-bottom-12">
+                                <label for="" class='col-4'>Nama</label>
+                                <span class="col-d"><?= Account::Get("nama") ?></span>
+                                <a href="" class="color-primary">Ubah</a>
+                            </div>
+                            <div class="margin-top-bottom-12">
+                                <label for="" class='col-4'>Tanggal Lahir</label>
+                                <span class="col-d"><?= App::Date(Account::Get("tanggal_lahir"), 'd M Y') ?></span>
+                            </div>
+                            <div class="margin-top-bottom-12">
+                                <label for="" class='col-4'>Jenis Kelamin</label>
+                                <span class="col-d"><?= jenis_kelamin[Account::Get("jenis_kelamin")] ?></span>
+                            </div>
+                            <h5 class="margin-top-bottom-12">Ubah Kontak</h5>
+                            <div class="margin-top-bottom-12">
+                                <label for="" class='col-4'>No Hp</label>
+                                <span class="col-4"><?= Account::Get("no_hp") ?></span>
+                                <span class="badge badge-success"><i class="fa fa-check"></i> Terverifikasi</span>
+                                <a href="" class="color-primary">Ubah</a>
+                            </div>
+                            <div class="margin-top-bottom-12">
+                                <label for="" class='col-4'>Email</label>
+                                <span class="col-4"><?= Account::Get("email") ?></span>
+                                <span class="badge badge-success"><i class="fa fa-check"></i> Terverifikasi</span>
+                                <a href="" class="color-primary">Ubah</a>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Alamat</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= Account::Get("nama") ?>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </article>
             </div>

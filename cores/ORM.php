@@ -51,7 +51,12 @@ class ORM {
 
         return [$d1, $d2];
     }
-
+    public  function lastInsertId(){
+        $p = $this->pdo->prepare("SELECT LAST_INSERT_ID()");
+        $p->execute();
+        $lastId = $p->fetchColumn();
+        return $lastId;
+    }
     public function CustomQuery($q) {
         $this->Execute($q);
     }

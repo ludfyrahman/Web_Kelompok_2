@@ -28,3 +28,10 @@ define('host', 'localhost');
 define('dbname', 'papikos');
 define('username', 'root');
 define('password', '051299');
+
+
+// transaction and other
+define('invoice_code', 'INV000');
+
+
+define('jenis_kelamin', ['Perempuan', 'Laki-laki']);

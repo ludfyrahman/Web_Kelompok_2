@@ -13,6 +13,7 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?=BASEASSET?>css/responsive.css">
     <link rel="stylesheet" href="<?=BASEASSET?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.css">
     <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
     <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
@@ -56,6 +57,7 @@ if($content != 'user/login')
 <script src="<?php echo BASEASSET ?>js/plugins.min.js"></script>
 
 <!-- Active js -->
+<script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
 <script src="<?php echo BASEASSET ?>/js/active.js"></script>
 <script src="<?php echo BASEASSET ?>js/script.js"></script>
 
@@ -90,7 +92,7 @@ function initMap() {
   var uluru = {lat: <?=$data['latitude']?>, lng: <?= $data['longitude']?>};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 17, center: uluru});
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
 }

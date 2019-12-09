@@ -99,7 +99,7 @@ class PenggunaController {
     }
 
     public function profil() {
-        Response::render('front/index', ['title' => 'Ubah Profil', 'content' => 'user/profil']);
+        Response::render('front/index', ['title' => 'Profil '.Account::Get('nama'), 'content' => 'user/profil']);
     }
 
     public function password() {

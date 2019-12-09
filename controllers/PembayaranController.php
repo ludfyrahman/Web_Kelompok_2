@@ -1,9 +1,12 @@
 <?php
+App::loadModels(['Pemesanan', 'media']);
 class pembayaranController {
-    private $pembayaran;
+    private $pembayaran, $pemesanan, $media;
 
     public function __construct() {
         $this->pembayaran = new pembayaran;
+        $this->pemesanan = new pemesanan;
+        $this->media = new media;
     }
 
     public function index() {
@@ -31,9 +34,13 @@ class pembayaranController {
             $this->edit($id);
         }
     }
-    public function doOrder($id){
-        $q = mysqli_query($host, "UPDATE kos set jumlah_kos=jumlah_kos-1 where id = $id");
-        header('location:index.php');
+    public function doPay($id){
+        echo "works";
+    }
+    public function bayar($id){
+        $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
+        Response::render('front/index', ['title' => "Pembayaran     ", 'data' => $data, 'content' => 'pembayaran/bayar', 'media' => $media]);
     }
 
 }

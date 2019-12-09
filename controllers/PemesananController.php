@@ -1,9 +1,11 @@
 <?php
+App::loadModels(["Media"]);
 class PemesananController {
-    private $pemesanan;
+    private $pemesanan, $media;
 
     public function __construct() {
         $this->pemesanan = new pemesanan;
+        $this->media = new Media;
     }
 
     public function index() {
@@ -32,8 +34,29 @@ class PemesananController {
         }
     }
     public function doOrder($id){
-        $q = mysqli_query($host, "UPDATE kos set jumlah_kos=jumlah_kos-1 where id = $id");
-        header('location:index.php');
+        $arr = [
+            'id_kos' => $id,
+            'id_pengguna' => Account::Get("id"),
+        ];
+        $this->pemesanan->insert($arr);
+        $id = $this->pemesanan->lastInsertId();
+        Response::redirectWithAlert('akun/pemesanan/detail/'.$id, ['info', 'pemesanan berhasil diedit']);
+    }
+    public function detailPemesananUser($id){
+        $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
+        // echo "<pre>";
+        // print_r($media);
+        Response::render('front/index', ['title' => 'Detail pemesanan', 'content' => 'pemesanan/detail', 'data' => $data, 'media' => $media]);
+    }
+    public function invoice($id){
+        $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        Response::render('partials/invoice', ['title' => "invoice", 'data' => $data]);
+    }
+    public function transaction(){
+        $data = null;
+        $media = null;
+        Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'data' => $data, 'media' => $media]);
     }
 
 }
