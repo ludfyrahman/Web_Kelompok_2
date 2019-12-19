@@ -118,7 +118,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon4"><i class="fas fa-envelope"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon4" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" value="<?= Input::postOrOr('email') ?>" aria-label="Email" aria-describedby="basic-addon4" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">

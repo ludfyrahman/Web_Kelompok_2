@@ -1,48 +1,67 @@
+// console.log(getCookie("lat"));
+
 // setting dropzone for upload multiple image
 $(".table").DataTable();
 var currentFile = null;
+
+var lat = getCookie("lat");
+var long = getCookie("long");
+var nama = $("#nama").val();
+$(".simpan").click(function(){
+    console.log("deskripsi "+$("#nama").val());
+    myDropzone.processQueue();
+})
 var formData = new FormData();
 Dropzone.autoDiscover = false;
 var myDropzone = new Dropzone(".dropzone", {
-  addRemoveLinks: true,
-  url: BASEADM+"/kos/uploadFile/2",
-  maxFiles:6,
-  paramName: 'file',
-  clickable: true,
-  uploadMultiple: true,
-  autoProcessQueue: false,
+    addRemoveLinks: true,
+    url: BASEADM+"kost/add",
+    maxFiles:1,
+    method :"POST",
+    paramName: 'file',
+    params: {
+            nama: $("#nama").val(),
+            jumlah_kamar: $("#jumlah_kamar").val(),
+            jenis_kos: $("#jenis_kos").val(),
+            harga: $("#harga").val(),
+            deskripsi: $("#deskripsi").val(),
+            id_kategori: $("#kategori").val(),
+            latitude: lat,
+            longitude: long,
+        },
+    clickable: true,
+    uploadMultiple: false,
+    autoProcessQueue: false,
   dictDefaultMessage: 'Unggah file anda disini',
   success: function(file, response)
     {
         console.log(file);
         console.log(response);
     },
-  accept: function(file, done) {
-        if (file.type != "image/jpeg" && file.type != "image/png" && file.type != "image/jpg") {
-            
-            if(file.type != "video/mp4"){
-                done("Error! video yang anda unggah tidak diijinkan");
-            }else if(file.type == "video/mp4"){
-                done();
-            }else{
-                done("Error! gambar yang anda unggah tidak diijinkan");
-            }
-        }
-        
-        done();
-    },
   init: function() {
     this.on("addedfile", function(file) {
         console.log(file);
-        formData.append("file", file); 
+        formData.append("file", file);
+        formData.append("nama", "Mochamad Ludfi Rahman") ;
     });
     this.on("removedfile", function(file) { 
         formData.delete('file');
       });
   }   
 });
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 // process dropzone after click button
-$("#simpan").click(function(e){
-    e.preventDefault();
-    myDropzone.processQueue();
-})

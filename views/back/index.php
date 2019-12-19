@@ -40,12 +40,10 @@
     <!-- build:js -->
     <script src="<?php echo BASEASSET ?>/js/dashboard.js"></script>
     <script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
-    <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
 
     <script>
         var latitude = "0", longitude = "0";
         // Initialize and add the map
-        initGeolocation();
         function initGeolocation() {
             if (navigator.geolocation) {
                 // Call getCurrentPosition with success and failure callbacks
@@ -57,12 +55,12 @@
         }
 
         function success(position) {
-            console.log("long " + position.coords.longitude);
+            console.log("lat "+position.coords.latitude);
             latitude = position.coords.latitude;
             document.cookie = "lat ="+ position.coords.latitude;
             document.cookie = "long ="+ position.coords.longitude;
             longitude = position.coords.longitude;
-            console.log("lat " + position.coords.latitude);
+            console.log("lat "+position.coords.longitude);
         }
 
         function fail() {
@@ -70,6 +68,7 @@
         }
         function initMap() {
             // The location of Uluru
+            initGeolocation();
             var uluru = {lat: <?= ($data['latitude'] == null ? $_COOKIE['lat'] : $data['latitude']);?>, lng: <?= ($data['longitude'] == null ? $_COOKIE['long'] : $data['longitude']);?>};
             // The map, centered at Uluru
             var map = new google.maps.Map(
@@ -83,6 +82,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
     </script>
     <script src="<?php echo BASEASSET ?>/js/template.js"></script>
+    <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
     <!-- endbuild -->
     
 </body>

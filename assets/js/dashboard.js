@@ -103,7 +103,8 @@ $(function () {
             options: StatsLineOptions
         });
     }
-    if ($("#followers-bar-chart").length) {
+    
+    if ($("#order-chart").length) {
         var a = {
                 layout: {
                     padding: {
@@ -123,8 +124,6 @@ $(function () {
                             drawBorder: !1
                         },
                         ticks: {
-                            min: 20,
-                            max: 80,
                             stepSize: 20,
                             fontColor: "#212529",
                             maxTicksLimit: 3,
@@ -147,15 +146,16 @@ $(function () {
                     display: !1
                 }
             },
-            e = document.getElementById("followers-bar-chart");
+            e = document.getElementById("order-chart");
+            
         new Chart(e, {
             type: "bar",
             data: {
                 labels: ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat"],
                 datasets: [{
                     label: "Follower",
-                    data: [62, 52, 73, 58, 63, 72],
-                    backgroundColor: [chartColors[0], chartColors[0], chartColors[0], chartColors[0], chartColors[0], chartColors[0]],
+                    data: [100, 52, 73, 58, 63, 72],
+                    backgroundColor: chartColors[0],
                     borderColor: chartColors[0],
                     borderWidth: 0
                 }]
@@ -169,7 +169,7 @@ $(function () {
                 height: 230,
                 type: "radialBar"
             },
-            series: [67],
+            series: [presentase_pemesanan],
             colors: ["#696ffb"],
             plotOptions: {
                 radialBar: {

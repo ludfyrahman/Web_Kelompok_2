@@ -6,7 +6,6 @@
     <form action="" method="post">
         <?php Response::part('alert') ?>
         <div class="row">
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">Name</label>
