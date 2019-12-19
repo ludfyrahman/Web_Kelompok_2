@@ -1,0 +1,46 @@
+<?php
+App::loadModels(['Pemesanan', 'media']);
+class pembayaranController {
+    private $pembayaran, $pemesanan, $media;
+
+    public function __construct() {
+        $this->pembayaran = new pembayaran;
+        $this->pemesanan = new pemesanan;
+        $this->media = new media;
+    }
+
+    public function index() {
+        $lists = $this->pembayaran->datapembayaran()[1];
+        // print_r($lists);
+        Response::render('back/index', ['title' => 'Daftar pembayaran', 'content' => 'pembayaran/index', 'list' => $lists]);
+
+    }
+
+    public function update($id) {
+        $d = $_POST;
+
+        try {
+            $arr = [
+                'nama' => $d['nama'], 
+            ];
+
+
+            $this->pembayaran->Update($arr, "WHERE id = $id");
+
+            Response::redirectWithAlert('admin/pembayaran/', ['info', 'pembayaran berhasil diedit']);
+        }
+        catch(Exception $e) {
+
+            $this->edit($id);
+        }
+    }
+    public function doPay($id){
+        echo "works";
+    }
+    public function bayar($id){
+        $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
+        Response::render('front/index', ['title' => "Pembayaran     ", 'data' => $data, 'content' => 'pembayaran/bayar', 'media' => $media]);
+    }
+
+}

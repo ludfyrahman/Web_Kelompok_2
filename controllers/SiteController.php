@@ -1,27 +1,21 @@
 <?php
 
-
-App::LoadModels(['Restoran', 'Hotel', 'Event', 'Pariwisata', 'Slider']);
+App::loadModels(['Kos','kategori', 'pengguna']);
 class SiteController {
-    private $restoran, $hotel, $event, $pariwisata, $slider;
-
+    private $kos;
     public function __construct() {
-        $this->hotel = new Hotel;
-        $this->restoran = new Restoran;
-        $this->event = new Event;
-        $this->pariwisata = new Pariwisata;
-        $this->slider = new Slider;
+        $this->kos = new Kos();
+        $this->kategori = new Kategori();
+        $this->pengguna = new Pengguna();
     }
 
     public function home() {
-        echo "home";
-        // $slider = $this->slider->Select('*', "", "ORDER BY position ASC LIMIT 0, 5")[1];
-        // $pariwisata = $this->pariwisata->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 4")[1];
-        // $restoran = $this->restoran->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
-        // $hotel = $this->hotel->Select('title, cover, permalink, text, name', "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC LIMIT 0, 10")[1];
-        // $event = $this->event->Select('*', "", "ORDER BY id DESC LIMIT 0, 4")[1];
-
-        // Response::render('front/index', ['title' => 'Jelajahin Homepage', 'content' => 'site/home', 'pariwisata' => $pariwisata, 'restoran' => $restoran, 'hotel' => $hotel, 'event' => $event, 'slider' => $slider]);
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
+        $kategori = $this->kategori->Select('*', "ORDER BY id DESC");
+        $pengguna = $this->pengguna->Select('*', "ORDER BY id DESC");
+        // echo "<pre>";
+        // print_r($kos);
+        Response::render('front/index', ['title' => 'Papikos Homepage', 'content' => 'site/home', 'kos' => $kos[1], 'jumlahkos' => $kos[0], 'jumlahpengguna' => $pengguna[0], 'jumlahkategori' => $kategori[0]]);
     }
 
     public function filter() {

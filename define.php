@@ -13,3 +13,25 @@ define('BASEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/' . basename(__DIR__) . 
 define('BASEASSET', BASEURL . 'assets/');
 define('BASEADM', BASEURL . 'admin/');
 define('BASEPATH', str_replace('\\', '/', dirname(__FILE__)) . '/');
+
+
+// configure google api setting
+/* Google App Client Id */
+define('CLIENT_ID', '381036941652-c840m0csbpp1fb22108i1vkeeg4t9r6i.apps.googleusercontent.com');
+
+/* Google App Client Secret */
+define('CLIENT_SECRET', '1A96xemFAeRUWNZXp-FAvkWV');
+
+/* Google App Redirect Url */
+define('CLIENT_REDIRECT_URL', BASEURL.'helpers/gauth.php');
+define('host', 'localhost');
+define('dbname', 'papikos');
+define('username', 'root');
+define('password', '051299');
+
+
+// transaction and other
+define('invoice_code', 'INV000');
+
+
+define('jenis_kelamin', ['Perempuan', 'Laki-laki']);

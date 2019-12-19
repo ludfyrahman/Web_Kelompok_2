@@ -6,9 +6,33 @@ class App {
             if(!class_exists($a))
                 include BASEPATH . "models/$a.php";
     }
-
+    public static function validateTypeUpload($array, $file){
+            
+        if(in_array($file['type'], $array)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function validateSizeUpload($limit, $file){
+        // 39092  = 39 kb
+        if($file['size'] > $limit){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public static function UploadImage($img, $path) {
-        move_uploaded_file($img['tmp_name'], BASEPATH . "assets/$path/$img[name]");
+        move_uploaded_file($img['tmp_name'], BASEPATH . "assets/images/upload/$path/$img[name]");
+    }
+    public static function uri($index){
+        $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+        return $var[$index];
+    }
+    
+    public static function url(){
+        $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+        return $var;
     }
 
     public static function RandomString($length) {
@@ -29,5 +53,8 @@ class App {
 
     public static function price($harga) {
         return "Rp. " . number_format($harga, 0, '', '.');
+    }
+    public static function breadcrumb(){
+        Response::part('breadcrumb');
     }
 }

@@ -6,7 +6,10 @@ class ORM {
 
     public function __construct() {
         $this->table = get_called_class();
+
         $this->pdo = new PDO("mysql:hostname=localhost;dbname=papikos", 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+       
     }
 
     public function Insert($data, $table = '') {
@@ -51,7 +54,12 @@ class ORM {
 
         return [$d1, $d2];
     }
-
+    public  function lastInsertId(){
+        $p = $this->pdo->prepare("SELECT LAST_INSERT_ID()");
+        $p->execute();
+        $lastId = $p->fetchColumn();
+        return $lastId;
+    }
     public function CustomQuery($q) {
         $this->Execute($q);
     }

@@ -13,7 +13,6 @@ class Router {
 
     public static function call_router($url, $class, $params) {
         $uri = isset($_GET['uri']) ? '/' . preg_replace('(\/$)', '', $_GET['uri']) : '/';
-
         if($uri == $url) {
             Router::validate($params);
             Router::call_class($class);
@@ -21,7 +20,6 @@ class Router {
         else if(strpos($url, ':') !== FALSE) {
             $_uri = explode('/', $uri);
             $_url = explode('/', $url);
-
             if(count($_uri) == count($_url)){
                 $args = [];
 

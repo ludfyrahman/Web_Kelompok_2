@@ -1,0 +1,20 @@
+pemesanan
+select p.id, k.nama, pg.nama as nama_pengguna, p.tanggal_pemesanan, (CASE WHEN p.status = 0 THEN "Dibatalkan" WHEN p.status = 1 THEN "Pembayaran DP" WHEN p.status = 2 THEN "Ditempati" END) as status from pemesanan p join kos k on p.id_kos=k.id JOIN pengguna pg on p.id_pengguna=pg.id
+
+
+pemesanan dengan status
+select p.id, k.nama, pg.nama as nama_pengguna, p.tanggal_pemesanan, p.status, (CASE WHEN p.status = 0  THEN "Dibatalkan" WHEN p.status = 1 THEN "Pembayaran DP" WHEN p.status = 2 THEN "Ditempati" END) as status from pemesanan p join kos k on p.id_kos=k.id join pengguna pg on p.id_pengguna = pg.id
+
+
+pemesanan dengan status kode
+SELECT p.id, k.nama, pg.nama as nama_pengguna, p.tanggal_pemesanan, p.status from pemesanan p join kos k on p.id_kos = k.id join pengguna pg on p.id_pengguna = pg.id
+
+
+kos tersedia
+SELECT id, nama, jumlah_kamar, harga, (CASE WHEN jumlah_kamar < 1 THEN "Tidak Tersedia" WHEN jumlah_kamar > 0 THEN "Tersedia" END) as status from kos\
+
+
+
+
+Mochamad Ludfi Rahman Soal
+select p.id, k.nama as nama_kos, pg.email, p.status,(CASE WHEN p.status = 0 THEN "Dibatalkan" WHEN p.status = 1 THEN "DP" WHEN p.status = 2 THEN "Sudah Bayar" END) as keterangan from pemesanan p JOIN kos k on p.id_kos=k.id JOIN pengguna pg on p.id_pengguna=pg.id WHERE k.id = 4;

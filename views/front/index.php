@@ -3,27 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title ?></title>
-    <link rel="stylesheet" href="<?php echo BASEASSET ?>css/grid.css">
-    <link rel="stylesheet" href="<?php echo BASEASSET ?>css/use.css">
-    <link rel="stylesheet" href="<?php echo BASEASSET ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo BASEASSET ?>css/res.css">
-</head>
-<body>
+    
+    <link rel="icon" href="<?= BASEASSET ?>/images/favicon.png">
+    <!-- ***** All CSS Files ***** -->
 
+    <!-- Style css -->
+    <link rel="stylesheet" href="<?=BASEASSET?>css/style.css">
+
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="<?=BASEASSET?>css/responsive.css">
+    <link rel="stylesheet" href="<?=BASEASSET?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.css">
+    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+    <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
+</head>
+<body class="miami" onload="initGeolocation();">
+    <!--====== Preloader Area Start ======-->
+    <div id="loader">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+    </div>
+    <!--====== Preloader Area End ======-->
+
+    <!--====== Scroll To Top Area Start ======-->
+    <div id="scrollUp" title="Scroll To Top">
+        <i class="icofont-bubble-up"></i>
+    </div>
+    
+    <!--====== Scroll To Top Area End ======-->
 <?php
-include BASEPATH . "views/front/layout/navbar.php";
+if($content != 'user/login')
+    include BASEPATH . "views/front/layout/navbar.php";
 
 if($content == 'site/home')
     include BASEPATH . "views/front/layout/header.php";
 
 include BASEPATH . "views/front/content/$content.php";
-include BASEPATH . "views/front/layout/footer.php";
+if($content != 'user/login')
+    include BASEPATH . "views/front/layout/footer.php";
 
 ?>
 
 <script>var BASEURL = '<?php echo BASEURL ?>'; var BASEADM = '<?php echo BASEADM ?>';</script>
-<script src="<?php echo BASEASSET ?>js/jquery.js"></script>
+<script src="<?php echo BASEASSET ?>js/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap js -->
+<script src="<?php echo BASEASSET ?>vendors/bootstrap/popper.min.js"></script>
+<script src="<?php echo BASEASSET ?>vendors/bootstrap/bootstrap.min.js"></script>
+
+<!-- Plugins js -->
+<script src="<?php echo BASEASSET ?>js/plugins.min.js"></script>
+
+<!-- Active js -->
+<script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
+<script src="<?php echo BASEASSET ?>/js/active.js"></script>
 <script src="<?php echo BASEASSET ?>js/script.js"></script>
+
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
+</script>
+<script>
+// Initialize and add the map
+function initGeolocation() {
+   if (navigator.geolocation) {
+      // Call getCurrentPosition with success and failure callbacks
+      navigator.geolocation.getCurrentPosition(success, fail);
+   }
+   else {
+      alert("Sorry, your browser does not support geolocation services.");
+   }
+}
+
+function success(position) {
+   console.log("long " + position.coords.longitude);
+   console.log("lat " + position.coords.latitude);
+   // document.getElementById('long').value = position.coords.longitude;
+   // document.getElementById('lat').value = position.coords.latitude;
+}
+
+function fail() {
+   // Could not obtain location
+}
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: <?=$data['latitude']?>, lng: <?= $data['longitude']?>};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 17, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+</script>
+
+
 
 </body>
 </html>
