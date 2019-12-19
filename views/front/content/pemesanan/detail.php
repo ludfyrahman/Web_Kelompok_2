@@ -80,7 +80,7 @@
                                 $pesan = "";
                                 $alert = "";
                                 if($data['status_code'] == '0'){
-                                    $pesan = "Pesanan anda ditolak oleh pemilik kos";
+                                    $pesan = "Pesanan anda dibatalkan";
                                     $alert = "danger";
                                 }else{
                                     $pesan = "Terimakasih anda sudah membayar dp kos";

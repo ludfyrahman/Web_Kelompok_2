@@ -120,23 +120,19 @@
             <div class="dropdown-body border-top pt-0">
                 <a class="dropdown-grid">
                 <i class="grid-icon mdi mdi-jira mdi-2x"></i>
-                <span class="grid-tittle">Jira</span>
+                <span class="grid-tittle">Google</span>
                 </a>
                 <a class="dropdown-grid">
                 <i class="grid-icon mdi mdi-trello mdi-2x"></i>
-                <span class="grid-tittle">Trello</span>
+                <span class="grid-tittle">Facebook</span>
                 </a>
                 <a class="dropdown-grid">
                 <i class="grid-icon mdi mdi-artstation mdi-2x"></i>
-                <span class="grid-tittle">Artstation</span>
-                </a>
-                <a class="dropdown-grid">
-                <i class="grid-icon mdi mdi-bitbucket mdi-2x"></i>
-                <span class="grid-tittle">Bitbucket</span>
+                <span class="grid-tittle">No Hp</span>
                 </a>
             </div>
             <div class="dropdown-footer">
-                <a href="#">View All</a>
+                <a href="<?= BASEURL."keluar" ?>">Keluar</a>
             </div>
             </div>
         </li>

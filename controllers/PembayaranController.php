@@ -35,10 +35,27 @@ class pembayaranController {
         }
     }
     public function doPay($id){
-        echo "works";
+        $d = $_POST;
+        $f = $_FILES;
+        try {
+            App::UploadImage($f['file'], 'bukti');
+            $q = $this->pembayaran->Insert(['id_pemesanan' => $id,  'tipe' => 1, 'jumlah' => $d['dp'], 'bukti_bayar' => $f['file']['name']]);
+            if($q){
+                return true;
+            }else{
+                return false;
+            }
+            Response::redirectWithAlert('admin/pembayaran/', ['info', 'pembayaran berhasil diedit']);
+        }
+        catch(Exception $e) {
+
+            echo $e->getMessage();
+        }
     }
     public function bayar($id){
         $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        // echo "<pre>";
+        // print_r($data);
         $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
         Response::render('front/index', ['title' => "Pembayaran     ", 'data' => $data, 'content' => 'pembayaran/bayar', 'media' => $media]);
     }

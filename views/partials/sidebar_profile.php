@@ -24,8 +24,8 @@
                     <div id="transaksi" class="accordion-content widget-content collapse show" data-parent="#cat-accordion">
                         <!-- Category Widget Items -->
                         <ul class="widget-items">
-                            <li><a href="#" class="d-flex p-3"><span>Daftar Transaksi</span></a></li>
-                            <li><a href="<?= BASEURL."pengguna/lupaPasssword" ?>" class="d-flex p-3"><span>Menunggu Pembayaran</span></a></li>
+                            <li><a href="<?= BASEURL."transaksi" ?>" class="d-flex p-3"><span>Daftar Transaksi</span></a></li>
+                            <li><a href="<?= BASEURL."transaksi" ?>" class="d-flex p-3"><span>Menunggu Pembayaran</span></a></li>
                         </ul>
                     </div>
                 </div>

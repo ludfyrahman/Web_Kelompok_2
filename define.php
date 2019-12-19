@@ -35,3 +35,4 @@ define('invoice_code', 'INV000');
 
 
 define('jenis_kelamin', ['Perempuan', 'Laki-laki']);
+define('level', ['', 'Admin', 'Pemilik Kos', 'Penyewa Kos']);

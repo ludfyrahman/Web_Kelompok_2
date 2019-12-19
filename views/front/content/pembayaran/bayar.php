@@ -15,6 +15,7 @@
                         </ol>
                     </nav> -->
                     <h2 class="margin-top-bottom-12">Bayar</h2>
+                    <form action="<?= BASEURL."bayar/uploadBukti/" ?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-12 margin-top-bottom-12">
                             <div class="row">
@@ -61,9 +62,9 @@
                         <h3 class="margin-top-bottom-12">Bukti Pembayaran</h3>
                         <div class="col-md-12">
                             <div class="blog-thumb">
-                                <form action="#" class="dropzone dropzone-previews">
+                                <div class="dropzone dropzone-previews">
                                     <div class="fallback">
-                                        <input name="file" type="file" multiple />
+                                        <input name="file" type="file" />
                                     </div>
                                 </form>
                             </div>
@@ -72,16 +73,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3 class="margin-top-bottom-12">Pembayaran Melalui Rekening</h3>
-                                    <p class="margin-top-bottom-12"><?=Account::Get('nama_bank')." ".Account::Get('no_rekening')."(".Account::Get('nama_rekening').")"?></p>
+                                    <p class="margin-top-bottom-12"><?= $data['nama_bank']." ".$data['no_rekening']."(".$data['nama_rekening'].")"?></p>
                                 </div>
                                 <div class="col-md-6">
                                     <p style="text-align:right">Batas maksimal pembayaran dp 1 x 24 jam</p>
-                                    <input type="hidden" id="id_pemesanan" value="<?= $data['id'] ?>">
-                                    <button id="simpan" class="btn konfirmasi btn-success float-right" >Konfirmasi</button>
+                                    <input type="hidden" id="id_pemesanan" name="id_pemesanan" value="<?= $data['id'] ?>">
+                                    <input type="hidden" id="dp" name="dp" value="<?= (25/100 * $data['harga'])?>">
+                                    <button id="pesan" type="button" class="btn konfirmasi btn-success float-right" >Konfirmasi</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                     <!-- Blog Content -->
                 </article>
             </div>

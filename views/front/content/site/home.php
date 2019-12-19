@@ -40,7 +40,7 @@
                         <!-- Benifits Text -->
                         <div class="benifits-text">
                             <h3 class="mb-2">Berkualitas</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, ipsum.</p>
+                            <p>Kualitas kos yang baik dan bagus</p>
                         </div>
                     </div>
                 </div>
@@ -272,106 +272,7 @@
     </section>
     <!-- ***** Features Area End ***** -->
 
-    <!-- ***** Testimonial Area Start ***** -->
-    <section class="section testimonial-area ptb_100">
-        <div class="shapes-container">
-            <div class="shape bg-shape"></div>
-        </div>
-        <div class="container text-center">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-md-8">
-                    <div class="testimonials owl-carousel">
-                        <!-- Single Testimonial -->
-                        <div class="single-testimonial p-3 p-md-5">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-1.png" class="mx-auto d-block" alt="">
-                            <!-- Client Name -->
-                            <h3 class="client-name mt-4 mb-2">John Doe</h3>
-                            <!-- Client Address -->
-                            <h5 class="client-address fw-4">Los Angeles, California</h5>
-                            <!-- Client Rating -->
-                            <div class="client-rating mt-2 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <!-- Client Description -->
-                            <div class="client-description">
-                                <!-- Client Text -->
-                                <div class="client-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam rem sunt nulla ducimus expedita, incidunt laborum assumenda. Deleniti iste placeat nostrum incidunt rem laudantium, sapiente, cum, molestias unde, quidem labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Testimonial -->
-                        <div class="single-testimonial p-3 p-md-5">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-2.png" class="mx-auto d-block" alt="">
-                            <!-- Client Name -->
-                            <h3 class="client-name mt-4 mb-2">Jassica William</h3>
-                            <!-- Client Address -->
-                            <h5 class="client-address fw-4">Los Angeles, California</h5>
-                            <!-- Client Rating -->
-                            <div class="client-rating mt-2 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <!-- Client Description -->
-                            <div class="client-description">
-                                <!-- Client Text -->
-                                <div class="client-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam rem sunt nulla ducimus expedita, incidunt laborum assumenda. Deleniti iste placeat nostrum incidunt rem laudantium, sapiente, cum, molestias unde, quidem labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Testimonial -->
-                        <div class="single-testimonial p-3 p-md-5">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-3.png" class="mx-auto d-block" alt="">
-                            <!-- Client Name -->
-                            <h3 class="client-name mt-4 mb-2">Johnson Smith</h3>
-                            <!-- Client Address -->
-                            <h5 class="client-address fw-4">Los Angeles, California</h5>
-                            <!-- Client Rating -->
-                            <div class="client-rating mt-2 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <!-- Client Description -->
-                            <div class="client-description">
-                                <!-- Client Text -->
-                                <div class="client-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam rem sunt nulla ducimus expedita, incidunt laborum assumenda. Deleniti iste placeat nostrum incidunt rem laudantium, sapiente, cum, molestias unde, quidem labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Testimonial Thumb -->
-                    <div class="single-testimonial-thumb d-none d-md-block">
-                        <!-- Thumb Prev -->
-                        <div class="thumb-prev">
-                            <span>
-                                <img src="<?=BASEASSET?>/images/avatar/avatar-3.png" alt="">
-                            </span>
-                        </div>
-                        <!-- Thumb Next -->
-                        <div class="thumb-next">
-                            <span>
-                                <img src="<?=BASEASSET?>/images/avatar/avatar-2.png" alt="">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Testimonial Area End ***** -->
-
+    
     <!-- ***** Blog Area Start ***** -->
     <section id="kos" class="section blog-area ptb_100">
         <div class="container">
@@ -381,7 +282,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
                         <h2 class="text-capitalize">Kos Terbaru</h2>
-                        <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
+                        <!-- <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> -->
                         <!-- <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet,/ consectetur adipisicing elit. Laborum obcaecati.</p> -->
                     </div>
                 </div>
@@ -398,7 +299,7 @@
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                         <!-- Blog Thumb -->
                         <div class="blog-thumb">
-                            <a href="#"><img src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a>
+                            <a href="#"><img style="height:200px" src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a>
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content p-4">

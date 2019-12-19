@@ -44,6 +44,7 @@ class PemesananController {
     }
     public function detailPemesananUser($id){
         $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        // print_r($data);
         $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
         // echo "<pre>";
         // print_r($media);
@@ -54,9 +55,14 @@ class PemesananController {
         Response::render('partials/invoice', ['title' => "invoice", 'data' => $data]);
     }
     public function transaction(){
-        $data = null;
-        $media = null;
-        Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'data' => $data, 'media' => $media]);
+        $id = Account::Get('id');
+        $dp = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='1'")[1];
+        $dibatalkan = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='0'")[1];
+        $lunas = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='2'")[1];
+        $selesai = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='3'")[1];
+        // echo "<pre>";
+        // print_r($dp);
+        Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'dp' => $dp, 'lunas' => $lunas, 'dibatalkan' => $dibatalkan, 'selesai' => $selesai]);
     }
 
 }

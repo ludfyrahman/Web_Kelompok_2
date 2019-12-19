@@ -11,7 +11,7 @@ class FasilitasController {
 
     public function index() {
         $lists = $this->fasilitas->Select("*", "", "ORDER By id desc");
-        Response::render('back/index', ['title' => 'Daftar Akun', 'content' => 'fasilitas/index', 'list' => null]);
+        Response::render('back/index', ['title' => 'Daftar Fasilitas', 'content' => 'fasilitas/index', 'list' => null]);
 
     }
 

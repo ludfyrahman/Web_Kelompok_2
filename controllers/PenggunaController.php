@@ -36,30 +36,60 @@ class PenggunaController {
 
     public function store() {
         $d = $_POST;
+        $f = $_FILES;
 
         try {
             $arr = [
                 'nama' => $d['nama'], 
                 'email' => $d['email'], 
-                'no_hp' => $d['no_hp'], 
                 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 
                 'level' => $d['level'],
+                'status' => $d['status'],
+                'nik' => $d['nik'], 
+                'no_hp' => $d['no_hp'], 
+                'jenis_kelamin' => $d['jenis_kelamin'],
+                'tanggal_lahir' => $d['tanggal_lahir'],
+                'nama_rekening' => $d['nama_rekening'],
+                'no_rekening' => $d['no_rekening'],
+                'nama_bank' => $d['nama_bank'],
+                'alamat' => "jalan pakisan desa bataan tenggarang bondowoso",
                 'tanggal_ditambahkan' => date('Y-m-d'),
             ];
-            if($d['password'] != $d['password_konfirmasi']){
-                // Response::redirectWithAlert('admin/pengguna/add', ['danger', 'Password konfirmasi dengan password tidak sama']);
-                $_SESSION['alert'] = ['danger', 'Password konfirmasi dengan password tidak sama'];
-                $this->add();
-            }else{
-                $arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
+            if(App::validateSizeUpload(20097152 , $f['ktp'])){
+                if(App::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['ktp'])){
+                    if(App::validateSizeUpload(20097152 , $f['profil'])){
+                        if(App::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['profil'])){
+                            $f['profil']['name'] = $d['email'].".".str_replace("image/", "", $f['profil']['type']);
+                            $f['ktp']['name'] = $d['email'].".".str_replace("image/", "", $f['ktp']['type']);
+                            App::UploadImage($f['profil'], "profil");
+                            App::UploadImage($f['ktp'], "ktp");
+                            $arr['ktp'] = $f['ktp']['name'];
+                            $arr['profil'] = $f['profil']['name'];
+                            if($d['password'] != $d['password_konfirmasi']){
+                                $_SESSION['alert'] = ['danger', 'Password konfirmasi dengan password tidak sama'];
+                                $this->add();
+                                Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil ditambahkan']);
+                            }else{
+                                $arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
+                            }
+                            $this->pengguna->Insert($arr);
+                        }else{
+                            $_SESSION['alert'] = ['danger', 'foto profile yang anda upload tidak sesuai.'];
+                            $this->add();
+                        }
+                    }
+                    // $this->karyawan->Insert($arr);
+                }else{
+                    $_SESSION['alert'] = ['danger', 'ktp yang anda upload tidak sesuai.'];
+                    $this->add();
+                }
             }
-            $this->pengguna->Insert($arr);
+            
 
-            Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
-            // print_r($e);
+            print_r($e);
             $_SESSION['alert'] = ['danger', 'error'];
             $this->add();
         }
@@ -67,23 +97,58 @@ class PenggunaController {
 
     public function update($id) {
         $d = $_POST;
+        $f = $_FILES;
 
         try {
-            $arr = ['name' => $d['name'], 'email' => $d['email'], 'no_hp' => $d['no_hp'], 'level' => $d['level']];
-
+            $arr = [
+                'nama' => $d['nama'], 
+                'email' => $d['email'], 
+                'level' => $d['level'],
+                'status' => $d['status'],
+                'nik' => $d['nik'], 
+                'no_hp' => $d['no_hp'], 
+                'jenis_kelamin' => $d['jenis_kelamin'],
+                'tanggal_lahir' => $d['tanggal_lahir'],
+                'nama_rekening' => $d['nama_rekening'],
+                'no_rekening' => $d['no_rekening'],
+                'nama_bank' => $d['nama_bank'],
+                'alamat' => $d['alamat'],
+                'tanggal_ditambahkan' => date('Y-m-d'),
+            ];
+            if($f['ktp']['name'] !=''){
+                if(App::validateSizeUpload(20097152 , $f['ktp'])){
+                    if(App::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['ktp'])){
+                        $f['ktp']['name'] = $d['email'].".".str_replace("image/", "", $f['ktp']['type']);
+                        App::UploadImage($f['ktp'], "ktp");
+                        $arr['ktp'] = $f['ktp']['name'];
+                    }else{
+                        $_SESSION['alert'] = ['danger', 'ktp yang anda upload tidak sesuai.'];
+                        $this->add();
+                    }
+                }
+            }
+            if($f['profil']['name'] !=''){
+                if(App::validateSizeUpload(20097152 , $f['profil'])){
+                    if(App::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['profil'])){
+                        $f['profil']['name'] = $d['email'].".".str_replace("image/", "", $f['profil']['type']);
+                        App::UploadImage($f['profil'], "profil");
+                        $arr['profil'] = $f['profil']['name'];
+                    }else{
+                        $_SESSION['alert'] = ['danger', 'foto profile yang anda upload tidak sesuai.'];
+                        $this->add();
+                    }
+                }
+            }
             if(Input::postOrOr('password') != ''){
                 if($d['password'] != $d['password_konfirmasi']){
-                    // $_SESSION['alert'] = ['danger', "Password konfirmasi dengan password tidak sama"];
-                    // $this->add();
                     Response::redirectWithAlert('admin/pengguna/'.$id."/edit", ['info', 'Password konfirmasi dengan password tidak sama']);
                 }else{
                     $arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
                 }
             }
-
             $this->pengguna->Update($arr, "WHERE id = $id");
 
-            Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil diedit']);
+            // Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil diedit']);
         }
         catch(Exception $e) {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -181,7 +246,10 @@ class PenggunaController {
                 $_SESSION['alert'] = ['danger', "Login gagal, email anda tidak terdaftar silahkan cek kembali"];
                 return $this->login();
             }
-
+            if($a[0]['status'] == 0) {
+                $_SESSION['alert'] = ['danger', "Login gagal, akun anda belum diaktifasi"];
+                return $this->login();
+            }
             $a = $a[0];
 
             if(!password_verify($d['password'], $a['password'])) {

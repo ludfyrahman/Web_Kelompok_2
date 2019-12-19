@@ -4,8 +4,8 @@
         <img class="profile-img img-lg rounded-circle" src="<?= BASEASSET ?>/images/profile/male/image_1.png" alt="profile image">
         </div>
         <div class="info-wrapper">
-        <p class="user-name">Mochamad Ludfi Rahman</p>
-        <h6 class="display-income">ludfyr@gmail.com</h6>
+        <p class="user-name"><?= Account::Get("nama") ?></p>
+        <h6 class="display-income"><?= level[Account::Get("level")] ?></h6>
         </div>
     </div>
     <ul class="navigation-menu">
@@ -22,6 +22,9 @@
                 <i class="mdi mdi-account link-icon"></i>
             </a>
         </li>
+        <?php
+        if(Account::Get('level') == 1) {
+        ?>
         <li>
             <a href="<?= BASEADM."pengguna" ?>">
                 <span class="link-title">Pengguna</span>
@@ -52,11 +55,11 @@
                 <a href="<?= BASEADM."kategori" ?>">Kategori</a>
                 </li>
                 <li>
-                <a href="pages/sample-pages/error_2.html" target="_blank">Sub Kategori</a>
+                <a href="<?= BASEADM."kategori/sub_kategori" ?>">Sub Kategori</a>
                 </li>
             </ul>
         </li>
-        
+        <?php } ?> 
         <li class="nav-category-divider">Transaksi</li>
         <li>
             <a href="<?= BASEADM."pemesanan" ?>">
@@ -70,6 +73,29 @@
                 <i class="mdi mdi-asterisk link-icon"></i>
             </a>
         </li>
+        <?php
+        if(Account::Get('level') == 1) {
+        ?>
+        <li class="nav-category-divider">Pengaturan</li>
+        <li>
+            <a href="../docs/docs.html">
+                <span class="link-title">Gmail</span>
+                <i class="mdi mdi-asterisk link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="../docs/docs.html">
+                <span class="link-title">Facebook</span>
+                <i class="mdi mdi-asterisk link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="<?= BASEADM."pemesanan" ?>">
+                <span class="link-title">Profil</span>
+                <i class="mdi mdi-asterisk link-icon"></i>
+            </a>
+        </li>
+        <?php } ?>
     </ul>
     <!-- <div class="sidebar-upgrade-banner">
         <p class="text-gray">Upgrade to <b class="text-primary">PRO</b> for more exciting features</p>

@@ -55,20 +55,22 @@ class KosController {
 
     public function store() {
         $d = $_POST;
-
+        $f = $_FILES;
         try {
-            $arr = [
-                'nama' => $d['nama'], 
-                'deskripsi' => $d['deskripsi'], 
-                'harga' => $d['harga'],
-                'id_kategori' => $d['kategori'],
-                'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-                'ditambahkan_oleh' =>  Account::Get('id')
-            ];
+            echo "<pre>";
+            print_r($d);
+            // $arr = [
+            //     'nama' => $d['nama'], 
+            //     'deskripsi' => $d['deskripsi'], 
+            //     'harga' => $d['harga'],
+            //     'id_kategori' => $d['kategori'],
+            //     'jumlah_kamar' => $d['jumlah_kamar'],
+            //     'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
+            //     'ditambahkan_oleh' =>  Account::Get('id')
+            // ];
+            // $this->kos->Insert($arr);
 
-            $this->kos->Insert($arr);
-
-            Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil ditambahkan']);
+            // Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -140,6 +142,8 @@ class KosController {
     public function semua(){
         $d = $_POST;
         $pencarian = " ";
+        $urut = " HAVING distance < 500 order by distance asc";
+        $pencarian = $urut;
         if(isset($d['search'])){
             $pencarian = "Where ";
             $cari = "";
@@ -158,7 +162,6 @@ class KosController {
                     $tipe = (isset($d['tipe']) ? " and k.jenis ='".$d['tipe']."'" : '');
                 }
             }
-            $urut = " ORDER By ";
             if (isset($d['urut'])) {
                 if ($d['urut'] == 1) {
                     $urut .= " k.id desc";
@@ -182,8 +185,9 @@ class KosController {
             //key latitude and $user longitude
         }
         // echo "id kategori ".$d['kategori']."<br>";
-        // echo $pencarian;
-        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", " $pencarian ");
+        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media, ( 3959 * acos ( cos ( radians(-7.1786496) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(113.4657536) ) + sin ( radians(-7.1786496) ) * sin( radians( latitude ) ) ) ) AS distance', 
+        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", " $pencarian ");
+        // $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
         $kategori = $this->kategori->Select("*", '')[1];
         Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);
     }

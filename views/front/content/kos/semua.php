@@ -77,7 +77,7 @@
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                         <!-- Blog Thumb -->
                         <div class="blog-thumb">
-                            <a href="#"><img src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a>
+                            <!-- <a href="#"><img style="height:200px" src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a> -->
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content p-4">

@@ -14,7 +14,7 @@
     Router::resource('/admin/fasilitas', 'FasilitasController');
     Router::resource('/admin/fasilitas/sub_fasilitas', 'SubFasilitasController');
     Router::resource('/admin/kategori', 'KategoriController');
-    Router::resource('/admin/kategori/sub_kategori', 'SubKategoriController');
+    // Router::resource('/admin/kategori/sub_kategori', 'SubKategoriController');
 
     Router::get('/admin/dashboard', 'DashboardController@index');
     Router::get('/admin/profile', 'AkunController@profile', 'login:1');
@@ -49,6 +49,7 @@
     // pembayaran
     Router::get('/pemesanan/bayar/:id', 'PembayaranController@bayar');
     Router::post('/bayar/uploadBukti/:id', 'PembayaranController@doPay');
+    // Router::get('/bayar/uploadBukti', 'PembayaranController@doPay');
     Router::get('/invoice/:id', 'PemesananController@invoice');
 
     // transaksi
