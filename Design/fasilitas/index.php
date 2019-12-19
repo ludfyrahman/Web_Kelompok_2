@@ -10,6 +10,18 @@
 		<h2>Menampilkan data dari database</h2>
 	</div>
 	<br/>
+	<form action="index.php" method="get">
+	<label>Cari :</label>
+	<input type="text" name="cari">
+	<input type="submit" value="Cari">
+</form>
+ 
+<?php 
+if(isset($_GET['cari'])){
+	$cari = $_GET['cari'];
+	echo "<b>Hasil pencarian : ".$cari."</b>";
+}
+?>
  
 	<?php 
 	if(isset($_GET['pesan'])){
@@ -35,7 +47,12 @@
 		</tr>
 		<?php 
 		include "koneksi.php";
-		$query_mysqli = mysqli_query($host, "SELECT * FROM fasilitas")or die(mysqli_error());
+		if(isset($_GET['cari'])){
+			$cari = $_GET['cari'];
+			$query_mysqli = mysqli_query($host, "SELECT * FROM fasilitas where nama like '%$cari%'")or die(mysqli_error());
+		}else{
+			$query_mysqli = mysqli_query($host, "SELECT * FROM fasilitas")or die(mysqli_error());
+		}
 		$nomor = 1;
 		while($data = mysqli_fetch_array($query_mysqli)){
 		?>
