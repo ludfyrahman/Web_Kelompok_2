@@ -13,8 +13,8 @@
                     <div id="profil" class="accordion-content widget-content collapse show" data-parent="#cat-accordion">
                         <!-- Category Widget Items -->
                         <ul class="widget-items">
-                            <li><a href="#" class="d-flex p-3"><span>Pengaturan</span></a></li>
-                            <li><a href="<?= BASEURL."pengguna/lupaPasssword" ?>" class="d-flex p-3"><span>Disukai</span></a></li>
+                            <li><a href="<?= BASEURL."pengguna/profil" ?>" class="d-flex p-3"><span>Pengaturan</span></a></li>
+                            <li><a href="<?= BASEURL."pengguna/wishlist" ?>" class="d-flex p-3"><span>Disukai</span></a></li>
                         </ul>
                     </div>
                     <h5>

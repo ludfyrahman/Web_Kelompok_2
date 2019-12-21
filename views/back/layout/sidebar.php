@@ -32,6 +32,12 @@
             </a>
         </li>
         <li>
+            <a href="<?= BASEADM."kategori" ?>">
+                <span class="link-title">Kategori</span>
+                <i class="mdi mdi-account link-icon"></i>
+            </a>
+        </li>
+        <li>
             <a href="#fasilitas" data-toggle="collapse" aria-expanded="false">
                 <span class="link-title">Fasilitas</span>
                 <i class="mdi mdi-flask link-icon"></i>
@@ -40,23 +46,9 @@
                 <li>
                 <a href="<?= BASEADM."fasilitas" ?>">Fasilitas</a>
                 </li>
-                <li>
-                <a href="pages/sample-pages/error_2.html" target="_blank">Sub Fasilitas</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#kategori" data-toggle="collapse" aria-expanded="false">
-                <span class="link-title">Kategori</span>
-                <i class="mdi mdi-flask link-icon"></i>
-            </a>
-            <ul class="collapse navigation-submenu" id="kategori">
-                <li>
-                <a href="<?= BASEADM."kategori" ?>">Kategori</a>
-                </li>
-                <li>
-                <a href="<?= BASEADM."kategori/sub_kategori" ?>">Sub Kategori</a>
-                </li>
+                <!-- <li>
+                    <a href="pages/sample-pages/error_2.html" target="_blank">Sub Fasilitas</a>
+                </li> -->
             </ul>
         </li>
         <?php } ?> 
@@ -68,7 +60,7 @@
             </a>
         </li>
         <li>
-            <a href="../docs/docs.html">
+            <a href="<?= BASEADM."pembayaran" ?>">
                 <span class="link-title">Pembayaran</span>
                 <i class="mdi mdi-asterisk link-icon"></i>
             </a>
@@ -78,14 +70,8 @@
         ?>
         <li class="nav-category-divider">Pengaturan</li>
         <li>
-            <a href="../docs/docs.html">
-                <span class="link-title">Gmail</span>
-                <i class="mdi mdi-asterisk link-icon"></i>
-            </a>
-        </li>
-        <li>
-            <a href="../docs/docs.html">
-                <span class="link-title">Facebook</span>
+            <a href="<?= BASEADM."setting" ?>">
+                <span class="link-title">Pengaturan</span>
                 <i class="mdi mdi-asterisk link-icon"></i>
             </a>
         </li>

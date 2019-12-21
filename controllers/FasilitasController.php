@@ -11,21 +11,21 @@ class FasilitasController {
 
     public function index() {
         $lists = $this->fasilitas->Select("*", "", "ORDER By id desc");
-        Response::render('back/index', ['title' => 'Daftar Fasilitas', 'content' => 'fasilitas/index', 'list' => null]);
+        Response::render('back/index', ['title' => 'Daftar Fasilitas', 'content' => 'fasilitas/index', 'list' => $lists[1]]);
 
     }
 
     public function add() {
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
-        Response::render('back/index', ['title' => 'Tambah Kos', 'content' => 'kos/_form', 'type' => 'Tambah', 'data' => null, 'kategori' => $kategori[1]]);
+        Response::render('back/index', ['title' => 'Tambah fasilitas', 'content' => 'fasilitas/_form', 'type' => 'Tambah', 'data' => null, 'kategori' => $kategori[1]]);
     }
 
     public function edit($id) {
-        $data = $this->kos->Select("*", "WHERE id = $id")[1];
+        $data = $this->fasilitas->Select("*", "WHERE id = $id")[1];
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
         if(count($data) < 1)
             Router::not_found();
-        Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'kategori' => $kategori[1]]);
+        Response::render('back/index', ['title' => 'Edit fasilitas', 'content' => 'fasilitas/_form', 'type' => 'Edit', 'data' => $data[0], 'kategori' => $kategori[1]]);
     }
 
     public function store() {
@@ -34,17 +34,13 @@ class FasilitasController {
         try {
             $arr = [
                 'nama' => $d['nama'], 
-                'deskripsi' => $d['deskripsi'], 
-                // // 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 
-                'harga' => $d['harga'],
-                'id_kategori' => $d['kategori'],
                 'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
                 'ditambahkan_oleh' =>  Account::Get('id')
             ];
 
-            $this->kos->Insert($arr);
+            $this->fasilitas->Insert($arr);
 
-            Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil ditambahkan']);
+            Response::redirectWithAlert('admin/fasilitas/', ['info', 'fasilitas berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -60,16 +56,12 @@ class FasilitasController {
         try {
             $arr = [
                 'nama' => $d['nama'], 
-                'deskripsi' => $d['deskripsi'], 
-                // // 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 
-                'harga' => $d['harga'],
-                'id_kategori' => $d['kategori'],
             ];
 
 
-            $this->kos->Update($arr, "WHERE id = $id");
+            $this->fasilitas->Update($arr, "WHERE id = $id");
 
-            Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil diedit']);
+            Response::redirectWithAlert('admin/fasilitas/', ['info', 'fasilitas berhasil diedit']);
         }
         catch(Exception $e) {
 
@@ -79,8 +71,8 @@ class FasilitasController {
 
     public function delete($id) {
         // $this->akun->CustomQuery("SELECT DISTINCT(id) from pemesanan where tanggal BETWEEN '2019-02-02' and '2019-02-06'");
-        $this->kos->delete("WHERE id='$id'");
-        Response::redirectWithAlert('admin/kos/', ['info', "Berhasil menghapus akun"]);
+        $this->fasilitas->delete("WHERE id='$id'");
+        Response::redirectWithAlert('admin/fasilitas/', ['info', "Berhasil menghapus akun"]);
     }
 
     public function profile() {

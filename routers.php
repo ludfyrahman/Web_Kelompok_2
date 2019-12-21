@@ -17,45 +17,59 @@
     // Router::resource('/admin/kategori/sub_kategori', 'SubKategoriController');
 
     Router::get('/admin/dashboard', 'DashboardController@index');
-    Router::get('/admin/profile', 'AkunController@profile', 'login:1');
-    Router::post('/admin/profile', 'AkunController@proses_profile', 'login:1');
-    Router::get('/admin/password', 'AkunController@password', 'login:1');
-    Router::post('/admin/password', 'AkunController@proses_password', 'login:1');
 
 
     Router::resource('/admin/pemesanan', 'PemesananController', 'login:1');
+    Router::post('/admin/pemesanan', 'PemesananController@index', 'login:1');
+    Router::get('/admin/pemesanan/pdf', 'PemesananController@pdf', 'login:1');
+    Router::get('/admin/pemesanan/aksi/:status/:id', 'PemesananController@aksi', 'login:1');
     Router::resource('/admin/pembayaran', 'PembayaranController', 'login:1');
+    Router::post('/admin/pembayaran', 'PembayaranController@index', 'login:1');
 // end backend
 
 // front end 
     Router::get('/', 'SiteController@home');
     Router::get('/filter', 'SiteController@filter');
+
+    // pengguna
     Router::get('/pengguna/login', 'PenggunaController@login');
     Router::get('/pengguna/profil', 'PenggunaController@profil');
+    Router::get('/pengguna/profil/pengaturan', 'PenggunaController@pengaturan');
+    Router::get('/pengguna/wishlist', 'SiteController@wishlist');
+    Router::post('/pengguna/wishlist', 'SiteController@wishlist');
     Router::get('/pengguna/gmail?:code', 'PenggunaController@gmail');
-    Router::get('/pengguna/lupaPasssword', 'PenggunaController@password');
+    Router::post('/pengguna/profil/proses_password', 'PenggunaController@proses_password');
     Router::get('/keluar', 'PenggunaController@logout');
+    Router::get('/lupa_password', 'PenggunaController@lupa_password');
+    Router::post('/lupa_password', 'PenggunaController@proses_forgot_password');
+    Router::get('/ubah_password/:kode', 'PenggunaController@ubah_password');
+    Router::post('/ubah_password/:kode', 'PenggunaController@proses_ubah_password');
     Router::post('/pengguna/proses_login', 'PenggunaController@proses_login');
+    Router::post('/pengguna/proses_register', 'PenggunaController@proses_register');
+    // end  pengguna
 
-    Router::get('/kos/detail/:id', 'KosController@detail');
     
     // pemesanan
+    Router::get('/kos/detail/:id', 'KosController@detail');
     Router::get('/kos/pesan/:id', 'KosController@pesan');
     Router::get('/kos/semua', 'KosController@semua');
     Router::post('/kos/semua', 'KosController@semua');
     Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
     Router::get('/akun/pemesanan/detail/:id', 'PemesananController@detailPemesananUser');
 
+
+    // authentication
+    Router::get("/admin/setting", 'SettingController@index');
     // pembayaran
     Router::get('/pemesanan/bayar/:id', 'PembayaranController@bayar');
     Router::post('/bayar/uploadBukti/:id', 'PembayaranController@doPay');
     // Router::get('/bayar/uploadBukti', 'PembayaranController@doPay');
     Router::get('/invoice/:id', 'PemesananController@invoice');
-
     // transaksi
     Router::get('/transaksi', 'PemesananController@transaction');
 // end front end
-
+    Router::get("/verifikasi_email/:from/:to", "SettingController@verification_code");
+    Router::get("/verifikasi_no_hp/:to", "SettingController@verification_code_hp");
 
 
 Router::not_found();

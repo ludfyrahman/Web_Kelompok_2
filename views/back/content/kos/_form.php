@@ -53,6 +53,27 @@
                 </div>
                 <div class="col-lg-6 equel-grid">
                     <div class="grid">
+                        <p class="grid-header">Fasilitas</p>
+                        <div class="grid-body">
+                            <div class="item-wrapper">
+                                <div class="row">
+                                    <?php 
+                                        foreach ($subfas as $sf) {
+                                    ?>
+                                    <div class="form-group col-md-6">
+                                        <label><input type="checkbox" name="fasilitas[]" value="<?= $sf['id_fasilitas'] ?>"> <?= $sf['nama'] ?></label>
+                                        <div class="container">
+                                            <?php 
+                                                foreach ($sf['sub'] as $sub) {
+                                            ?>
+                                                <input type="checkbox" name="sub_fasilitas[]" value="<?= $sub['id'] ?>"> <?= $sub['nama'] ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
                         <p class="grid-header">Foto / Video</p>
                         <div class="grid-body">
                             <div class="item-wrapper">

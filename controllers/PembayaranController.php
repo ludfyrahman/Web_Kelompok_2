@@ -10,8 +10,19 @@ class pembayaranController {
     }
 
     public function index() {
-        $lists = $this->pembayaran->datapembayaran()[1];
-        // print_r($lists);
+        // $lists = $this->pembayaran->datapembayaran()[1];
+        $d = $_POST;
+        if (isset($d['cari'])) {
+            $start_date = date("Y-m-d", strtotime($d['start_date']));
+            // echo "berhasil";
+            $end_date = date("Y-m-d", strtotime($d['end_date']));
+            $send = [
+                $start_date, $end_date
+            ];
+            $lists = $this->pembayaran->datapembayaran($send)[1];
+        }else{
+            $lists = $this->pembayaran->datapembayaran()[1];
+        }
         Response::render('back/index', ['title' => 'Daftar pembayaran', 'content' => 'pembayaran/index', 'list' => $lists]);
 
     }

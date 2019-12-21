@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Kategori Kos</label>
-                                    <select name="tipe" id="" class="form-control">
+                                    <select name="kategori" id="" class="form-control">
                                         <option value="">Semua</option>
                                     <?php
                                     $tp = Input::postOrOr('tipe');
@@ -39,10 +39,14 @@
                                     <label for="">Urutkan</label>
                                     <select name="urut" id="" class="form-control">
                                         <option value="">Semua</option>
-                                        <option value="1">Terbaru</option>
-                                        <option value="2">Termurah</option>
-                                        <option value="3">Tertinggi</option>
+                                        <option value="1" <?= (Input::postOrOr('urut') == 1 ? "selected" : "") ?>>Terbaru</option>
+                                        <option value="2" <?= (Input::postOrOr('urut') == 2 ? "selected" : "") ?>>Termurah</option>
+                                        <option value="3" <?= (Input::postOrOr('urut') == 3 ? "selected" : "") ?>>Tertinggi</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Jarak (m)</label>
+                                    <input type="text" placeholder="jarak" name="jarak" value="<?= Input::postOrOr('jarak') ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Rentang Harga</label>
@@ -77,7 +81,7 @@
                     <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                         <!-- Blog Thumb -->
                         <div class="blog-thumb">
-                            <!-- <a href="#"><img style="height:200px" src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt=""></a> -->
+                            <img style="height:200px" src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt="">
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content p-4">

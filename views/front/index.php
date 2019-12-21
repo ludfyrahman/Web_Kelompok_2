@@ -17,7 +17,7 @@
     <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
     <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
-<body class="miami" onload="initGeolocation();">
+<body class="miami">
     <!--====== Preloader Area Start ======-->
     <div id="loader">
         <div class="spinner">
@@ -62,12 +62,14 @@ if($content != 'user/login')
 <script src="<?php echo BASEASSET ?>js/script.js"></script>
 
 
-<script async defer
+<!-- <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
-</script>
+</script> -->
 <script>
 // Initialize and add the map
+initGeolocation();
 function initGeolocation() {
+    console.log("berhasil");
    if (navigator.geolocation) {
       // Call getCurrentPosition with success and failure callbacks
       navigator.geolocation.getCurrentPosition(success, fail);
@@ -78,6 +80,8 @@ function initGeolocation() {
 }
 
 function success(position) {
+    document.cookie = "long="+position.coords.longitude;
+    document.cookie = "lat="+position.coords.latitude;
    console.log("long " + position.coords.longitude);
    console.log("lat " + position.coords.latitude);
    // document.getElementById('long').value = position.coords.longitude;
@@ -85,11 +89,12 @@ function success(position) {
 }
 
 function fail() {
+    console.log("error");
    // Could not obtain location
 }
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: <?=$data['latitude']?>, lng: <?= $data['longitude']?>};
+  var uluru = {lat: <?=(isset($data['latitude']) == null ? 0 : $data['latitude'])?>, lng: <?= (isset($data['longitude']) == null ? 0 : $data['longitude']) ?>};
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 17, center: uluru});

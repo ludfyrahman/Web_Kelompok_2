@@ -39,8 +39,14 @@
     <!-- Vendor Js For This Page Ends-->
     <!-- build:js -->
     <script src="<?php echo BASEASSET ?>/js/dashboard.js"></script>
+    <script src="<?= BASEASSET."vendors/datatables/js/dataTables.buttons.min.js"?>"></script>
+    <script src="<?= BASEASSET."vendors/datatables/js/jszip.min.js"?>"></script>
+    <script src="<?= BASEASSET."vendors/datatables/js/pdfmake.min.js"?>"></script>
+    <script src="<?= BASEASSET."vendors/datatables/js/vfs_fonts.js"?>"></script>
+    <script src="<?= BASEASSET."vendors/datatables/js/buttons.html5.min.js"?>"></script>
     <script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
-
+    <script src="<?php echo BASEASSET ?>/js/template.js"></script>
+    <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
     <script>
         var latitude = "0", longitude = "0";
         // Initialize and add the map
@@ -81,8 +87,6 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
     </script>
-    <script src="<?php echo BASEASSET ?>/js/template.js"></script>
-    <script src="<?php echo BASEASSET ?>/js/custom.js"></script>
     <!-- endbuild -->
     
 </body>

@@ -79,7 +79,7 @@
                                     <table width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td colspan="2">
-                                                <img src="https://ecs7.tokopedia.net/img/tokopedia-logo-large.png" alt="Tokopedia" style="margin-bottom: 15px; width: 147px;">
+                                                <img src="<?= BASEASSET."images/logo.png" ?>">
                                             </td>
                                         </tr>
                                         

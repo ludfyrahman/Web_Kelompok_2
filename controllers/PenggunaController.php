@@ -1,12 +1,12 @@
 <?php
 
-
+include "SettingController.php";
 class PenggunaController {
-    private $pengguna;
+    private $pengguna, $setting;
     
-
     public function __construct() {
         $this->pengguna = new pengguna;
+        $this->setting = new SettingController();
     }
     public function logout() {
         // echo "keluar";
@@ -167,13 +167,65 @@ class PenggunaController {
         Response::render('front/index', ['title' => 'Profil '.Account::Get('nama'), 'content' => 'user/profil']);
     }
 
-    public function password() {
-        // if($_SESSION['userlevel'] == 1)
-        //     Response::render('back/index', ['title' => 'Ubah Password', 'content' => 'password']);
-        // else if($_SESSION['userlevel'] == 2)
-            Response::render('front/index', ['title' => 'Ubah Password', 'content' => 'user/password']);
+    public function lupa_password() {
+        Response::render('front/index', ['title' => 'Lupa Password', 'content' => 'user/lupa_password']);
     }
+    public function ubah_password($kode) {
+        Response::render('front/index', ['title' => 'Ubah Password', 'content' => 'user/password']);
+    }
+    public function proses_ubah_password($kode){
+        $d = $_POST;
+        try {
+            // echo "password lama "
+            if($d['new_password'] != $d['password_confirmation']) {
+                $_SESSION['alert'] = ['danger', 'Password konfirmasi tidak sama'];
+                // echo "password konfirmasi tidak sama";
+                return $this->ubah_password($kode);
+            }
 
+            $arr = ['password' => password_hash($d['new_password'], PASSWORD_DEFAULT)];
+
+            $this->pengguna->Update($arr, "WHERE verification = '$kode'");
+
+            Response::redirectWithAlert('/pengguna/login', ['success', 'Password berhasil diubah']);
+        }
+        catch(Exception $e) {
+            $this->password();
+        }
+    }
+    public function proses_forgot_password(){
+        $d = $_POST;
+        $c = $this->pengguna->select("*", "WHERE email='$d[email]'");
+        if($c[0] > 0 ){
+            $this->lupa_password_email("papikos@gmail.com", "ludfyr@gmail.com");
+            // echo "ada cek email";
+            $_SESSION['alert'] = ['info', 'Verifikasi Terkirim ke email '.$c['email']];
+            return $this->lupa_password();
+        }else{
+            $_SESSION['alert'] = ['info', 'Email anda tidak terdaftar di aplikasi'];
+            return $this->lupa_password();
+        }
+    }
+    public function lupa_password_email($from, $to){
+        $kode = App::RandomString(5);
+        $this->pengguna->update(["verification" => $kode], "WHERE email='$to'");
+        $subject = "Lupa Password";
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom($from, "Lupa Password Akun Papikos");
+        $email->setSubject($subject);
+        $email->addTo($to, "Sesama Korban Ditabrak Cewek");
+        $email->addContent("text/html", "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
+        $sg = new \SendGrid(SENDGRID_API_KEY);
+
+        $response = $sg->client->mail()->send()->post($email);
+                
+        if ($response->statusCode() == 202) {
+            // Successfully sent
+            echo 'done';
+        } else {
+            echo 'false';
+        }
+    }
     public function proses_profile() {
         $d = $_POST;
 
@@ -191,32 +243,32 @@ class PenggunaController {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
                 $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
 
-            $this->profile();
+            return $this->profile();
         }
     }
 
     public function proses_password() {
         $d = $_POST;
-
         try {
-            if($d['password'] != $d['password_confirmation']) {
-                $_SESSION['alert'] = ['danger', 'Password konfirmasi tidak sama'];
-                return $this->password();
-            }
-
-            if(!password_verify($d['old_password'], pengguna::Get('password'))) {
+            // echo "password lama "
+            if(!password_verify($d['old_password'], Account::Get('password'))) {
                 $_SESSION['alert'] = ['danger', 'Password lama tidak sama'];
-                return $this->password();
+                // echo "password lama tidak sama";
+                return $this->profil();
+            }
+            if($d['new_password'] != $d['password_confirmation']) {
+                $_SESSION['alert'] = ['danger', 'Password konfirmasi tidak sama'];
+                // echo "password konfirmasi tidak sama";
+                return $this->profil();
             }
 
-            $arr = ['password' => password_hash($d['password'], PASSWORD_DEFAULT)];
+            
+
+            $arr = ['password' => password_hash($d['new_password'], PASSWORD_DEFAULT)];
 
             $this->pengguna->Update($arr, "WHERE id = $_SESSION[userid]");
 
-            if($_SESSION['userlevel'] == 1)
-                Response::redirectWithAlert('admin/password/', ['info', 'Password berhasil diedit']);
-            else if($_SESSION['userlevel'] == 2)
-                Response::redirectWithAlert('user/password/', ['info', 'Password berhasil diedit']);
+            Response::redirectWithAlert('pengguna/profil', ['success', 'Password berhasil diubah']);
         }
         catch(Exception $e) {
             $this->password();
@@ -269,24 +321,20 @@ class PenggunaController {
 
     public function proses_register() {
         $d = $_POST;
-
         try {
             if($d['password'] != $d['password_confirmation']) {
                 $_SESSION['alert'] = ['danger', "Password konfirmasi harus sama"];
-                return $this->register();
+                return $this->login();
             }
 
-            $arr = ['name' => $d['name'], 'email' => $d['email'], 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 'level' => 2];
-
+            $arr = ['nama' => $d['nama'], 'email' => $d['email'], 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 'level' => 3];
             $this->pengguna->Insert($arr);
-
             Response::redirectWithAlert('login/', ['info', 'Register berhasil, anda dapat login']);
         }
         catch(Exception $e) {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
                 $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
-
-            $this->register();
+            Response::redirectWithAlert('login/', ['info', 'Register berhasil, anda dapat login']);
         }
     }
 

@@ -330,8 +330,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
                         <h2 class="text-capitalize">Tim Kami</h2>
-                        <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p>
-                        <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati.</p>
+                        <p class="d-none d-sm-block mt-4">Tim kami memiliki dari 5 orang yang berasal dari kelompok 2 golongan B </p>
                     </div>
                 </div>
             </div>
@@ -342,7 +341,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-1.png" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/neva.jpg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">
@@ -372,7 +371,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-2.png" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/ludfi.jpg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">
@@ -402,7 +401,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-3.png" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/satria.jpeg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">
@@ -432,7 +431,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-4.png" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/reza.jpg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">
@@ -462,7 +461,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/avatar-5.png" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/yuni.jpg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">

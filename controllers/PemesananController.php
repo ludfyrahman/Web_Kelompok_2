@@ -1,36 +1,62 @@
 <?php
 App::loadModels(["Media"]);
+use Dompdf\Dompdf;
 class PemesananController {
     private $pemesanan, $media;
-
     public function __construct() {
         $this->pemesanan = new pemesanan;
         $this->media = new Media;
     }
 
     public function index() {
-        $lists = $this->pemesanan->dataPemesanan()[1];
-        // print_r($lists);
+        $d = $_POST;
+        if (isset($d['cari'])) {
+            $start_date = date("Y-m-d", strtotime($d['start_date']));
+            $end_date = date("Y-m-d", strtotime($d['end_date']));
+            $send = [
+                $start_date, $end_date
+            ];
+            $lists = $this->pemesanan->dataPemesanan($send)[1];
+        }else{
+            $lists = $this->pemesanan->dataPemesanan()[1];
+        }
         Response::render('back/index', ['title' => 'Daftar pemesanan', 'content' => 'pemesanan/index', 'list' => $lists]);
 
     }
-
-    public function update($id) {
+    public function pdf(){
+        // Response::render('partials/pdfPemesanan');
+        $dompdf = new Dompdf();
+        $html   = Response::render('partials/pdfPemesanan');
+        $dompdf = new DOMPDF();
+        $dompdf->load_html($html);
+        $dompdf->render();
+        $dompdf->stream('laporan_'.$nama.'.pdf');
+    }
+    public function excel(){
+        
+    }
+    public function aksi($status, $id){
         $d = $_POST;
 
         try {
+            // if ($status = ) {
+            //     # code...
+            // }
             $arr = [
                 'nama' => $d['nama'], 
+                'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
+                'ditambahkan_oleh' => Account::Get('id')
             ];
 
+            // $this->kategori->Insert($arr);
 
-            $this->pemesanan->Update($arr, "WHERE id = $id");
-
-            Response::redirectWithAlert('admin/pemesanan/', ['info', 'pemesanan berhasil diedit']);
+            // Response::redirectWithAlert('admin/kategori/', ['info', 'kategori berhasil ditambahkan']);
         }
         catch(Exception $e) {
-
-            $this->edit($id);
+            // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
+            //     $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
+            print_r($e->errorInfo[2]);
+            // $this->add();
         }
     }
     public function doOrder($id){

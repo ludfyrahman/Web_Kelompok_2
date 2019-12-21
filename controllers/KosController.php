@@ -1,6 +1,6 @@
 <?php
 
-App::loadModels(['kategori', 'media', 'fasilitas', 'sub_fasilitas']);
+App::loadModels(['kategori', 'media', 'fasilitas_kos', 'sub_fasilitas']);
 class KosController {
     private $kos, $kategori, $media;
 
@@ -8,7 +8,7 @@ class KosController {
         $this->kos = new Kos;
         $this->kategori = new Kategori;
         $this->media = new Media;
-        $this->fasilitas = new Fasilitas;
+        $this->fasilitas_kos = new fasilitas_kos;
         $this->sub_fasilitas = new Sub_fasilitas;
         // echo App::uri(4);
     }
@@ -21,7 +21,25 @@ class KosController {
 
     public function add() {
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
-        Response::render('back/index', ['title' => 'Tambah Kos', 'content' => 'kos/_form', 'type' => 'Tambah', 'data' => null, 'kategori' => $kategori[1]]);
+        $fasilitas = $this->fasilitas_kos->Select("*", " fk JOIN fasilitas f ON fk.id_fasilitas=f.id ", "")[1];
+        // echo "<pre>";
+        $index = 0;
+        $index = 0;
+        $subfas = array();
+        foreach($fasilitas as $f){
+            $subfas[$index] = $f;
+            $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
+            $in = 0;
+            foreach($sub_fasilitas as $sub){
+                $subfas[$index]['sub'][$in] = $sub;
+                $in++;
+            }
+            $index++;
+        }
+        // echo "<pre>";
+        // print_r($subfas);
+        // echo "</pre>";
+        Response::render('back/index', ['title' => 'Tambah Kos', 'content' => 'kos/_form', 'type' => 'Tambah', 'subfas' => $subfas, 'data' => null, 'kategori' => $kategori[1]]);
     }
 
     public function edit($id) {
@@ -110,7 +128,7 @@ class KosController {
     public function detail($id){
         $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
         $media = $this->media->Select("*", "WHERE id_kos='$data[id]'")[1];
-        $fasilitas = $this->fasilitas->Select("*", "WHERE id_kos='$data[id]'")[1];
+        $fasilitas = $this->fasilitas_kos->Select("*", " fk JOIN fasilitas f ON fk.id_fasilitas=f.id ", "WHERE fk.id_kos='$data[id]'")[1];
         // echo "<pre>";
         $index = 0;
         $index = 0;
@@ -142,7 +160,19 @@ class KosController {
     public function semua(){
         $d = $_POST;
         $pencarian = " ";
-        $urut = " HAVING distance < 500 order by distance asc";
+        $lat = $_COOKIE['lat'];
+        $long = $_COOKIE['long'];
+        // echo $_COOKIE['long'];
+        // echo "<pre>";
+        // print_r($d);
+        // echo "</pre>";
+        $urut = "";
+        if (isset($d['jarak'])) {
+            if($d['jarak'] != ''){
+                $urut = " HAVING distance < $d[jarak] order by distance asc";    
+            }
+        }
+        
         $pencarian = $urut;
         if(isset($d['search'])){
             $pencarian = "Where ";
@@ -163,12 +193,15 @@ class KosController {
                 }
             }
             if (isset($d['urut'])) {
-                if ($d['urut'] == 1) {
-                    $urut .= " k.id desc";
-                }else if($d['urut'] = 2){
-                    $urut .= " k.harga asc";
-                }else if($d['urut'] = 3){
-                    $urut .= " k.harga desc";
+                if ($d['urut'] !='') {
+                    $urut = "ORDER BY ";
+                    if ($d['urut'] == 1) {
+                        $urut .= " k.id desc";
+                    }else if($d['urut'] == 2){
+                        $urut .= " k.harga asc";
+                    }else if($d['urut'] == 3){
+                        $urut .= " k.harga desc";
+                    }
                 }
             }
             $harga = "";
@@ -177,16 +210,14 @@ class KosController {
                     $harga = " AND k.harga BETWEEN '$d[harga_awal]' AND '$d[harga_tertinggi]'";
                 }
             }
-            
-            $pencarian.=" $cari $kategori $tipe $harga $urut";
+            $pencarian.=" $cari $kategori $tipe $harga";
             // SELECT *, ( 3959 * acos ( cos ( radians($key) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($user) ) + sin ( radians($key) ) * sin( radians( latitude ) ) ) ) AS distance FROM outlet HAVING distance < 500 order by distance asc
-            // SELECT *, ( 3959 * acos ( cos ( radians(-7.1786496) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(113.4657536) ) + sin ( radians(-7.1786496) ) * sin( radians( latitude ) ) ) ) AS distance FROM kos HAVING distance < 500 order by distance asc
             // 1 mile = 1,609 
             //key latitude and $user longitude
         }
-        // echo "id kategori ".$d['kategori']."<br>";
+        // echo "$pencarian";
         $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media, ( 3959 * acos ( cos ( radians(-7.1786496) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(113.4657536) ) + sin ( radians(-7.1786496) ) * sin( radians( latitude ) ) ) ) AS distance', 
-        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (SELECT link_media, id, id_kos FROM media LIMIT 1) m on k.id=m.id_kos ", " $pencarian ");
+        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos", " $pencarian GROUP BY m.id_kos  $urut");
         // $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
         $kategori = $this->kategori->Select("*", '')[1];
         Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);

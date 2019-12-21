@@ -5,7 +5,7 @@
       
       <div class="col-lg-12">
         <div class="grid">
-          <p class="grid-header"><?= $title ?> <a href="<?=BASEADM."kategori/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
+          <p class="grid-header"><?= $title ?> <a href="<?=BASEADM."fasilitas/add"?>"><button class="btn btn-primary float-right">Tambah</button></a></p>
           <?php Response::part('alert');?>
           <div class="item-wrapper">
             <div class="table-responsive">
@@ -26,11 +26,11 @@
                     <td><?=$no?></td>
                     <td class='text-left'><?=$l['nama']?></td>
                     <td>
-                      <a href="<?=BASEADM.'kategori/'.$l['id'].'/edit' ?>" >
+                      <a href="<?=BASEADM.'fasilitas/'.$l['id'].'/edit' ?>" >
                         <i class="mdi mdi-pencil-box-outline"></i>
                       </a>
                       
-                      <a href="<?=BASEADM.'kategori/'.$l['id'].'/delete' ?>" >
+                      <a class="delete" href="<?=BASEADM.'fasilitas/'.$l['id'].'/delete' ?>" >
                         <i class="mdi mdi-delete-forever"></i>
                       </a>
 

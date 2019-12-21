@@ -1,7 +1,19 @@
 // console.log(getCookie("lat"));
-
+$(".mdi-delete-forever").click(function(){
+  return confirm("Apakah anda yakin");
+})
 // setting dropzone for upload multiple image
-$(".table").DataTable();
+$(".table").DataTable(
+  {
+    dom: 'Bfrtip',
+    buttons: [
+      'copyHtml5',
+      'excelHtml5',
+      'csvHtml5',
+      'pdfHtml5'
+  ]
+}
+);
 var currentFile = null;
 
 var lat = getCookie("lat");

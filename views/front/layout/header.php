@@ -13,7 +13,7 @@ Kos murah, nyaman, berkualitas dan strategis</p>
                     <?php
                     if(isset($_SESSION['userlevel'])){
                     ?>
-                        <a href="<?= BASEURL ?>#kos" class="btn btn-bordered"><span>Cari Kos</span></a>
+                        <a href="<?= BASEURL ?>kos/semua" class="btn btn-bordered"><span>Cari Kos</span></a>
                     <?php }else{?>
                         <a href="<?= BASEURL."pengguna/login"?>" class="btn btn-bordered"><span>Bergabung</span></a>
                         <a href="<?= BASEURL."pengguna/login"?>" class="btn btn-bordered d-none d-sm-inline-block">Masuk</a>
@@ -28,7 +28,7 @@ Kos murah, nyaman, berkualitas dan strategis</p>
                 </div>
                 <!-- Video Icon -->
                 <div class="video-icon d-none d-lg-block">
-                    <a class="play-btn" data-fancybox href="https://youtu.be/bvxf5IfntD0">
+                    <a class="play-btn" data-fancybox href="https://www.youtube.com/watch?v=Mft-c4N9J-g">
                         <i class="icofont-ui-play"></i>
                     </a>
                 </div>

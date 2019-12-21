@@ -22,6 +22,13 @@ define('CLIENT_ID', '381036941652-c840m0csbpp1fb22108i1vkeeg4t9r6i.apps.googleus
 /* Google App Client Secret */
 define('CLIENT_SECRET', '1A96xemFAeRUWNZXp-FAvkWV');
 
+// api key sendgrid
+define('SENDGRID_API_KEY', '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');
+// nexmo
+define('NEXMO_API_KEY', '68206d0a');
+define('NEXMO_API_SECRET', 'H9nFINin9ytRgmeT');
+
+
 /* Google App Redirect Url */
 define('CLIENT_REDIRECT_URL', BASEURL.'helpers/gauth.php');
 define('host', 'localhost');
@@ -33,6 +40,6 @@ define('password', '051299');
 // transaction and other
 define('invoice_code', 'INV000');
 
-
 define('jenis_kelamin', ['Perempuan', 'Laki-laki']);
 define('level', ['', 'Admin', 'Pemilik Kos', 'Penyewa Kos']);
+define('tipe_pembayaran', ['', 'DP', 'Pelunasan', 'Bulanan']);

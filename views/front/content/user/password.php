@@ -10,14 +10,22 @@
                     <img src="<?= BASEASSET ?>/images/welcome/forgot-thumb.png" alt="">
                 </div>
                 <div class="col-12 col-md-6 col-lg-6 mb-5 mb-md-0">
-                    <h2 class="text-primary">Lupa Password Kamu?</h2>
-                    <p class="mt-3 mb-4">Masukkan email akun anda yang terdaftar di aplikasi kami. maka kami akan mengirimkan kode verifikasi ke email anda untuk mengubah password</p>
-                    <div class="input-group reset-password">
-                        <input type="email" class="form-control" placeholder="Enter your Email">
-                        <div class="input-group-append mt-3 mt-sm-0">
-                            <button type="button" class="btn btn-primary">Reset</button>
+                    <h2 class="text-primary">Ubah Password</h2>
+                    <p class="mt-3 mb-4">Ubah password kamu untuk masuk akun papikos</p>
+                    <?php Response::part('alert'); ?>
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label for="">Password Baru</label>
+                            <input type="password" class="form-control" name="new_password" placeholder="masukkan password baru kamu">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="">Ulangi Password Baru</label>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Ulangi password baru kamu">
+                        </div>
+                        <div class="form-group">
+                        <input type="submit" value="Ubah Password" class="btn btn-primary">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

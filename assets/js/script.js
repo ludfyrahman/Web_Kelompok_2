@@ -8,6 +8,41 @@ $(".pesan").click(function(){
 $(".bayar").click(function(){
    return confirm("apakah anda ingin Membayar Dp kos ini ???")
 });
+$("#verifikasi_email").click(function(){
+    // alert();
+    $.ajax({
+        type: "GET",
+        url: BASEURL+"verifikasi_email/papikos@gmail.com/"+"ludfyr@gmail.com",
+        cache: false,
+        success: function(data){
+        //    $("#resultarea").text(data);
+        console.log("success");
+            $('#email').modal('hide');
+            $('#code_email').modal('show');
+        },
+        error(res){
+            console.log("errrror")
+        }
+      });
+});
+$("#verifikasi_no_hp").click(function(){
+    // alert();
+    $.ajax({
+        type: "GET",
+        url: BASEURL+"verifikasi_no_hp/+6282331759738",
+        cache: false,
+        success: function(data){
+        //    $("#resultarea").text(data);
+        console.log("success");
+            $('#no_hp').modal('hide');
+            $('#code_email').modal('show');
+        },
+        error(res){
+            console.log("errrror")
+        }
+      });
+});
+
 var formData = new FormData();
 var id_pemesanan = $("#id_pemesanan").val();
 var dp = $("#dp").val();

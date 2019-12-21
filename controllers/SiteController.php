@@ -1,49 +1,37 @@
 <?php
 
-App::loadModels(['Kos','kategori', 'pengguna']);
+App::loadModels(['Kos','kategori', 'pengguna', 'favorit']);
 class SiteController {
     private $kos;
     public function __construct() {
         $this->kos = new Kos();
         $this->kategori = new Kategori();
         $this->pengguna = new Pengguna();
+        $this->favorit = new Favorit();
     }
 
     public function home() {
         $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
         $kategori = $this->kategori->Select('*', "ORDER BY id DESC");
         $pengguna = $this->pengguna->Select('*', "ORDER BY id DESC");
-        // echo "<pre>";
-        // print_r($kos);
-        Response::render('front/index', ['title' => 'Papikos Homepage', 'content' => 'site/home', 'kos' => $kos[1], 'jumlahkos' => $kos[0], 'jumlahpengguna' => $pengguna[0], 'jumlahkategori' => $kategori[0]]);
+        $jumlahkos = $this->kos->Select('*', "ORDER BY id DESC");
+        Response::render('front/index', ['title' => 'Papikos Homepage', 'content' => 'site/home', 'kos' => $kos[1], 'jumlahkos' => $jumlahkos[0], 'jumlahpengguna' => $pengguna[0], 'jumlahkategori' => $kategori[0]]);
     }
 
     public function filter() {
         echo "filter";
     }
 
-    public function sitemap() {
-        header("Content-Type: application/xml");
-
-        echo "<?xml version='1.0' encoding='UTF-8' ?>";
-        echo "<urlset xmns='http://sitemaps.org/schemas/sitemap/0.9'>";
-        $this->createLink(BASEURL);
-
-        $pariwisata = $this->pariwisata->Select("title, cover, permalink, text, name, 'pariwisata' type", "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC")[1];
-        $restoran = $this->restoran->Select("title, cover, permalink, text, name, 'restaurant' type", "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC")[1];
-        $hotel = $this->hotel->Select("title, cover, permalink, text, name, 'hotel' type", "p JOIN kabupaten k ON p.kabupaten_id = k.id", "ORDER BY p.id DESC")[1];
-        $event = $this->event->Select("'event' type, permalink", "", "ORDER BY id DESC LIMIT 0, 4")[1];
-        
-        foreach(array_merge($pariwisata, $restoran, $hotel, $event) as $c)
-            $this->createLink(BASEURL . "$c[type]/$c[permalink]/");
-        
-        echo "</urlset>";
+    public function wishlist(){
+        $d = $_POST;
+        $where = " where p.id= ".Account::Get('id');
+        if(isset($d['search'])){
+            $cari = $_POST['cari'];
+            $where.=" and k.nama like '%$cari%' ";
+        }
+        // print_r($where);
+        $favorit = $this->favorit->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, k.tanggal_ditambahkan ', " f JOIN kos k ON f.id_kos=k.id JOIN pengguna p on f.id_pengguna=p.id  JOIN (Select * from media) m on k.id=m.id_kos $where ", "GROUP BY m.id_kos");
+        Response::render('front/index', ['title' => 'Profil '.Account::Get('nama'), 'content' => 'user/wishlist', 'data' => $favorit[1]]);
     }
-
-    public function createLink($link) {
-        echo "<url>";
-        echo "<loc>$link</loc>";
-        echo "<priority>0.5</priority>";
-        echo "</url>";
-    }
+    
 }

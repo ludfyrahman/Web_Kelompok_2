@@ -61,7 +61,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Username or Email" name="email" aria-label="Username" aria-describedby="basic-addon1" required>
+                                            <input type="text" class="form-control" value="<?= Input::postOrOr('email') ?>" placeholder=" Email" name="email" aria-label="Username" aria-describedby="basic-addon1" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -75,16 +75,16 @@
                                                 <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                             </div>
                                             <div class="forgot-password ml-auto">
-                                                <span><a href="#">Forgot Password?</a></span>
+                                                <span><a href="<?= BASEURL."lupa_password" ?>">Lupa Password?</a></span>
                                             </div>
                                         </div>
                                         <!-- Login Button -->
-                                        <button type="submit" class="btn btn-bordered d-block btn-block">Login</button>
+                                        <button type="submit" class="btn btn-bordered d-block btn-block">Masuk</button>
                                     </form>
                                 </div>
                                 <!-- Signup Form -->
                                 <div class="tab-pane fade" id="signup">
-                                    <form action="#" class="login-form signup-form">
+                                    <form action="<?= BASEURL."pengguna/proses_register" ?>" method="POST" class="login-form signup-form">
                                         <!-- Social Login -->
                                         <div class="social-login text-center">
                                             <h5 class="fw-4 mt-2 mb-3">Daftar dengan akun sosial media anda</h5>
@@ -112,7 +112,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" class="form-control"name="nama" placeholder="Nama" aria-label="Nama" aria-describedby="basic-addon3" required>
+                                            <input type="text" class="form-control" name="nama" placeholder="Nama" aria-label="Nama" aria-describedby="basic-addon3" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -124,16 +124,16 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon5"><i class="fas fa-unlock-alt"></i></span>
                                             </div>
-                                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5">
+                                            <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5" required>
                                         </div>
-                                        <div class="custom-control custom-checkbox my-4">
-                                            <div class="remember">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                <label class="custom-control-label" for="customCheck2">By clicking, you are continue to receive newsletters &amp; promotions from Appo</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon5"><i class="fas fa-unlock"></i></span>
                                             </div>
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Password Konfirmasi" aria-describedby="basic-addon5" required>
                                         </div>
                                         <!-- Signup Button -->
-                                        <a href="#" class="btn btn-bordered d-block">Sign Up</a>
+                                        <button class="btn btn-bordered btn-block" type="submit">Mendaftar</button>
                                     </form>
                                 </div>
                             </div>
