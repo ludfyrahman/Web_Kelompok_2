@@ -46,7 +46,7 @@
                                                     <i class="fab fa-twitter"></i>
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
-                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>">
+                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online&tipe=login' ?>">
                                                     <i class="fab fa-google-plus-g"></i>
                                                     <i class="fab fa-google-plus-g"></i>
                                                 </a>
@@ -80,6 +80,7 @@
                                         </div>
                                         <!-- Login Button -->
                                         <button type="submit" class="btn btn-bordered d-block btn-block">Masuk</button>
+                                        <p style="padding:12px;text-align:center"><a href="<?= BASEURL ?>">Kembali Ke Beranda</a></p>
                                     </form>
                                 </div>
                                 <!-- Signup Form -->
@@ -87,7 +88,7 @@
                                     <form action="<?= BASEURL."pengguna/proses_register" ?>" method="POST" class="login-form signup-form">
                                         <!-- Social Login -->
                                         <div class="social-login text-center">
-                                            <h5 class="fw-4 mt-2 mb-3">Daftar dengan akun sosial media anda</h5>
+                                            <h5 class="fw-4 mt-2 mb-3">Mendaftar untuk mengakses aplikasi kami</h5>
                                             <!-- Social Icons -->
                                             <div class="social-icons d-flex justify-content-center">
                                                 <a class="facebook" href="#">
@@ -98,7 +99,7 @@
                                                     <i class="fab fa-twitter"></i>
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
-                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>">
+                                                <a class="google-plus" href="<?= 'https://accounts.google.com/o/oauth2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online&tipe=register' ?>">
                                                     <i class="fab fa-google-plus-g"></i>
                                                     <i class="fab fa-google-plus-g"></i>
                                                 </a>
@@ -134,6 +135,7 @@
                                         </div>
                                         <!-- Signup Button -->
                                         <button class="btn btn-bordered btn-block" type="submit">Mendaftar</button>
+                                        <p style="padding:12px;text-align:center"><a href="<?= BASEURL ?>">Kembali Ke Beranda</a></p>
                                     </form>
                                 </div>
                             </div>

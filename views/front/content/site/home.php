@@ -218,7 +218,7 @@
                                     <!-- Features Text -->
                                     <div class="features-text media-body">
                                         <h3>Design Simple dan mudah</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, adipisci.</p>
+                                        <p>Design aplikasi yang simple dan sangat mudah untuk digunakan pengguna aplikasi papikos</p>
                                     </div>
                                 </div>
                             </li>
@@ -232,7 +232,7 @@
                                     <!-- Features Text -->
                                     <div class="features-text media-body">
                                         <h3>Kreatif design</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, adipisci.</p>
+                                        <p>Kreatif design yang membuat tampilan lebih enak dilihat</p>
                                     </div>
                                 </div>
                             </li>
@@ -246,7 +246,7 @@
                                     <!-- Features Text -->
                                     <div class="features-text media-body">
                                         <h3>Pemesanan Online</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, adipisci.</p>
+                                        <p>memudahkan dalam pemesanan kos secara online</p>
                                     </div>
                                 </div>
                             </li>
@@ -260,7 +260,7 @@
                                     <!-- Features Text -->
                                     <div class="features-text media-body">
                                         <h3>Notif Pembayaran</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, adipisci.</p>
+                                        <p>mengingatkan penyewa untuk membayar tagihan kos</p>
                                     </div>
                                 </div>
                             </li>
@@ -282,7 +282,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
                         <h2 class="text-capitalize">Kos Terbaru</h2>
-                        <!-- <p class="d-none d-sm-block mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.</p> -->
+                        <p class="d-none d-sm-block mt-4">Menampilkan kos terbaru dari aplikasi papikos.</p>
                         <!-- <p class="d-block d-sm-none mt-4">Lorem ipsum dolor sit amet,/ consectetur adipisicing elit. Laborum obcaecati.</p> -->
                     </div>
                 </div>
@@ -312,7 +312,13 @@
                             <h3 class="blog-title my-3"><a href="#"><?= substr($k['nama'], 0,20)."..." ?></a></h3>
                             <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
                             <p><?= App::price($k['harga']) ?></p>
+                            
                             <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya</a>
+                            <?php
+                            if(isset($_SESSION['userid'])){
+                            ?>
+                                <a href="#" id="test" kosid="<?= $k['id'] ?>" class="blog-btn mt-3 float-right"><i class="icofont-heart-alt"></i></a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -467,6 +473,35 @@
                         <div class="team-content mt-2 mb-1">
                             <h3 class="team-name mt-3 mb-2">Sri Wahyuni</h3>
                             <h5 class="team-post mb-2">Dokumentasi dan dev team</h5>
+                            <!-- Team Media -->
+                            <div class="team-media mt-3">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-team text-center px-3 py-2 m-2">
+                        <!-- Team Photo -->
+                        <div class="team-photo mx-auto">
+                            <img src="<?=BASEASSET?>/images/avatar/yuni.jpg" alt="">
+                        </div>
+                        <!-- Team Content -->
+                        <div class="team-content mt-2 mb-1">
+                            <h3 class="team-name mt-3 mb-2">Vanika Ningrum</h3>
+                            <h5 class="team-post mb-2">Tester dan dev team</h5>
                             <!-- Team Media -->
                             <div class="team-media mt-3">
                                 <a href="#">

@@ -9,18 +9,19 @@ class PemesananController {
     }
 
     public function index() {
-        $d = $_POST;
-        if (isset($d['cari'])) {
-            $start_date = date("Y-m-d", strtotime($d['start_date']));
-            $end_date = date("Y-m-d", strtotime($d['end_date']));
+        $start_date = Input::getOr('start_date');
+        if ($start_date != "") {
+            $start_date = date("Y-m-d", strtotime(Input::getOr('start_date')));
+            $end_date = date("Y-m-d", strtotime(Input::getOr('end_date')));
+            $st = Input::getOr('status');
             $send = [
-                $start_date, $end_date
+                $start_date, $end_date, $st
             ];
             $lists = $this->pemesanan->dataPemesanan($send)[1];
         }else{
             $lists = $this->pemesanan->dataPemesanan()[1];
         }
-        Response::render('back/index', ['title' => 'Daftar pemesanan', 'content' => 'pemesanan/index', 'list' => $lists]);
+        Response::render ('back/index', ['title' => 'Daftar pemesanan', 'content' => 'pemesanan/index', 'list' => $lists]);
 
     }
     public function pdf(){

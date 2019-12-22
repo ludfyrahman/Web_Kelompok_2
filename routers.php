@@ -20,11 +20,14 @@
 
 
     Router::resource('/admin/pemesanan', 'PemesananController', 'login:1');
-    Router::post('/admin/pemesanan', 'PemesananController@index', 'login:1');
+    // Router::post('/admin/pemesanan', 'PemesananController@index', 'login:1');
     Router::get('/admin/pemesanan/pdf', 'PemesananController@pdf', 'login:1');
     Router::get('/admin/pemesanan/aksi/:status/:id', 'PemesananController@aksi', 'login:1');
     Router::resource('/admin/pembayaran', 'PembayaranController', 'login:1');
     Router::post('/admin/pembayaran', 'PembayaranController@index', 'login:1');
+    // report
+        Router::get('/admin/report', 'ReportController@index', 'login:1');
+        Router::post('/admin/report', 'ReportController@index', 'login:1');
 // end backend
 
 // front end 
@@ -33,6 +36,7 @@
 
     // pengguna
     Router::get('/pengguna/login', 'PenggunaController@login');
+    Router::get('/pengguna/loginfb', 'PenggunaController@loginfb');
     Router::get('/pengguna/profil', 'PenggunaController@profil');
     Router::get('/pengguna/profil/pengaturan', 'PenggunaController@pengaturan');
     Router::get('/pengguna/wishlist', 'SiteController@wishlist');
@@ -46,6 +50,9 @@
     Router::post('/ubah_password/:kode', 'PenggunaController@proses_ubah_password');
     Router::post('/pengguna/proses_login', 'PenggunaController@proses_login');
     Router::post('/pengguna/proses_register', 'PenggunaController@proses_register');
+        // verifikasi
+        Router::get("/verifikasi_email/:from/:to", "SettingController@verification_code");
+        Router::get("/verifikasi_no_hp/:to", "SettingController@verification_code_hp");
     // end  pengguna
 
     
@@ -68,8 +75,6 @@
     // transaksi
     Router::get('/transaksi', 'PemesananController@transaction');
 // end front end
-    Router::get("/verifikasi_email/:from/:to", "SettingController@verification_code");
-    Router::get("/verifikasi_no_hp/:to", "SettingController@verification_code_hp");
 
 
 Router::not_found();

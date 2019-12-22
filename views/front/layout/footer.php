@@ -11,7 +11,7 @@
                         <a class="navbar-brand" href="#">
                             <img class="logo" src="<?=BASEASSET?>/images/logo-white.png" alt="">
                         </a>
-                        <p class="text-white-50 mt-2 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.</p>
+                        <p class="text-white-50 mt-2 mb-3">papikos adalah aplikasi yang memudahkan penyewa kos dalam mencari kos sehingga tidak perlu datang langsung ke lokasi kos.</p>
                         <!-- Social Icons -->
                         <div class="social-icons d-flex">
                             <a class="facebook" href="#">
@@ -37,13 +37,13 @@
                     <!-- Footer Items -->
                     <div class="footer-items">
                         <!-- Footer Title -->
-                        <h3 class="footer-title text-white mb-2">Useful Links</h3>
+                        <h3 class="footer-title text-white mb-2">Link</h3>
                         <ul>
-                            <li class="py-2"><a class="text-white-50" href="#">Home</a></li>
-                            <li class="py-2"><a class="text-white-50" href="#">About Us</a></li>
-                            <li class="py-2"><a class="text-white-50" href="#">Services</a></li>
-                            <li class="py-2"><a class="text-white-50" href="#">Blog</a></li>
-                            <li class="py-2"><a class="text-white-50" href="#">Contact</a></li>
+                            <li class="py-2"><a class="text-white-50" href="<?= BASEURL."#" ?>">Beranda</a></li>
+                            <li class="py-2"><a class="text-white-50" href="<?= BASEURL."#about" ?>">Tentang</a></li>
+                            <li class="py-2"><a class="text-white-50" href="<?= BASEURL."#features" ?>">Fitur</a></li>
+                            <li class="py-2"><a class="text-white-50" href="<?= BASEURL."#kos" ?>">Kos</a></li>
+                            <li class="py-2"><a class="text-white-50" href="<?= BASEURL."#team" ?>">Tim</a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <!-- Copyright Area -->
                     <div class="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
                         <!-- Copyright Left -->
-                        <div class="copyright-left text-white-50">&copy; Copyrights 2019 Appo All rights reserved.</div>
+                        <div class="copyright-left text-white-50">&copy; Copyrights <?= date('Y') ?> Appo All rights reserved.</div>
                         <!-- Copyright Right -->
                         <div class="copyright-right text-white-50">Made with <i class="icofont-heart-alt"></i> By <a class="text-white-50" href="#">Theme Land</a></div>
                     </div>

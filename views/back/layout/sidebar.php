@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="user-profile">
         <div class="display-avatar animated-avatar">
-        <img class="profile-img img-lg rounded-circle" src="<?= BASEASSET ?>/images/profile/male/image_1.png" alt="profile image">
+        <img class="profile-img img-lg rounded-circle" src="<?= BASEASSET ?>/images/upload/profil/<?= Account::get("profil") ?>" alt="profile image">
         </div>
         <div class="info-wrapper">
         <p class="user-name"><?= Account::Get("nama") ?></p>
@@ -19,7 +19,7 @@
         <li>
             <a href="<?= BASEADM."kost" ?>">
                 <span class="link-title">Kos</span>
-                <i class="mdi mdi-account link-icon"></i>
+                <i class="mdi mdi-home link-icon"></i>
             </a>
         </li>
         <?php
@@ -34,7 +34,7 @@
         <li>
             <a href="<?= BASEADM."kategori" ?>">
                 <span class="link-title">Kategori</span>
-                <i class="mdi mdi-account link-icon"></i>
+                <i class="mdi mdi-format-list-bulleted link-icon"></i>
             </a>
         </li>
         <li>
@@ -62,23 +62,29 @@
         <li>
             <a href="<?= BASEADM."pembayaran" ?>">
                 <span class="link-title">Pembayaran</span>
-                <i class="mdi mdi-asterisk link-icon"></i>
+                <i class="mdi mdi-paypal link-icon"></i>
             </a>
         </li>
         <?php
         if(Account::Get('level') == 1) {
         ?>
+        <li>
+            <a href="<?= BASEADM."report" ?>">
+                <span class="link-title">Laporan</span>
+                <i class="mdi mdi-format-list-checks link-icon"></i>
+            </a>
+        </li>
         <li class="nav-category-divider">Pengaturan</li>
         <li>
             <a href="<?= BASEADM."setting" ?>">
                 <span class="link-title">Pengaturan</span>
-                <i class="mdi mdi-asterisk link-icon"></i>
+                <i class="mdi mdi-settings link-icon"></i>
             </a>
         </li>
         <li>
-            <a href="<?= BASEADM."pemesanan" ?>">
+            <a href="<?= BASEURL."pengguna/profil" ?>">
                 <span class="link-title">Profil</span>
-                <i class="mdi mdi-asterisk link-icon"></i>
+                <i class="mdi mdi-account link-icon"></i>
             </a>
         </li>
         <?php } ?>

@@ -92,6 +92,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 equel-grid">
+                <div class="grid">
+                    <p class="grid-header">Notifikasi Sms</p>
+                    <div class="grid-body">
+                        <div class="item-wrapper">
+                            <form method="post" action="" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="inputEmail1">Api Key</label>
+                                    <input type="text" name="api_key" class="form-control" value="<?=Input::postOrOr('api_key', $gmail['api_key'])?>" placeholder="Masukkan Api Key Papikos">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail1">Api Secret</label>
+                                    <input type="text" name="api_secret" class="form-control" value="<?=Input::postOrOr('api_secret', $gmail['api_secret'])?>" placeholder="Masukkan Api Secret Papikos">
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

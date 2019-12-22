@@ -2,6 +2,13 @@
 $(".mdi-delete-forever").click(function(){
   return confirm("Apakah anda yakin");
 })
+$('.btn-filter-pemesanan').click(function() {
+  window.location=BASEADM + "pemesanan&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val() + "&status=" + $('#status').val()
+});
+$('.btn-filter-pembayaran').click(function() {
+  window.location=BASEADM + "pembayaran&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val() + "&status=" + $('#status').val()
+});
+
 // setting dropzone for upload multiple image
 $(".table").DataTable(
   {

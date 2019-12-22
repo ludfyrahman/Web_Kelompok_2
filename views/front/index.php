@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="<?=BASEASSET?>css/responsive.css">
     <link rel="stylesheet" href="<?=BASEASSET?>css/custom.css">
     <link rel="stylesheet" href="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.css">
-    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
     <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
 <body class="miami">

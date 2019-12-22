@@ -1,5 +1,6 @@
 {
     "require": {
-        "sendgrid/sendgrid": "^7.4"
+        "sendgrid/sendgrid": "^7.4",
+        "facebook/graph-sdk": "^5.7"
     }
 }

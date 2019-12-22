@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit622ea3f5198c2ffc636fb9f8138c0107
 {
     public static $files = array (
+        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
         '3f8bdd3b35094c73a26f0106e3c0f8b2' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/SendGrid.php',
     );
 
@@ -17,6 +18,10 @@ class ComposerStaticInit622ea3f5198c2ffc636fb9f8138c0107
             'SendGrid\\Mail\\' => 14,
             'SendGrid\\Contacts\\' => 18,
             'SendGrid\\' => 9,
+        ),
+        'F' => 
+        array (
+            'Facebook\\' => 9,
         ),
     );
 
@@ -37,6 +42,10 @@ class ComposerStaticInit622ea3f5198c2ffc636fb9f8138c0107
         array (
             0 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
             1 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib',
+        ),
+        'Facebook\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
     );
 

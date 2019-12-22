@@ -10,14 +10,13 @@ class pembayaranController {
     }
 
     public function index() {
-        // $lists = $this->pembayaran->datapembayaran()[1];
-        $d = $_POST;
-        if (isset($d['cari'])) {
-            $start_date = date("Y-m-d", strtotime($d['start_date']));
-            // echo "berhasil";
-            $end_date = date("Y-m-d", strtotime($d['end_date']));
+        $start_date = Input::getOr('start_date');
+        if ($start_date != "") {
+            $start_date = date("Y-m-d", strtotime(Input::getOr('start_date')));
+            $end_date = date("Y-m-d", strtotime(Input::getOr('end_date')));
+            $st = Input::getOr('status');
             $send = [
-                $start_date, $end_date
+                $start_date, $end_date, $st
             ];
             $lists = $this->pembayaran->datapembayaran($send)[1];
         }else{

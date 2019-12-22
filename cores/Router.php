@@ -46,8 +46,8 @@ class Router {
             Response::redirectWithAlert('login/', ['danger', 'Anda harus login dulu']);
         else if($params[0] == 'notlogin' && isset($_SESSION['userlevel']))
             Response::redirect('');
-        else if(($params[1] == 1 && $_SESSION['userlevel'] == 2) || ($params[1] == 2 && $_SESSION['userlevel'] == 1))
-            Response::redirect('');
+        // else if(($params[1] == 1 && $_SESSION['userlevel'] == 2) || ($params[1] == 2 && $_SESSION['userlevel'] == 1))
+        //     Response::redirect('');
     }
 
     public static function call_class($class, $args = []) {

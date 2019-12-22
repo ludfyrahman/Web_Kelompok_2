@@ -13,7 +13,7 @@ class PenggunaController {
         unset($_SESSION['userid']);
         unset($_SESSION['userlevel']);
 
-        Response::redirectWithAlert('/', ['info', 'Logout berhasil']);
+        Response::redirectWithAlert('pengguna/login', ['info', 'Logout berhasil']);
     }
     public function index() {
         $lists = $this->pengguna->Select('*', "", "ORDER BY id DESC");
@@ -281,7 +281,20 @@ class PenggunaController {
         Response::render('front/index', ['title' => 'Login Papikos', 'content' => 'user/login', 'gmail' => $gmail_url]);
     }
 
-   
+    public function loginfb(){
+        $fb = new Facebook\Facebook([
+            'app_id' => APP_FACEBOOK_ID,
+            'app_secret' => APP_FACEBOOK_SECRET,
+            'default_graph_version' => 'v3.2',
+            ]);
+          
+          $helper = $fb->getRedirectLoginHelper();
+          
+          $permissions = ['email']; // Optional permissions
+          $loginUrl = $helper->getLoginUrl('http://localhost/papikos/helpers/facebook/fb-callback.php', $permissions);
+          
+          echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+    }
 
     public function register() {
         

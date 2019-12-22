@@ -40,10 +40,10 @@
         <div class="grid">
             <div class="grid-body text-gray">
             <div class="d-flex justify-content-between">
-                <p><?= $kos[0]?></p>
+                <p><?= $fasilitas[0]?></p>
                 <p>+02.7%</p>
             </div>
-            <p class="text-black">Ulasan</p>
+            <p class="text-black">Fasilitas</p>
             <div class="wrapper w-50 mt-4">
                 <canvas height="45" id="stat-line_3"></canvas>
             </div>
@@ -79,8 +79,8 @@
                         </div>
                         </div>
                         <div class="d-flex align-items-end pt-2 mb-4">
-                        <h4>16.2K</h4>
-                        <p class="ml-2 text-muted">New Followers</p>
+                        <h4><?= $jumlah_pesanan_bulan ?></h4>
+                        <p class="ml-2 text-muted">Pesanan Bulan Ini</p>
                         </div>
                     </div>
                     <div class="mt-auto">
@@ -218,6 +218,9 @@
 <script>
     var jumlah_pemesanan = '<?= $jumlah_pemesanan ?>';
     var bulan_pemesanan = '<?= $bulan_pemesanan ?>';
+    var presentase_pemesanan = '<?= $presentase_pemesanan ?>';
+    var pesanan = <?= $label_pesanan ?>;
+    var data_pesanan = <?= $data_pesanan ?>;
     var presentase_pemesanan = '<?= $presentase_pemesanan ?>';
 </script>
 <!-- page content ends -->

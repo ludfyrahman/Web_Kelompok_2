@@ -128,7 +128,7 @@ $(function () {
                             fontColor: "#212529",
                             maxTicksLimit: 3,
                             callback: function (a, e, r) {
-                                return a + " K"
+                                return a + " Pesanan"
                             },
                             padding: 10
                         }
@@ -151,10 +151,10 @@ $(function () {
         new Chart(e, {
             type: "bar",
             data: {
-                labels: ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat"],
+                labels: pesanan,
                 datasets: [{
-                    label: "Follower",
-                    data: [100, 52, 73, 58, 63, 72],
+                    label: "Pesanan",
+                    data: data_pesanan,
                     backgroundColor: chartColors[0],
                     borderColor: chartColors[0],
                     borderWidth: 0

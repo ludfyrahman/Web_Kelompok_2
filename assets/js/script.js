@@ -1,4 +1,8 @@
-
+$("#favorit").click(function(){
+    alert();
+    var id = $(this).attr("kosid");
+    console.log("idnya "+id);
+})
 $('.rating').on('change', function () {
    alert("Changed: " + $(this).val())
 });

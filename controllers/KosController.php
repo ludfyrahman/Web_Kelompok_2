@@ -14,7 +14,11 @@ class KosController {
     }
 
     public function index() {
-        $lists = $this->kos->customSelect("SELECT k.id, k.nama,k.harga, ka.nama as nama_kategori from kos k JOIN kategori ka ON k.id_kategori=ka.id");
+        $where = "";
+        if(Account::get('level') == 2){
+            $where = " WHERE p.id=".Account::get('id');
+        }
+        $lists = $this->kos->customSelect("SELECT k.id, k.nama,k.harga, ka.nama as nama_kategori from kos k JOIN kategori ka ON k.id_kategori=ka.id JOIN pengguna p on k.ditambahkan_oleh=p.id $where");
         Response::render('back/index', ['title' => 'Daftar Akun', 'content' => 'kos/index', 'list' => $lists]);
 
     }

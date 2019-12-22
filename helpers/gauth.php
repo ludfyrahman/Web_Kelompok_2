@@ -18,17 +18,13 @@ if(isset($_GET['code'])) {
 		// $_SESSION['userdata'] = $user_info;
 		$q = $pdo->query("SELECT * FROM pengguna where email='$user_info[email]'");
 		$pengguna = $q->fetchAll(PDO::FETCH_ASSOC);
-		echo count($pengguna);
 		if(count($pengguna) < 1){
 			Response::redirectWithAlert('pengguna/login/', ['danger', 'Anda masih belum register. harap register terlebih dahulu']);
 		}else{
-			// print_r($pengguna[0]);
 			$_SESSION['userid'] = $pengguna[0]['id'];
 			$_SESSION['userlevel'] = $pengguna[0]['level'];
 			Response::redirect('');
 		}
-		// echo "<pre>";
-		// print_r($pengguna);
 		
 	}
 	catch(Exception $e) {

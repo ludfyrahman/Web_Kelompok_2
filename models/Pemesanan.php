@@ -10,7 +10,14 @@ class Pemesanan extends ORM {
     public function dataPemesanan($date = []){
         $range = "";
         if (count($date) > 0) {
-            $range = "WHERE p.tanggal_pemesanan BETWEEN '$date[0]' and '$date[1]'";
+            
+            $range = "WHERE DATE(p.tanggal_pemesanan) BETWEEN '$date[0]' and '$date[1]'";
+            if ($date[2] != "") {
+                $range.=" AND p.status=$date[2] ";
+            }
+        }
+        if(Account::get('level') == 2){
+            $range.=" AND k.ditambahkan_oleh=".Account::get('id');
         }
         $q = $this->Select("p.id, pg.nama_rekening, pg.nama_bank, pg.no_rekening, k.nama as nama_kos, p.status as status_code, k.harga, pg.nama as nama_pemesan,p.tanggal_pemesanan, (CASE WHEN p.status = 0 THEN 'Ditolak' WHEN p.status = 1 THEN 'Pending' WHEN p.status = 2 THEN 'Dp' WHEN p.status = 3 THEN 'Lunas' END) as status ", " p JOIN kos k on p.id_kos=k.id JOIN pengguna pg on p.id_pengguna=pg.id", " $range ");
         return $q;
