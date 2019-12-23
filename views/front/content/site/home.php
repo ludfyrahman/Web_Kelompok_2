@@ -218,7 +218,7 @@
                                     <!-- Features Text -->
                                     <div class="features-text media-body">
                                         <h3>Design Simple dan mudah</h3>
-                                        <p>Design aplikasi yang simple dan sangat mudah untuk digunakan pengguna aplikasi papikos</p>
+                                        <p>Design aplikasi yang simple dan sangat mudah</p>
                                     </div>
                                 </div>
                             </li>
@@ -317,7 +317,7 @@
                             <?php
                             if(isset($_SESSION['userid'])){
                             ?>
-                                <a href="#" id="test" kosid="<?= $k['id'] ?>" class="blog-btn mt-3 float-right"><i class="icofont-heart-alt"></i></a>
+                                <a href="#" id="favorit" kosid="<?= $k['id'] ?>" class="blog-btn mt-3 float-right"><i class="icofont-heart-alt"></i></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -496,7 +496,7 @@
                     <div class="single-team text-center px-3 py-2 m-2">
                         <!-- Team Photo -->
                         <div class="team-photo mx-auto">
-                            <img src="<?=BASEASSET?>/images/avatar/yuni.jpg" alt="">
+                            <img src="<?=BASEASSET?>/images/avatar/vanika.jpg" alt="">
                         </div>
                         <!-- Team Content -->
                         <div class="team-content mt-2 mb-1">

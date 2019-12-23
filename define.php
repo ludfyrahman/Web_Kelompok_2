@@ -44,10 +44,10 @@ define('password', '051299');
 // transaction and other
 define('invoice_code', 'INV000');
 
-define('jenis_kelamin', ['Perempuan', 'Laki-laki']);
+define('jenis_kelamin', ['', 'Laki-laki', 'Perempuan']);
 define('level', ['', 'Admin', 'Pemilik Kos', 'Penyewa Kos']);
 define('tipe_pembayaran', ['', 'DP', 'Pelunasan', 'Bulanan']);
-
+define('status', ['danger', 'default', 'primary', 'success']);
 
 // status pemesanan
 define('status_pemesanan', ['Ditolak', 'Pending','DP','Lunas']);

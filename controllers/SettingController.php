@@ -1,10 +1,11 @@
 <?php
-App::loadModels(['Pengguna']);
+App::loadModels(['Pengguna', 'pemesanan']);
 class SettingController {
-    private $pengguna;
+    private $pengguna, $pemesanan;
 
     public function __construct() {
         $this->pengguna = new pengguna;
+        $this->pemesanan = new pemesanan;
     }
 
     public function index() {
@@ -92,7 +93,67 @@ class SettingController {
             echo 'false';
         }
     }
+    public function lupa_password_email($from, $to){
+        $kode = App::RandomString(5);
+        $this->pengguna->update(["verification" => $kode], "WHERE email='$to'");
+        $subject = "Lupa Password";
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom($from, "Lupa Password Akun Papikos");
+        $email->setSubject($subject);
+        $email->addTo($to, "Lupa Password Akun");
+        $email->addContent("text/html", "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
+        $sg = new \SendGrid(SENDGRID_API_KEY);
+
+        $response = $sg->client->mail()->send()->post($email);
+                
+        if ($response->statusCode() == 202) {
+            // Successfully sent
+            echo 'done';
+        } else {
+            echo 'false';
+        }
+    }
+    public function notifikasi_pembayaran($from, $to, $kode){
+        $d = $this->pemesanan->select("p.id, pg.nama, p.tanggal_pemesanan, k.nama,p.status, k.harga", "p JOIN pengguna pg on p.id_pengguna=pg.id JOIN kos k on p.id_kos=k.id", "WHERE p.id='$kode'")[1][0];
+        $invoice = invoice_code."".$d['id'];
+        $status = "DP";
+        $tempo = date('Y-m-d H:i:s', strtotime($d['tanggal_pemesanan']."+1 day"));
+        $harga = 25 * $d['harga'] / 100;
+        if($d['status'] == 1){
+            $status = "DP";
+            $tempo = date('Y-m-d H:i:s', strtotime($d['tanggal_pemesanan']."+1 day"));
+            $harga = 25 * $d['harga'] / 100;
+        }else if($d['status'] == 3){
+            $status = "Pelunasan";
+            $tempo = date('Y-m-d H:i:s', strtotime($d['tanggal_pemesanan']."+4 day"));
+            $harga = ($d['harga'] - (25 * $d['harga'] / 100));
+        }
+        $subject = "Pembayaran Kos";
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom($from, "Pembayaran Pemesanan Kos ".$d['nama']);
+        $email->setSubject($subject);
+        $email->addTo($to, "Notifikasi Pembayaran $status");
+        $email->addContent("text/html", 
+        "<h1>Pembayaran Kos $d[nama] $invoice</h1>
+        <p>Kami menginformasikan bahwa pembayaran kos hampir jatuh tempo $tempo sebesar<p>
+        <h3>$harga</h3>");
+        $sg = new \SendGrid(SENDGRID_API_KEY);
+
+        $response = $sg->client->mail()->send()->post($email);
+                
+        if ($response->statusCode() == 202) {
+            echo 'done';
+        } else {
+            echo 'false';
+        }
+    }
     public function verification_code_hp($to){
+        $kode = App::RandomString(5);
+        $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
+        $sms = new NexmoMessage(NEXMO_API_KEY, NEXMO_API_SECRET);
+        $sms->sendText( $to, 'Papikos', 'Kode Verifikasi '.$kode." " );
+    }
+    public function notifikasi_pembayaran_noHp($to){
         $kode = App::RandomString(5);
         $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
         $sms = new NexmoMessage(NEXMO_API_KEY, NEXMO_API_SECRET);

@@ -197,7 +197,7 @@ class PenggunaController {
         $d = $_POST;
         $c = $this->pengguna->select("*", "WHERE email='$d[email]'");
         if($c[0] > 0 ){
-            $this->lupa_password_email("papikos@gmail.com", "ludfyr@gmail.com");
+            $this->setting->lupa_password_email("papikos@gmail.com", $c['email']);
             // echo "ada cek email";
             $_SESSION['alert'] = ['info', 'Verifikasi Terkirim ke email '.$c['email']];
             return $this->lupa_password();
@@ -206,24 +206,32 @@ class PenggunaController {
             return $this->lupa_password();
         }
     }
-    public function lupa_password_email($from, $to){
-        $kode = App::RandomString(5);
-        $this->pengguna->update(["verification" => $kode], "WHERE email='$to'");
-        $subject = "Lupa Password";
-        $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom($from, "Lupa Password Akun Papikos");
-        $email->setSubject($subject);
-        $email->addTo($to, "Sesama Korban Ditabrak Cewek");
-        $email->addContent("text/html", "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
-        $sg = new \SendGrid(SENDGRID_API_KEY);
-
-        $response = $sg->client->mail()->send()->post($email);
+    
+    public function proses_verifikasi($tipe = 'email'){
+        $d = $_POST;
+        try {
+            $j = $this->pengguna->select("*", "WHERE verification='$d[verification_code]'");
+            // print_r($j);
+            if ($j[0] > 0) {
+                if($tipe == 'email'){
+                    $arr = ['stemail' => 1];
+                    
+                }else if($tipe == 'nohp'){
+                    $arr = ['stnohp' => 1];
+                }
+                $q = $this->pengguna->update($arr, "WHERE verification='$d[verification_code]' ");
+                if(!$q){
+                    echo json_encode(['status' => true]);
+                }else{
+                    echo json_encode(['status' => false]);    
+                }
                 
-        if ($response->statusCode() == 202) {
-            // Successfully sent
-            echo 'done';
-        } else {
-            echo 'false';
+            }else{
+                echo json_encode(['status' => false]);
+            }
+        }
+        catch(Exception $e) {
+            print_r($e);
         }
     }
     public function proses_profile() {
@@ -348,6 +356,56 @@ class PenggunaController {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
                 $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
             Response::redirectWithAlert('login/', ['info', 'Register berhasil, anda dapat login']);
+        }
+    }
+    public function simpanProfil(){
+        $d = $_POST;
+        try{
+            $arr = [
+                    'nama' => $d['nama'],
+                    'email' => $d['email'],
+                    'no_hp' => $d['no_hp'],
+                    'jenis_kelamin' => $d['jenis_kelamin'],
+                    'tanggal_lahir' => $d['tanggal_lahir'],
+                    'alamat' => $d['alamat']
+                ];
+                $this->pengguna->update($arr, "WHERE id=".Account::get('id'));
+                // $this->pengguna->update($arr, "WHERE id=1");
+                return true;
+        }catch(Exception $e){
+            print_r($e);
+        }
+    }
+    public function simpanRekening(){
+        $d = $_POST;
+        try{
+            $arr = [
+                    'nama_bank' => $d['nama_bank'],
+                    'nama_rekening' => $d['nama_rekening'],
+                    'no_rekening' => $d['no_rekening'],
+                ];
+                $this->pengguna->update($arr, "WHERE id=".Account::get('id'));
+                // $this->pengguna->update($arr, "WHERE id=1");
+                return true;
+        }catch(Exception $e){
+            print_r($e);
+        }
+    }
+    public function uploadFotoProfil(){
+        $f = $_FILES;
+        if(App::validateSizeUpload(20097152 , $f['foto'])){
+            if(App::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['foto'])){
+                $name = App::RandomString(5);
+                $tipe = str_replace("image/", "", $f['foto']['type']);
+                $f['foto']['name'] = $name.".".$tipe;
+                App::UploadImage($f['foto'], "profil");
+                $this->pengguna->update(['profil' => $name.".".$tipe],  "WHERE id=".Account::get('id'));
+            }else{
+                echo json_encode(['danger', 'file yang anda upload tidak sesuai.']);
+            }
+        }else{
+            $_SESSION['alert'] = ['danger', 'file yang anda upload melebihi batas upload.'];
+            $this->add();
         }
     }
 

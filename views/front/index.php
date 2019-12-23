@@ -61,9 +61,9 @@ if($content != 'user/login')
 <script src="<?php echo BASEASSET ?>js/script.js"></script>
 
 
-<!-- <script async defer
+<script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSKJIGO-yzFVyqEEzljduSDeVj0Z4_lo&callback=initMap">
-</script> -->
+</script>
 <script>
 // Initialize and add the map
 initGeolocation();

@@ -82,7 +82,7 @@
                                     <div class="alert alert-success margin-top-bottom-12">
                                         <p>Sudah Dibayarkan</p>
                                     </div>
-                                    <p class="margin-top-bottom-12">Kode Pemesanan : <a href="<?= BASEURL."akun/pemesanan/detail/".$l['id_pemesanan'] ?>"><b><?= invoice_code."".$l['id_pemesanan'] ?></b></a></p>
+                                    <p class="margin-top-bottom-12">Kode Invoice : <a href="<?= BASEURL."akun/pemesanan/detail/".$l['id_pemesanan'] ?>"><b><?= invoice_code."".$l['id_pemesanan'] ?></b></a><a href="#" id_kos="<?= $l['id_kos'] ?>"  id="open_ulasan_model" class="float-right">Ulasan</a></p>
                                 </div>
                                 <?php } ?>
                             </div>
@@ -93,4 +93,42 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="ulasan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ulasan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="#" method="POST" >
+      
+        <div class="modal-body text-center">
+            <p>Ulasan anda</p>
+            <div class="form_ulasan">
+                <input type="hidden" id="id_kos">
+                <input type="hidden" id="rating" value="2">
+                <div class="form-group">
+                    <h3 for="" style="margin:20px">Rating</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="form-group">
+                    <h3>Ulasan</h3>
+                    <textarea name="ulasan" placeholder="ulasan anda untuk kos" class="form-control" id="ulasan" cols="30" rows="10"></textarea>
+                </div>
+                
+                <button type="button" id="simpan_ulasan" class="btn btn-success btn-block">Ulasan</button>
+            </div>
+            <div class="result_ulasan">
+                
+            </div>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
 <!-- ***** Blog Area End ***** -->

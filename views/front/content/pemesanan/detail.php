@@ -82,8 +82,11 @@
                                 if($data['status_code'] == '0'){
                                     $pesan = "Pesanan anda dibatalkan";
                                     $alert = "danger";
-                                }else{
+                                }else if($data['status_code'] == 2){
                                     $pesan = "Terimakasih anda sudah membayar dp kos";
+                                    $alert = "success";
+                                }else if($data['status_code'] == 3){
+                                    $pesan = "Terimakasih anda sudah melunasi kos";
                                     $alert = "success";
                                 }
                                 ?>

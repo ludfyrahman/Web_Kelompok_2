@@ -52,7 +52,7 @@
                   foreach($list as $l){
                   ?>
                   <tr>
-                    <td><?= invoice_code."$l[id]"?></td>
+                    <td><a href="<?= BASEADM."pemesanan/$l[id]/detail" ?>"><?= invoice_code."$l[id]"?></a></td>
                     <td class='text-left'><?=$l['nama_pemesan']?></td>
                     <td class='text-left'><?=$l['nama_kos']?></td>
                     <td class='text-left'><?=$l['status']?></td>

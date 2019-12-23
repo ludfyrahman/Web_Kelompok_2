@@ -55,22 +55,6 @@
                                             <li class="d-inline-block p-2">Diubah <?= App::date($data['tanggal_diubah'], "d M Y, H:i") ?></li>
                                             <li class="d-inline-block p-2"><a href="#">2 Comments</a></li>
                                         </ul>
-                                        <!-- <div class="blog-share ml-auto d-none d-sm-block">
-                                            <div class="social-icons d-flex justify-content-center">
-                                                <a class="bg-white facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                                <a class="bg-white twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                                <a class="bg-white google-plus" href="#">
-                                                    <i class="fab fa-google-plus-g"></i>
-                                                    <i class="fab fa-google-plus-g"></i>
-                                                </a>
-                                            </div>
-                                        </div> -->
                                     </div>
                                     <div class="rating padding12">
                                         <div class="row">
@@ -84,50 +68,49 @@
                                             <div class="col-md-2">
                                                 <p>O ulasan</p>
                                             </div>
+                                            <div class="col-md-2    ">
+                                                <?php
+                                                if(isset($_SESSION['userid'])){
+                                                ?>
+                                                    <a href="#" id="favorit" kosid="<?= $data['id'] ?>"><i class="icofont-heart-alt"></i></a>
+                                                <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row margin-12">
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 col-sm-2">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <i class="fa fa-eye"></i>
-                                                </div>
+                                                
                                                 <div class="col-md-6 text-center">
                                                     Dilihat
+                                                    <p><?= $data['dilihat'] ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="row">
+                                                
+                                                <div class="col-md-12 text-center">
+                                                    Dipesan
                                                     <p>20</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-4 col-sm-4">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <i class="fa fa-eye"></i>
-                                                </div>
-                                                <div class="col-md-6 text-center">
-                                                    Dilihat
-                                                    <p>20</p>
+                                                
+                                                <div class="col-md-12 text-center">
+                                                    Jumlah Kamar
+                                                    <p><?= $data['jumlah_kamar'] ?></p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 col-sm-2">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <i class="fa fa-eye"></i>
-                                                </div>
-                                                <div class="col-md-6 text-center">
-                                                    Dilihat
-                                                    <p>20</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <i class="fa fa-eye"></i>
-                                                </div>
-                                                <div class="col-md-6 text-center">
-                                                    Dilihat
-                                                    <p>20</p>
+                                                
+                                                <div class="col-md-12 text-center">
+                                                    Jenis Kos
+                                                    <p><?= jenis_kelamin[$data['jenis']] ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,17 +133,18 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="informasi" role="tabpanel" aria-labelledby="informasi-tab">
                                     <div class="container">
-                                        <h4 class="margin-top-bottom-12">Deskripsi Kos</h4>
+                                        <h4 class="margin-top-bottom-12">Deskripsi</h4>
                                         <p class="d-none d-sm-block text-justify"><?= $data['deskripsi'] ?></p>
+                                        <h4 class="margin-top-bottom-12">Fasilitas</h4>
                                         <?php 
                                         foreach ($subfas as $sf) {
                                         ?>
-                                        <h5 class="margin-top-bottom-12"><?= $sf['nama'] ?></h5>
+                                        <h5 class="margin-top-bottom-12" style="margin-left:12px"><?= $sf['nama'] ?></h5>
                                         <div class="row">
                                         <?php 
                                         foreach ($sf['sub'] as $sub) {
                                             ?>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="margin-left:24px">
                                                 <i class="fa fa-book"></i> <?= $sub['nama'] ?>
                                             </div>
                                             <?php } ?>
@@ -173,7 +157,39 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">...</div>
+                                <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">
+                                    <?php
+                                    if(count($ulasan) < 1){
+                                        echo "<div class='text-center'>
+                                            <img src='".BASEASSET."images/welcome/404.gif' style='width:400px'>
+                                            <h3>Data Ulasan Kosong</h3>
+                                        </div>";
+                                    }
+                                    foreach ($ulasan as $u) {
+                                    ?>
+                                    <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
+                                        <!-- Blog Content -->
+                                        <div class="blog-content p-4">
+                                            <!-- Meta Info -->
+                                            
+                                            <ul class="meta-info d-flex justify-content-between">
+                                                <li>Dari <b><?= $u['nama'] ?></b>  
+                                                <?php 
+                                                for ($i=1; $i <= $u['rating'] ; $i++) { 
+                                                ?>
+                                                    <i class="fa fa-star"></i>
+                                                <?php }?>
+                                            </li>
+                                                <li><?= App::date($u['tanggal_ditambahkan']) ?></li>
+                                            </ul>
+                                            <div class="container">
+                                            <p><?= $u['ulasan'] ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>

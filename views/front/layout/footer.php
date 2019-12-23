@@ -54,7 +54,7 @@
                         <h3 class="footer-title text-white mb-2">Product Help</h3>
                         <ul>
                             <li class="py-2"><a class="text-white-50" href="#">FAQ</a></li>
-                            <li class="py-2"><a class="text-white-50" href="#">Privacy Policy</a></li>
+                            <li class="py-2"><a class="text-white-50" href="https://www.termsfeed.com/privacy-policy/692328c5c8474265363f51e6d9a8b156">Privacy Policy</a></li>
                             <li class="py-2"><a class="text-white-50" href="#">Support</a></li>
                             <li class="py-2"><a class="text-white-50" href="#">Terms &amp; Conditions</a></li>
                             <li class="py-2"><a class="text-white-50" href="#">Contact</a></li>

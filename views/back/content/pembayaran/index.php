@@ -52,7 +52,7 @@
                   foreach($list as $l){
                   ?>
                   <tr>
-                    <td><?=$no?></td>
+                    <td><a href="<?= BASEADM."pemesanan/$l[id]/detail" ?>"><?= invoice_code."$l[id]"?></a></td>
                     <td class='text-left'><?=$l['nama_pemesan']?></td>
                     <td class='text-left'><?=tipe_pembayaran[$l['tipe']]?></td>
                     <td class='text-left'><?= App::price($l['harga'])?></td>

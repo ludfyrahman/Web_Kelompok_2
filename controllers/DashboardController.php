@@ -28,7 +28,7 @@
             $pemesanan  = $this->pemesanan->Select("*", "");
             $pesanan_bulan_ini  = $this->pemesanan->Select("*", "WHERE tanggal_pemesanan BETWEEN '$now-01' and '$next_month-01'");
             $fasilitas  = $this->fasilitas->Select("*", "");
-            $pemesanan_lunas  = $this->pemesanan->Select("p.*, SUM(pp.jumlah) as jumlah, pg.nama, pg.no_hp", "p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN pengguna pg on p.id_pengguna=pg.id", "where p.status=3 and pp.status=1");
+            $pemesanan_lunas  = $this->pemesanan->Select("p.*, SUM(pp.jumlah) as jumlah, pg.nama, pg.no_hp", "p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN pengguna pg on p.id_pengguna=pg.id", "where p.status=3 and pp.status=1 GROUP BY p.id");
             $pemesanan_pembayaran_lunas  = $this->pemesanan->Select("SUM(pp.jumlah) as jumlah", "p JOIN pembayaran pp on pp.id_pemesanan=p.id where p.status=3 and pp.status=1");
             $pembayaran = $this->pembayaran->Select("*", "");
             $kos        = $this->kos->Select("*", "");
@@ -42,7 +42,7 @@
             }
             $jumlah_pemesanan  = json_encode($jumlah_pemesanan);
             $bulan_pemesanan  = json_encode($bulan_pemesanan);
-            $presentase_pemesanan = ($pemesanan_lunas[0] * 100 / $pemesanan[0]);
+            $presentase_pemesanan = (100  * count($pemesanan_lunas[1]) / $pemesanan[0]);
             $label_pesanan = status_pemesanan;
             Response::render('back/index', 
             [

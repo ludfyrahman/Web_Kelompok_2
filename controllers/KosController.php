@@ -1,8 +1,8 @@
 <?php
 
-App::loadModels(['kategori', 'media', 'fasilitas_kos', 'sub_fasilitas']);
+App::loadModels(['kategori', 'media', 'fasilitas_kos', 'sub_fasilitas', 'favorit', 'ulasan', 'fasilitas']);
 class KosController {
-    private $kos, $kategori, $media;
+    private $kos, $kategori, $media, $fasilitas;
 
     public function __construct() {
         $this->kos = new Kos;
@@ -10,6 +10,9 @@ class KosController {
         $this->media = new Media;
         $this->fasilitas_kos = new fasilitas_kos;
         $this->sub_fasilitas = new Sub_fasilitas;
+        $this->favorit = new favorit;
+        $this->fasilitas = new fasilitas;
+        $this->ulasan = new ulasan;
         // echo App::uri(4);
     }
 
@@ -18,15 +21,14 @@ class KosController {
         if(Account::get('level') == 2){
             $where = " WHERE p.id=".Account::get('id');
         }
-        $lists = $this->kos->customSelect("SELECT k.id, k.nama,k.harga, ka.nama as nama_kategori from kos k JOIN kategori ka ON k.id_kategori=ka.id JOIN pengguna p on k.ditambahkan_oleh=p.id $where");
+        $lists = $this->kos->customSelect("SELECT k.id, k.nama,k.harga, ka.nama as nama_kategori from kos k JOIN kategori ka ON k.id_kategori=ka.id JOIN pengguna p on k.ditambahkan_oleh=p.id $where ORDER BY k.id asc");
         Response::render('back/index', ['title' => 'Daftar Akun', 'content' => 'kos/index', 'list' => $lists]);
 
     }
 
     public function add() {
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
-        $fasilitas = $this->fasilitas_kos->Select("*", " fk JOIN fasilitas f ON fk.id_fasilitas=f.id ", "")[1];
-        // echo "<pre>";
+        $fasilitas = $this->fasilitas->Select("*", "")[1];
         $index = 0;
         $index = 0;
         $subfas = array();
@@ -34,12 +36,15 @@ class KosController {
             $subfas[$index] = $f;
             $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
             $in = 0;
+            $subfas[$index]['sub'][$in] = '';
             foreach($sub_fasilitas as $sub){
                 $subfas[$index]['sub'][$in] = $sub;
+                $subfas[$index]['old_sub'][$in] = null;
                 $in++;
             }
             $index++;
         }
+        
         // echo "<pre>";
         // print_r($subfas);
         // echo "</pre>";
@@ -47,11 +52,36 @@ class KosController {
     }
 
     public function edit($id) {
-        $data = $this->kos->Select("*", "WHERE id = $id")[1];
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
-        if(count($data) < 1)
-            Router::not_found();
-        Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'kategori' => $kategori[1]]);
+        $fasilitas = $this->fasilitas->Select("*", "")[1];
+        $index = 0;
+        $index = 0;
+        $subfas = array();
+        foreach($fasilitas as $f){
+            $subfas[$index] = $f;
+            $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
+            $in = 0;
+            $subfas[$index]['sub'][$in] = '';
+            foreach($sub_fasilitas as $sub){
+                $subfas[$index]['sub'][$in] = $sub;
+                $in++;
+            }
+            $inde = 0;
+            $subfas[$index]['old_sub'][$inde] = '';
+            $sf = $this->fasilitas_kos->select("sf.id", " fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id", "WHERE id_kos=$id and sf.id_fasilitas=$f[id]")[1];
+            foreach ($sf as $sfv) {
+                $subfas[$index]['old_sub'][$inde] = $sfv['id'];
+                $inde++;
+            }
+            $index++;
+        }
+        
+        
+        $data = $this->kos->select("*", "WHERE id=$id")[1];
+        // echo "<pre>";
+        // print_r($subfas);
+        // echo "</pre>";
+        Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'subfas' => $subfas, 'kategori' => $kategori[1]]);
     }
 
     public function storeFile($id){
@@ -79,20 +109,34 @@ class KosController {
         $d = $_POST;
         $f = $_FILES;
         try {
-            echo "<pre>";
-            print_r($d);
-            // $arr = [
-            //     'nama' => $d['nama'], 
-            //     'deskripsi' => $d['deskripsi'], 
-            //     'harga' => $d['harga'],
-            //     'id_kategori' => $d['kategori'],
-            //     'jumlah_kamar' => $d['jumlah_kamar'],
-            //     'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-            //     'ditambahkan_oleh' =>  Account::Get('id')
-            // ];
-            // $this->kos->Insert($arr);
+            $arr = [
+                'nama' => $d['nama'], 
+                'deskripsi' => $d['deskripsi'], 
+                'harga' => $d['harga'],
+                'jumlah_kamar' => $d['jumlah_kamar'],
+                'id_kategori' => $d['kategori'],
+                'harga' => $d['harga'],
+                'jenis' => $d['jenis'],
+                'latitude' => $_COOKIE['lat'],
+                'longitude' => $_COOKIE['long'],
+                'harga' => $d['harga'],
+                'ditambahkan_oleh' =>  Account::Get('id')
+            ];
+            // echo "<pre>";
+            // print_r($arr);
+            $this->kos->Insert($arr);
+            $id = $this->kos->lastInsertId();
+            $this->kos->add_sub($id);
+            // foreach ($d['sub_fasilitas'] as $v) {
+            //     $array = [
+            //         'id_fasilitas' => $v,
+            //         'id_kos' => $this->kos->lastInsertId()
+            //     ];
+            //     $this->fasilitas_kos->insert($array);
+            //     // print_r($array);
+            // }
 
-            // Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil ditambahkan']);
+            Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -116,7 +160,7 @@ class KosController {
 
             $this->kos->Update($arr, "WHERE id = $id");
 
-            Response::redirectWithAlert('admin/kos/', ['info', 'Kos berhasil diedit']);
+            Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil diedit']);
         }
         catch(Exception $e) {
 
@@ -126,17 +170,22 @@ class KosController {
 
     public function delete($id) {
         $this->kos->delete("WHERE id='$id'");
-        Response::redirectWithAlert('admin/kos/', ['info', "Berhasil menghapus akun"]);
+        Response::redirectWithAlert('admin/kost/', ['info', "Berhasil menghapus akun"]);
     }
 
     public function detail($id){
-        $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
+        $data = $this->kos->Select("k.id, k.nama as nama_kos, k.dilihat,k.jenis, k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
         $media = $this->media->Select("*", "WHERE id_kos='$data[id]'")[1];
-        $fasilitas = $this->fasilitas_kos->Select("*", " fk JOIN fasilitas f ON fk.id_fasilitas=f.id ", "WHERE fk.id_kos='$data[id]'")[1];
-        // echo "<pre>";
-        $index = 0;
+        // $fasilitas = $this->fasilitas_kos->Select("f.nama as fasilitas, sf.nama as sub_fasilitas, fk.", " fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id JOIN fasilitas f ON sf.id_fasilitas=f.id", "WHERE fk.id_kos='$data[id]'")[1];
+        $ulasan = $this->ulasan->select("u.*, p.nama", "u JOIN pengguna p on u.id_pengguna=p.id", "WHERE id_kos=$id ")[1];   
+        $this->kos->customQuery("update kos set dilihat = dilihat + 1 WHERE id='$id'");
+        $fasilitas = $this->fasilitas_kos->select("f.id, f.nama","fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id JOIN fasilitas f ON sf.id_fasilitas=f.id", "WHERE id_kos='$data[id]' GROUP by f.id")[1];
         $index = 0;
         $subfas = array();
+        
+        // echo "<pre>";
+        // print_r($fasilitas);
+        // echo "<br>Batasnya</br>";
         foreach($fasilitas as $f){
             $subfas[$index] = $f;
             $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
@@ -145,12 +194,14 @@ class KosController {
                 $subfas[$index]['sub'][$in] = $sub;
                 $in++;
             }
+            // print_r($sub_fasilitas);
+            
             $index++;
         }
         // print_r($subfas);
-        
         // echo "</pre>";
-        Response::render('front/index', ['title' => $data['nama_kos'], 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media, 'subfas' => $subfas]);
+
+        Response::render('front/index', ['title' => $data['nama_kos'], 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media, 'subfas' => $subfas, 'ulasan' => $ulasan]);
     }
     public function pesan($id){
         $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
@@ -219,12 +270,50 @@ class KosController {
             // 1 mile = 1,609 
             //key latitude and $user longitude
         }
+        $long = $_COOKIE['long'];
+        $lat    = $_COOKIE['lat'];
         // echo "$pencarian";
-        $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media, ( 3959 * acos ( cos ( radians(-7.1786496) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(113.4657536) ) + sin ( radians(-7.1786496) ) * sin( radians( latitude ) ) ) ) AS distance', 
+        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, k.harga, m.link_media, ( 6371 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
         " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos", " $pencarian GROUP BY m.id_kos  $urut");
-        // $kos = $this->kos->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, p.nama as nama_pemilik, k.tanggal_ditambahkan ', " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id JOIN (Select * from media) m on k.id=m.id_kos GROUP BY m.id_kos ", "ORDER BY id DESC LIMIT 0, 3");
+        
         $kategori = $this->kategori->Select("*", '')[1];
         Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);
+    }
+    public function favorit($id){
+        $count = $this->favorit->select("*", "WHERE id_kos=$id and id_pengguna=".Account::get('id'))[0];
+        echo $count;
+        if($count < 1){
+            $this->favorit->insert(['id_kos' => $id, 'id_pengguna' => Account::get('id')]);
+        }else{
+            $this->favorit->delete("WHERE id_kos=$id and id_pengguna=".Account::get('id'));
+        }
+    }
+    public function ulasan(){
+        $d = $_POST;
+
+        try {
+            $arr = [
+                'ulasan' => $d['ulasan'], 
+                'id_pengguna' => Account::Get('id'), 
+                'rating' => $d['rating'], 
+                'id_kos' => $d['id_kos'], 
+            ];
+
+            $q = $this->ulasan->Insert($arr);
+            // echo json_encode($arr);
+            echo json_encode(['status' => true]);
+            
+        }
+        catch(Exception $e) {
+            // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
+            //     $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
+            print_r($e->errorInfo[2]);
+            // $this->add();
+        }
+    }
+    public function reviewExist($id){
+        $d = $this->ulasan->select("k.nama, u.*", "u JOIN kos k on u.id_kos=k.id", "WHERE id_kos='$id' and id_pengguna=".Account::get('id')); 
+        echo json_encode($d);
     }
     
 }

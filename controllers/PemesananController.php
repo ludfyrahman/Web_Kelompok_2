@@ -1,11 +1,12 @@
 <?php
-App::loadModels(["Media"]);
+App::loadModels(["Media", 'pembayaran']);
 use Dompdf\Dompdf;
 class PemesananController {
     private $pemesanan, $media;
     public function __construct() {
         $this->pemesanan = new pemesanan;
         $this->media = new Media;
+        $this->pembayaran = new pembayaran;
     }
 
     public function index() {
@@ -40,24 +41,16 @@ class PemesananController {
         $d = $_POST;
 
         try {
-            // if ($status = ) {
-            //     # code...
-            // }
             $arr = [
-                'nama' => $d['nama'], 
-                'tanggal_ditambahkan' => date("Y-m-d H:i:s"),
-                'ditambahkan_oleh' => Account::Get('id')
+                'status' => $status, 
             ];
 
-            // $this->kategori->Insert($arr);
-
-            // Response::redirectWithAlert('admin/kategori/', ['info', 'kategori berhasil ditambahkan']);
+            $this->pembayaran->update($arr, "WHERE id=$id");
+            // echo "berhasil";
+            Response::redirectWithAlert('admin/pembayaran/', ['info', 'Status Pembayaran dengan kode '.invoice_code."".$id]);
         }
         catch(Exception $e) {
-            // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
-            //     $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
             print_r($e->errorInfo[2]);
-            // $this->add();
         }
     }
     public function doOrder($id){
@@ -91,5 +84,13 @@ class PemesananController {
         // print_r($dp);
         Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'dp' => $dp, 'lunas' => $lunas, 'dibatalkan' => $dibatalkan, 'selesai' => $selesai]);
     }
+    public function detail($id){
+        $data = $this->pemesanan->detailPemesanan($id)[1][0];
+        // echo "<pre>";
+        // print_r($data);
+        $pembayaran = $this->pembayaran->select("*", "WHERE id_pemesanan=$data[id]")[1];
+        // print_r($pembayaran); 
 
+        Response::render ('back/index', ['title' => 'Detail pemesanan', 'content' => 'pemesanan/detail', 'data' => $data, 'pembayaran' => $pembayaran]);
+    }
 }

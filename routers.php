@@ -24,6 +24,7 @@
     Router::get('/admin/pemesanan/pdf', 'PemesananController@pdf', 'login:1');
     Router::get('/admin/pemesanan/aksi/:status/:id', 'PemesananController@aksi', 'login:1');
     Router::resource('/admin/pembayaran', 'PembayaranController', 'login:1');
+    Router::get('/admin/pembayaran/aksi/:status/:id', 'PembayaranController@aksi', 'login:1');
     Router::post('/admin/pembayaran', 'PembayaranController@index', 'login:1');
     // report
         Router::get('/admin/report', 'ReportController@index', 'login:1');
@@ -52,7 +53,11 @@
     Router::post('/pengguna/proses_register', 'PenggunaController@proses_register');
         // verifikasi
         Router::get("/verifikasi_email/:from/:to", "SettingController@verification_code");
+        Router::post("/pengguna/proses_verifikasi/:tipe", "PenggunaController@proses_verifikasi");
         Router::get("/verifikasi_no_hp/:to", "SettingController@verification_code_hp");
+        Router::post('/pengguna/simpanProfil', 'PenggunaController@simpanProfil');
+        Router::post('/pengguna/simpanRekening', 'PenggunaController@simpanRekening');
+        Router::post('/pengguna/uploadFotoProfil', 'PenggunaController@uploadFotoProfil');
     // end  pengguna
 
     
@@ -61,9 +66,17 @@
     Router::get('/kos/pesan/:id', 'KosController@pesan');
     Router::get('/kos/semua', 'KosController@semua');
     Router::post('/kos/semua', 'KosController@semua');
+    // rating / review
+        Router::post('/kos/ulasan', 'KosController@ulasan');
+        Router::get('/ulasan/:id', 'KosController@reviewExist');
+    // end rating
     Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
     Router::get('/akun/pemesanan/detail/:id', 'PemesananController@detailPemesananUser');
-
+    // notifikasi
+        Router::get("/pembayaran/notifikasi", "PembayaranController@notifikasi");
+    // favoritkan
+        Router::get('/kos/favorit/:id', 'KosController@favorit');
+        
 
     // authentication
     Router::get("/admin/setting", 'SettingController@index');

@@ -76,5 +76,6 @@ class Router {
         Router::get($url . "/:id/edit", $class . '@edit', $params);
         Router::post($url . "/:id/edit", $class . '@update', $params);
         Router::get($url . "/:id/delete", $class . '@delete', $params);
+        Router::get($url . "/:id/detail", $class . '@detail', $params);
     }
 }

@@ -13,11 +13,12 @@
                         <div class="col-md-4">
                             <div class="" >
                                 <div>
-                                    <img src="<?= BASEASSET."images/upload/profil/".Account::get("profil") ?>" alt="" class="img-fluid" style="width:100%">
+                                    <img src="<?= BASEASSET."images/upload/profil/".Account::get("profil") ?>" alt="" id="profile" class="img-fluid" style="width:100%">
+                                    <input type="file" id="foto" name="foto" style="display:none;" />
                                 </div>
                                 <div class="card-body">
                                     <a href="#"class="btn btn-block btn-sm" data-toggle="modal" data-target="#ubah_password">Ubah Kata Sandi</a>
-                                    <a href="#" class="btn btn-block btn-sm" >Pilih Foto</a>
+                                    <a href="#" class="btn btn-block btn-sm" onclick="thisFileUpload();">Pilih Foto</a>
                                 </div>
                             </div>
                         </div>
@@ -121,17 +122,44 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= BASEURL."pengguna/profil/proses_password" ?>" method="POST" >
+      <form action="#" method="POST" >
       
         <div class="modal-body text-center">
             <p >Kode verifikasi yang telah dikirimkan ke email <?= Account::get("email") ?></p>
             <div class="form-group">
                 <h3 for="" style="margin:20px">Kode verifikasi</h3>
-                <input type="text" name="verification_code" class="form-control">
+                <input type="text" id="verification_email_code" class="form-control">
             </div>
             <p>Tidak menerima Kode ?</p>
-            <p class="text-success">Kirim Ulang</p>
-            <button type="submit" class="btn btn-success btn-block">Ubah</button>
+            <a href="#">
+              <p class="text-success" id="verifikasi_email">Kirim Ulang</p>
+            </a>
+            <button type="button" id="btn-proses-verifikasi-email" class="btn btn-success btn-block">Ubah</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="code_no_hp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Masukkan Kode Verifikasi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="#" method="POST" >
+      
+        <div class="modal-body text-center">
+            <p >Kode verifikasi yang telah dikirimkan ke No HP <?= Account::get("no_hp") ?></p>
+            <div class="form-group">
+                <h3 for="" style="margin:20px">Kode verifikasi</h3>
+                <input type="text" id="verification_nohp_code" class="form-control">
+            </div>
+            <p>Tidak menerima Kode ?</p>
+            <p class="text-success" id="verifikasi_no_hp">Kirim Ulang</p>
+            <button type="button" id="btn-proses-verifikasi-nohp" class="btn btn-success btn-block">Ubah</button>
         </div>
     </form>
     </div>
@@ -148,7 +176,7 @@
         </button>
       </div>
         <div class="modal-body">
-            <a href="#">
+            <a href="#" >
                 <div class="single-blog wow fadeIn res-margin" data-wow-duration="2s">
                     <div class="blog-content p-4" id="verifikasi_no_hp">
                         <i class="fa fa-envelope text-success"></i>  <?= Account::get('no_hp') ?>
@@ -159,8 +187,8 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="akun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade " id="akun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ubah Profil</h5>
@@ -180,10 +208,10 @@
           <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="diri" role="tabpanel" aria-labelledby="informasi-tab">
                   <div class="container">
-                      <form action="" method="">
+                      <form action="#" method="POST" id="data_diri">
                         <div class="form-group">
                             <label for="">Nama</label>
-                            <input type="text" placeholder="masukkan nama anda" class="form-control" name="nama" value="<?= Input::postOrOr('nama', Account::Get("nama")) ?>" required>
+                            <input type="text" placeholder="masukkan nama anda" class="form-control"  name="nama" value="<?= Input::postOrOr('nama', Account::Get("nama")) ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
@@ -191,7 +219,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">No Hp</label>
-                            <input type="text" placeholder="masukkan no hp anda" class="form-control" name="no_hp" value="<?= Input::postOrOr('no_hp', Account::Get("no_hp")) ?>" required>
+                            <input type="text" placeholder="masukkan no hp anda" class="form-control"  name="no_hp" value="<?= Input::postOrOr('no_hp', Account::Get("no_hp")) ?>" required>
                         </div>
                         <div class="form-group">
                             <?php 
@@ -210,14 +238,14 @@
                             <textarea name="alamat" class="form-control" id="" cols="30" rows="10" placeholder="masukkan alamat anda" required><?= Input::postOrOr('alamat', Account::Get("alamat")) ?></textarea>
                         </div>
                         <div class="form-group">
-                          <button class="btn btn-block" type="submit">Simpan</button>
+                          <button class="btn btn-block" id="btn_simpan_data_diri" type="button">Simpan</button>
                         </div>
                       </form>
                   </div>
               </div>
               <div class="tab-pane fade" id="rekening" role="tabpanel" aria-labelledby="ulasan-tab">
                   <div class="container">
-                      <form action="" method="">
+                      <form action="#" method="post">
                         <div class="form-group">
                             <label for="">Nama Bank</label>
                             <input type="text" placeholder="masukkan nama bank anda" class="form-control" name="nama_bank" value="<?= Input::postOrOr('nama_bank', Account::Get("nama_bank")) ?>" required>
@@ -231,7 +259,7 @@
                             <input type="text" placeholder="masukkan no rekening anda" class="form-control" name="no_rekening" value="<?= Input::postOrOr('no_rekening', Account::Get("no_rekening")) ?>" required>
                         </div>
                         <div class="form-group">
-                          <button class="btn btn-block" type="submit">Simpan</button>
+                          <button class="btn btn-block" type="button" id="btn_simpan_data_rekening">Simpan</button>
                         </div>
                       </form>
                   </div>
@@ -241,30 +269,4 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="code_no_hp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Masukkan Kode Verifikasi</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?= BASEURL."pengguna/profil/proses_password" ?>" method="POST" >
-      
-        <div class="modal-body text-center">
-            <p >Kode verifikasi yang telah dikirimkan ke No HP <?= Account::get("no_hp") ?></p>
-            <div class="form-group">
-                <h3 for="" style="margin:20px">Kode verifikasi</h3>
-                <input type="text" name="verification_code" class="form-control">
-            </div>
-            <p>Tidak menerima Kode ?</p>
-            <p class="text-success">Kirim Ulang</p>
-            <button type="submit" class="btn btn-success btn-block">Ubah</button>
-        </div>
-    </form>
-    </div>
-  </div>
-</div>
-<!-- ubah no hp -->
 <!-- ***** Blog Area End ***** -->

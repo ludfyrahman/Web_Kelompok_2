@@ -25,10 +25,9 @@ var currentFile = null;
 
 var lat = getCookie("lat");
 var long = getCookie("long");
-var nama = $("#nama").val();
 $(".simpan").click(function(){
-    console.log("deskripsi "+$("#nama").val());
-    myDropzone.processQueue();
+    // alert(nama);
+    // myDropzone.processQueue();
 })
 var formData = new FormData();
 Dropzone.autoDiscover = false;
@@ -39,12 +38,12 @@ var myDropzone = new Dropzone(".dropzone", {
     method :"POST",
     paramName: 'file',
     params: {
-            nama: $("#nama").val(),
-            jumlah_kamar: $("#jumlah_kamar").val(),
-            jenis_kos: $("#jenis_kos").val(),
-            harga: $("#harga").val(),
-            deskripsi: $("#deskripsi").val(),
-            id_kategori: $("#kategori").val(),
+            nama:$("input[name='nama']").val(),
+            jumlah_kamar: $("input[name='jumlah_kamar']").val(),
+            jenis_kos: $("select[name='jenis_kos']").val(),
+            harga: $("input[name='harga']").val(),
+            deskripsi: $("textarea[name='deskripsi']").val(),
+            id_kategori: $("select[name='kategori']").val(),
             latitude: lat,
             longitude: long,
         },

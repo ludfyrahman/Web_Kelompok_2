@@ -73,8 +73,14 @@
             <div class="col-12 col-lg-9">
                 <div class="row">
                 <?php 
+                 if(count($data) < 1){
+                    echo "<div class='col-md-12 text-center'>
+                        <img src='".BASEASSET."images/welcome/404.gif' class='img-fluid'>
+                        <h3>Data Kosong</h3>
+                    </div>";
+                }
                 foreach ($data as $k) {
-                    // $link = BASEURL."kos/detail/".
+                    $nama = explode(" ", $k['nama_pemilik']);
                 ?>
                 <div class="col-12 col-md-6 col-lg-4"  style="margin-top:20px;">
                     <!-- Single Blog -->
@@ -87,7 +93,7 @@
                         <div class="blog-content p-4">
                             <!-- Meta Info -->
                             <ul class="meta-info d-flex justify-content-between">
-                                <li>By <a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= $k['nama_pemilik'] ?></a></li>
+                                <li>By <a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= $nama[0] ?></a></li>
                                 <li><a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= App::Date($k['tanggal_ditambahkan'], 'd M Y') ?></a></li>
                             </ul>
                             <!-- Blog Title -->
@@ -95,6 +101,11 @@
                             <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
                             <p><?= App::price($k['harga']) ?></p>
                             <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya</a>
+                            <?php
+                            if(isset($_SESSION['userid'])){
+                            ?>
+                                <a href="#" id="favorit" kosid="<?= $k['id'] ?>" class="blog-btn mt-3 float-right"><i class="icofont-heart-alt"></i></a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

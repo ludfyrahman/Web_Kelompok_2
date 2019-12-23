@@ -221,6 +221,5 @@
     var presentase_pemesanan = '<?= $presentase_pemesanan ?>';
     var pesanan = <?= $label_pesanan ?>;
     var data_pesanan = <?= $data_pesanan ?>;
-    var presentase_pemesanan = '<?= $presentase_pemesanan ?>';
 </script>
 <!-- page content ends -->

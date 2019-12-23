@@ -23,7 +23,9 @@ class App {
         }
     }
     public static function UploadImage($img, $path) {
-        move_uploaded_file($img['tmp_name'], BASEPATH . "assets/images/upload/$path/$img[name]");
+        $path = "assets/images/upload/$path/$img[name]";
+        move_uploaded_file($img['tmp_name'], BASEPATH . $path);
+        chmod($path, 0755);
     }
     public static function uri($index){
         $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");

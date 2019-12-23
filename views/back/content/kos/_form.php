@@ -1,7 +1,7 @@
 <div class="page-content-wrapper-inner">
     <?php App::breadcrumb()?>
     <div class="content-viewport">
-        <!-- <form method="post" action="#" enctype="multipart/form-data"> -->
+        <form method="post" action="#" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-lg-6 equel-grid">
                     <div class="grid">
@@ -18,10 +18,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword1">Jenis Kos</label>
-                                    <select class="custom-select" name="jenis_kos" id="jenis_kos">
+                                    <select class="custom-select" name="jenis" id="jenis">
                                     <option value=' '>Pilih Kos</option>
                                     <?php
-                                    $jen = Input::postOrOr('jenis_kos', $data['jenis_kos']);
+                                    $jen = Input::postOrOr('jenis', $data['jenis']);
                                     ?>
                                         <option <?=($jen == '1' ? 'selected' : '')?> value='1'>Laki laki</option>
                                         <option <?=($jen == '2' ? 'selected' : '')?> value='2'>Perempuan</option>
@@ -61,13 +61,18 @@
                                         foreach ($subfas as $sf) {
                                     ?>
                                     <div class="form-group col-md-6">
-                                        <label><input type="checkbox" name="fasilitas[]" value="<?= $sf['id_fasilitas'] ?>"> <?= $sf['nama'] ?></label>
+                                        <label><?= $sf['nama'] ?></label>
                                         <div class="container">
                                             <?php 
+                                            if ($sf['sub'][0] != '') {
+                                                foreach($sf['old_sub'] as $s)
+                                                    echo "<input type='hidden' name='old_sub_fasilitas[]' value='$s'>";
                                                 foreach ($sf['sub'] as $sub) {
                                             ?>
-                                                <input type="checkbox" name="sub_fasilitas[]" value="<?= $sub['id'] ?>"> <?= $sub['nama'] ?>
-                                            <?php } ?>
+                                                <input type="checkbox" name="sub_fasilitas[]" <?= ((in_array($sub['id'], $sf['old_sub']) ? 'checked' : '')) ?> value="<?= $sub['id'] ?>"> <?= $sub['nama'] ?>
+                                            <?php }}else{
+                                                echo "<div class='alert alert-warning alert-block'>sub fasilitas tidak ada</div> ";
+                                            } ?>
                                         </div>
                                     </div>
                                     <?php } ?>
@@ -100,6 +105,6 @@
                 <button type="submit" class="simpan btn btn-sm btn-primary pull-right"><?=$type?></button>
                 </div>
             </div>
-        <!-- </form> -->
+        </form>
     </div>
 </div>
