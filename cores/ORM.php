@@ -7,9 +7,7 @@ class ORM {
     public function __construct() {
         $this->table = get_called_class();
 
-        $this->pdo = new PDO("mysql:hostname=localhost;dbname=papikos", 'root', '051299', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-       
+        $this->pdo = new PDO("mysql:hostname=".host.";dbname=".dbname."", ''.username.'', ''.password.'', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);       
     }
 
     public function Insert($data, $table = '') {

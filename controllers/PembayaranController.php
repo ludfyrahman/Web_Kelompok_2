@@ -50,9 +50,15 @@ class pembayaranController {
         $d = $_POST;
         $f = $_FILES;
         try {
+            $status = 1;
+            if ($d['status'] == 1) {
+                $status = 2;
+            }else if($d['status'] == 2){
+                $status = 3;
+            }
             App::UploadImage($f['file'], 'bukti');
-            $q = $this->pembayaran->Insert(['id_pemesanan' => $id,  'tipe' => 1, 'jumlah' => $d['dp'], 'bukti_bayar' => $f['file']['name']]);
-            $this->pemesanan->update(['status' => 2], "WHERE id=$id");
+            $q = $this->pembayaran->Insert(['id_pemesanan' => $id,  'tipe' => $d['status'], 'jumlah' => $d['bayar'], 'bukti_bayar' => $f['file']['name']]);
+            $this->pemesanan->update(['status' => $status], "WHERE id=$id");
             if(!$q){
                 echo json_encode(['status' => true]);
             }else{
@@ -64,17 +70,22 @@ class pembayaranController {
             echo $e->getMessage();
         }
     }
-    public function aksi($status, $id){
+    public function aksi($type, $id){
         $d = $_POST;
-
         try {
+            if ($type == 2) {
+                // echo "<pre>";
+                $r = $this->pembayaran->select("*", "p JOIN pemesanan pm ON p.id_pemesanan=pm.id JOIN kos k ON pm.id_kos=k.id WHERE p.id='$id'")[1][0];
+                // print_r($r);
+                $this->pembayaran->update(['jumlah_kamar' => $r['jumlah_kamar'] - 1], "WHERE id=$r[id]", "kos");
+            }
             $arr = [
-                'status' => $status, 
+                'status' => 1, 
             ];
-
             $this->pembayaran->update($arr, "WHERE id=$id");
-            // echo "berhasil";
-            Response::redirectWithAlert('admin/pembayaran/', ['info', 'Status Pembayaran dengan kode '.invoice_code."".$id]);
+            // $r = $this->pemesanan->select("k.id, k.jumlah_kamar", "p JOIN pembayaran pp ON p.id=pp.id_pemesanan JOIN kos k ON p.id_kos=k.id", "WHERE pp.id=$id")[1][0];
+            // $this->pemesanan->update(['jumlah_kamar' => $r['jumlah_kamar'] - 1], "WHERE id=$r[id]", "kos");
+            Response::redirectWithAlert('admin/pembayaran/', ['info', 'Status Pembayaran dengan kode '.invoice_code."".$id." Sudah di update"]);
         }
         catch(Exception $e) {
             print_r($e->errorInfo[2]);

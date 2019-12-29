@@ -44,6 +44,9 @@
             $bulan_pemesanan  = json_encode($bulan_pemesanan);
             $presentase_pemesanan = (100  * count($pemesanan_lunas[1]) / $pemesanan[0]);
             $label_pesanan = status_pemesanan;
+            // print_r($pemesanan_lunas);
+            // echo "pemesanan_lunas ".$pemesanan_lunas[0]."<br>";
+            // echo "pemesanan doang ".$pemesanan[0];
             Response::render('back/index', 
             [
                 'title' => 'Dashboard', 

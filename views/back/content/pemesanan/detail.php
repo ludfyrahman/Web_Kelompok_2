@@ -10,7 +10,6 @@
                             <div class="col-md-12">
                                 <h2>Kode Invoice: <?= invoice_code."".$data['id'] ?></h2>
                                 <span class="badge badge-<?= status[$data['status_code']]?>"><?= $data['status'] ?></span>
-                                <button class="btn btn-primary float-right">Lunas</button>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -99,7 +98,7 @@
                                             <?php
                                             if($p['status'] == 0){
                                             ?>
-                                            <a href="<?= BASEADM."pembayaran/aksi/1/".$p['id']."" ?>"><button class="mdi-delete-forever btn btn-primary">Konfirmasi</button></a>
+                                            <a href="<?= BASEADM."pembayaran/aksi/".$p['tipe']."/".$p['id']."" ?>"><button class="mdi-delete-forever btn btn-primary">Konfirmasi</button></a>
                                             <?php } ?>
                                         </div>
                                     </div>

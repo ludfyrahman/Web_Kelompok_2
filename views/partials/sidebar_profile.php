@@ -25,7 +25,7 @@
                         <!-- Category Widget Items -->
                         <ul class="widget-items">
                             <li><a href="<?= BASEURL."transaksi" ?>" class="d-flex p-3"><span>Daftar Transaksi</span></a></li>
-                            <li><a href="<?= BASEURL."transaksi" ?>" class="d-flex p-3"><span>Menunggu Pembayaran</span></a></li>
+                            <!-- <li><a href="<?= BASEURL."transaksi" ?>" class="d-flex p-3"><span>Menunggu Pembayaran</span></a></li> -->
                         </ul>
                     </div>
                 </div>

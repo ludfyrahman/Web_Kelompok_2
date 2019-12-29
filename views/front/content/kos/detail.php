@@ -53,20 +53,24 @@
                                         <ul>
                                             <li class="d-inline-block p-2">Pemilik Kos <?= $data['nama'] ?></li>
                                             <li class="d-inline-block p-2">Diubah <?= App::date($data['tanggal_diubah'], "d M Y, H:i") ?></li>
-                                            <li class="d-inline-block p-2"><a href="#">2 Comments</a></li>
                                         </ul>
                                     </div>
                                     <div class="rating padding12">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <?php 
+                                                
+                                                for ($i=0; $i < round($rate); $i++) { ?>
+                                                <i class="fa fa-star text-warning" ></i>
+                                                <?php }
+                                                $cal = 5 - round($rate);
+                                                for ($i=0; $i < $cal; $i++) {
+                                                ?>
+                                                <i class="fa fa-star "></i>
+                                                <?php } ?>
                                             </div>
                                             <div class="col-md-2">
-                                                <p>O ulasan</p>
+                                                <p><?= count($ulasan) ?> ulasan</p>
                                             </div>
                                             <div class="col-md-2    ">
                                                 <?php

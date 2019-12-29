@@ -347,15 +347,17 @@ class PenggunaController {
                 $_SESSION['alert'] = ['danger', "Password konfirmasi harus sama"];
                 return $this->login();
             }
-
-            $arr = ['nama' => $d['nama'], 'email' => $d['email'], 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 'level' => 3];
+            $kode = App::randomString(5);
+            $arr = ['nama' => $d['nama'], 'email' => $d['email'], 'password' => password_hash($d['password'], PASSWORD_DEFAULT), 'level' => 3, 'verification' => $kode];
             $this->pengguna->Insert($arr);
-            Response::redirectWithAlert('login/', ['info', 'Register berhasil, anda dapat login']);
+            $this->setting->send("rezamufti24@gmail.com", $arr['email'], 'Verifikasi Akun Papikos', 'Verifikasi Akun Papikos. klik <a href="'.BASEURL."verifikasi/$kode".'">'.$kode.'</a>');
+            Response::redirectWithAlert('pengguna/login', ['info', 'Register berhasil, verifikasi akun terlebih dahulu']);
         }
         catch(Exception $e) {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
                 $_SESSION['alert'] = ['danger', 'Email sudah terpakai'];
-            Response::redirectWithAlert('login/', ['info', 'Register berhasil, anda dapat login']);
+                print_r($e->errorInfo[2]);
+            Response::redirect('pengguna/login');
         }
     }
     public function simpanProfil(){

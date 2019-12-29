@@ -24,7 +24,7 @@
     Router::get('/admin/pemesanan/pdf', 'PemesananController@pdf', 'login:1');
     Router::get('/admin/pemesanan/aksi/:status/:id', 'PemesananController@aksi', 'login:1');
     Router::resource('/admin/pembayaran', 'PembayaranController', 'login:1');
-    Router::get('/admin/pembayaran/aksi/:status/:id', 'PembayaranController@aksi', 'login:1');
+    Router::get('/admin/pembayaran/aksi/:type/:id', 'PembayaranController@aksi', 'login:1');
     Router::post('/admin/pembayaran', 'PembayaranController@index', 'login:1');
     // report
         Router::get('/admin/report', 'ReportController@index', 'login:1');
@@ -53,6 +53,7 @@
     Router::post('/pengguna/proses_register', 'PenggunaController@proses_register');
         // verifikasi
         Router::get("/verifikasi_email/:from/:to", "SettingController@verification_code");
+        Router::get("/verifikasi/:code", "SettingController@verifikasi");
         Router::post("/pengguna/proses_verifikasi/:tipe", "PenggunaController@proses_verifikasi");
         Router::get("/verifikasi_no_hp/:to", "SettingController@verification_code_hp");
         Router::post('/pengguna/simpanProfil', 'PenggunaController@simpanProfil');
@@ -81,7 +82,7 @@
     // authentication
     Router::get("/admin/setting", 'SettingController@index');
     // pembayaran
-    Router::get('/pemesanan/bayar/:id', 'PembayaranController@bayar');
+    Router::get('/pemesanan/bayar/:id/:status', 'PembayaranController@bayar');
     Router::post('/bayar/uploadBukti/:id', 'PembayaranController@doPay');
     // Router::get('/bayar/uploadBukti', 'PembayaranController@doPay');
     Router::get('/invoice/:id', 'PemesananController@invoice');

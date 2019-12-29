@@ -43,7 +43,7 @@
                                     <h5 class="margin-top-bottom-12">Tersedia <?= $data['jumlah_kamar']?> kamar</h5>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            Pembayaran DP 
+                                            Pembayaran <?= tipe_pembayaran[$data['status_code']] ?>
                                             <!-- <span>*dp yang harus dibayarkan</span> -->
                                         </div>
                                         <div class="col-md-4">
@@ -78,7 +78,16 @@
                                 <div class="col-md-6">
                                     <p style="text-align:right">Batas maksimal pembayaran dp 1 x 24 jam</p>
                                     <input type="hidden" id="id_pemesanan" name="id_pemesanan" value="<?= $data['id'] ?>">
-                                    <input type="hidden" id="dp" name="dp" value="<?= (25/100 * $data['harga'])?>">
+                                    <?php 
+                                    $harga = (25/100 * $data['harga']);
+                                    if (App::url()[5] == 1) {
+                                        $harga = (25/100 * $data['harga']);
+                                    }else if(App::url()[5] == 2){
+                                        $harga = $data['harga'] - (25/100 * $data['harga']);
+                                    }
+                                    ?>
+                                    <input type="hidden" id="bayar" name="bayar" value="<?= $harga ?>">
+                                    <input type="hidden" id="status" name="status" value="<?= App::url()[5]?>">
                                     <button id="pesan" type="button" class="btn konfirmasi btn-success float-right" >Konfirmasi</button>
                                 </div>
                             </div>

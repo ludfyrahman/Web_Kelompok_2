@@ -108,13 +108,14 @@
             <p>Ulasan anda</p>
             <div class="form_ulasan">
                 <input type="hidden" id="id_kos">
-                <input type="hidden" id="rating" value="2">
+                <input type="hidden" id="rating" value="1">
                 <div class="form-group">
                     <h3 for="" style="margin:20px">Rating</h3>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <a href="#" id="rate" val="1"><i class="fa fa-star" ></i></a>
+                    <a href="#" id="rate" val="2"><i class="fa fa-star" ></i></a>
+                    <a href="#" id="rate" val="3"><i class="fa fa-star" ></i></a>
+                    <a href="#" id="rate" val="4"><i class="fa fa-star" ></i></a>
+                    <a href="#" id="rate" val="5"><i class="fa fa-star" ></i></a>
                 </div>
                 <div class="form-group">
                     <h3>Ulasan</h3>

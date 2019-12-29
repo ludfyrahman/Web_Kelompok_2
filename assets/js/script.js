@@ -14,6 +14,19 @@ $("[id='verifikasi_no_hp'").click(function(){
         }
       });
 });
+
+$("[id='rate'").click(function(){
+    var val = $(this).attr("val");
+    $("#rating").val(val);
+    $( "[id='rate'" ).each(function( i ) {
+        if(i < val){
+            $(this).css("color","rgb(228, 173, 34)"); //Change color of the div
+        }else{
+            $(this).css("color","#777");
+        }
+        // console.log("works");
+    });
+})
 $("[id='favorit']").click(function(){
     var id = $(this).attr("kosid");
     $(this).toggleClass("color-primary");
@@ -30,7 +43,8 @@ $("[id='favorit']").click(function(){
             console.log("res");
         }
       });
-})
+});
+
 $('.rating').on('change', function () {
    alert("Changed: " + $(this).val())
 });
@@ -38,7 +52,7 @@ $(".pesan").click(function(){
    return confirm("apakah anda ingin memesan kos ini ???")
 })
 $(".bayar").click(function(){
-   return confirm("apakah anda ingin Membayar Dp kos ini ???")
+   return confirm("apakah anda ingin Membayar kos ini ???")
 });
 $("#open_ulasan_model").click(function(){
     var id_kos = $(this).attr("id_kos");
@@ -50,9 +64,10 @@ $("#open_ulasan_model").click(function(){
         url: BASEURL+"/ulasan/"+id_kos,
         success: function(resultData) { 
             console.log(resultData);
+            console.log(resultData);
             var obj = JSON.parse(resultData);
             var appendElement = "";
-            console.log(obj[1][0]['tanggal_ditambahkan']);
+            // console.log(obj[1][0]['tanggal_ditambahkan']);
             if(obj[0] > 0){
                 // hide form and show result data from review
                 $('.form_ulasan').hide();
@@ -110,19 +125,13 @@ $("#simpan_ulasan").click(function(){
 $("#btn_simpan_data_diri").click(function(){
     // alert();
     // console.log($("#data_diri").serialize(),)
-    var userinput = $(this).val();
-    var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+    var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/;
     var nama = $('input[name="nama"').val();
     var email = $('input[name="email"').val();
     var no_hp = $('input[name="no_hp"').val();
     var tanggal_lahir = $('input[name="tanggal_lahir"').val();
     var alamat = $('textarea[name="alamat"').val();
     var jenis_kelamin = $('input[name="jenis_kelamin"]:checked').val();
-    console.log("jenis kelamin "+jenis_kelamin);
-    // if(!pattern.test(userinput))
-    // {
-    //     alert('not a valid e-mail address');
-    // }​
     var saveData = $.ajax({
         type: 'POST',
         url: BASEURL+"pengguna/simpanProfil",
@@ -252,7 +261,8 @@ $("#verifikasi_email").click(function(){
 
 var formData = new FormData();
 var id_pemesanan = $("#id_pemesanan").val();
-var dp = $("#dp").val();
+var bayar = $("#bayar").val();
+var status = $("#status").val();
 // alert(dp);
 Dropzone.autoDiscover = false;
 var myDropzone = new Dropzone(".dropzone", {
@@ -262,7 +272,8 @@ var myDropzone = new Dropzone(".dropzone", {
   method :"POST",
   paramName: 'file',
   params: {
-        dp: dp
+        bayar: bayar,
+        status: status
     },
   clickable: true,
   uploadMultiple: false,
@@ -274,7 +285,7 @@ var myDropzone = new Dropzone(".dropzone", {
         console.log(file);
         console.log(response);
         if(obj['status']){
-            alert('berhasil membayar dp kos');
+            alert('berhasil membayar kos');
             window.location.href = BASEURL+"transaksi";
         }else{
             alert('Gagal membayar kos');

@@ -102,10 +102,10 @@
         <div class="col-lg-4 col-md-6 equel-grid">
             <div class="grid">
                 <div class="grid-body">
-                <p class="card-title">Pemesanan Berhasil</p>
-                <div id="radial-chart"></div>
-                <h4 class="text-center"><?= App::price($pemesanan_lunas['jumlah']) ?></h4>
-                <p class="text-center text-muted">Uang Dibayarkan</p>
+                    <h2 class="grid-title">Kos</h2>
+                    <div class="item-wrapper">
+                    <canvas id="chartjs-staked-line-chart" width="600" height="400"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

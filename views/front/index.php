@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?=BASEASSET?>css/responsive.css">
     <link rel="stylesheet" href="<?=BASEASSET?>css/custom.css">
     <link rel="stylesheet" href="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
     <meta name="google-signin-client_id" content="<?= CLIENT_ID?>">
 </head>
 <body class="miami">
@@ -57,8 +58,8 @@ if($content != 'user/login')
 
 <!-- Active js -->
 <script src="<?php echo BASEASSET ?>/vendors/dropzone/dropzone.js"></script>
-<script src="<?php echo BASEASSET ?>/js/active.js"></script>
 <script src="<?php echo BASEASSET ?>js/script.js"></script>
+<script src="<?php echo BASEASSET ?>/js/active.js"></script>
 
 
 <script async defer

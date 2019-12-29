@@ -1,13 +1,15 @@
 <?php
 
 App::loadModels(['Kos','kategori', 'pengguna', 'favorit']);
+include "SettingController.php";
 class SiteController {
-    private $kos;
+    private $kos, $setting;
     public function __construct() {
         $this->kos = new Kos();
         $this->kategori = new Kategori();
         $this->pengguna = new Pengguna();
         $this->favorit = new Favorit();
+        $this->setting = new SettingController();
     }
 
     public function home() {
@@ -20,6 +22,7 @@ class SiteController {
 
     public function filter() {
         echo "filter";
+        $this->setting->send("rezamufti24@gmail.com", "ludfyr@gmail.com", 'Verifikasi Akun Papikos', 'berhsail<a href="youtube.com">test</a>');
     }
 
     public function wishlist(){

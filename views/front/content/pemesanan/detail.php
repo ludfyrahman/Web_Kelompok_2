@@ -66,24 +66,32 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <?php 
-                                if($data['status_code']  == '1'){
+                                if($data['status_code']  == '1' || $data['status_code']  == '2'){
                                 ?>
                                 <div class="col-md-6">
                                     <h3 class="margin-top-bottom-12">Pembayaran Melalui Rekening</h3>
-                                    <p class="margin-top-bottom-12"><?=Account::Get('nama_bank')." ".Account::Get('no_rekening')."(".Account::Get('nama_rekening').")"?></p>
+                                    <p class="margin-top-bottom-12">BNI 66176672676 (Papikos)</p>
                                 </div>
+                                <?php 
+                                if($data['status_code'] == '1'){
+                                ?>
                                 <div class="col-md-6">
                                     <p style="text-align:right">Batas maksimal pembayaran dp 1 x 24 jam</p>
-                                    <a href="<?= BASEURL."pemesanan/bayar/".$data['id'] ?>" class='bayar'><button class="btn btn-success float-right" >Bayar Dp</button></a>
+                                    <a href="<?= BASEURL."pemesanan/bayar/".$data['id']."/".$data['status_code'] ?>" class='bayar'><button class="btn btn-success float-right" >Bayar Dp</button></a>
                                 </div>
-                                <?php }else{
+                                <?php }else if($data['status_code'] == 2){ ?>
+                                <div class="col-md-6">
+                                    <p style="text-align:right">Batas maksimal pembayaran Pelunasan 3 x 24 jam</p>
+                                    <a href="<?= BASEURL."pemesanan/bayar/".$data['id']."/".$data['status_code'] ?>" class='bayar'><button class="btn btn-success float-right" >Bayar Pelunasan</button></a>
+                                </div>
+                                <?php }}else{
                                 $pesan = "";
                                 $alert = "";
                                 if($data['status_code'] == '0'){
                                     $pesan = "Pesanan anda dibatalkan";
                                     $alert = "danger";
                                 }else if($data['status_code'] == 2){
-                                    $pesan = "Terimakasih anda sudah membayar dp kos";
+                                    $pesan = "Terimakasih anda sudah membayar dp kos. segera bayar pelunasan kos anda";
                                     $alert = "success";
                                 }else if($data['status_code'] == 3){
                                     $pesan = "Terimakasih anda sudah melunasi kos";

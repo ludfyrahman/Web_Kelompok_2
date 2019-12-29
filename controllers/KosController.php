@@ -22,7 +22,7 @@ class KosController {
             $where = " WHERE p.id=".Account::get('id');
         }
         $lists = $this->kos->customSelect("SELECT k.id, k.nama,k.harga, ka.nama as nama_kategori from kos k JOIN kategori ka ON k.id_kategori=ka.id JOIN pengguna p on k.ditambahkan_oleh=p.id $where ORDER BY k.id asc");
-        Response::render('back/index', ['title' => 'Daftar Akun', 'content' => 'kos/index', 'list' => $lists]);
+        Response::render('back/index', ['title' => 'Daftar Kos', 'content' => 'kos/index', 'list' => $lists]);
 
     }
 
@@ -122,8 +122,6 @@ class KosController {
                 'harga' => $d['harga'],
                 'ditambahkan_oleh' =>  Account::Get('id')
             ];
-            // echo "<pre>";
-            // print_r($arr);
             $this->kos->Insert($arr);
             $id = $this->kos->lastInsertId();
             $this->kos->add_sub($id);
@@ -181,6 +179,13 @@ class KosController {
         $this->kos->customQuery("update kos set dilihat = dilihat + 1 WHERE id='$id'");
         $fasilitas = $this->fasilitas_kos->select("f.id, f.nama","fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id JOIN fasilitas f ON sf.id_fasilitas=f.id", "WHERE id_kos='$data[id]' GROUP by f.id")[1];
         $index = 0;
+        // echo "<pre>";
+        $rate = $this->ulasan->select("*", "WHERE id_kos=$id")[1];
+        $max = 0;
+        foreach ($rate as $key) {
+            $max+=$key['rating'];
+        }
+        $rate = $max / count($rate);
         $subfas = array();
         
         // echo "<pre>";
@@ -201,7 +206,7 @@ class KosController {
         // print_r($subfas);
         // echo "</pre>";
 
-        Response::render('front/index', ['title' => $data['nama_kos'], 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'media' => $media, 'subfas' => $subfas, 'ulasan' => $ulasan]);
+        Response::render('front/index', ['title' => $data['nama_kos'], 'content' => 'kos/detail', 'type' => 'Tambah', 'data' => $data, 'rate' => $rate, 'media' => $media, 'subfas' => $subfas, 'ulasan' => $ulasan]);
     }
     public function pesan($id){
         $data = $this->kos->Select("k.id, k.nama as nama_kos,k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, k.jumlah_kamar, k.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id", "WHERE k.id='$id'")[1][0];
@@ -312,8 +317,10 @@ class KosController {
         }
     }
     public function reviewExist($id){
-        $d = $this->ulasan->select("k.nama, u.*", "u JOIN kos k on u.id_kos=k.id", "WHERE id_kos='$id' and id_pengguna=".Account::get('id')); 
+        $d = $this->ulasan->select("k.nama, u.*", "u JOIN kos k on u.id_kos=k.id WHERE u.id_kos='$id' and u.id_pengguna=".Account::get('id')); 
         echo json_encode($d);
+        // print_r($d);
+        // echo "SELECT k.nama, u.* from ulasan u JOIN kos k on u.id_kos=k.id WHERE id_kos='36' and id_pengguna=1";
     }
     
 }

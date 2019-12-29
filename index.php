@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 require 'define.php';
 require 'cores/ORM.php';
 require 'cores/Response.php';
@@ -11,6 +11,7 @@ require 'vendor/autoload.php';
 require 'helpers/google-login-api.php';
 // require 'helpers/facebook/fb-callback.php';
 require 'helpers/NexMo/NexmoMessage.php';
+require 'helpers/PHPMAILER/PHPMailerAutoload.php';
 require_once("helpers/dompdf/autoload.inc.php");
 require 'routers.php';
 // chmod($target_path, 0755);

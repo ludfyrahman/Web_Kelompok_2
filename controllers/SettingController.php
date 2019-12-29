@@ -94,23 +94,15 @@ class SettingController {
         }
     }
     public function lupa_password_email($from, $to){
-        $kode = App::RandomString(5);
-        $this->pengguna->update(["verification" => $kode], "WHERE email='$to'");
-        $subject = "Lupa Password";
-        $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom($from, "Lupa Password Akun Papikos");
-        $email->setSubject($subject);
-        $email->addTo($to, "Lupa Password Akun");
-        $email->addContent("text/html", "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
-        $sg = new \SendGrid(SENDGRID_API_KEY);
-
-        $response = $sg->client->mail()->send()->post($email);
-                
-        if ($response->statusCode() == 202) {
-            // Successfully sent
-            echo 'done';
-        } else {
-            echo 'false';
+        $this->send("rezamufti24@gmail.com", $to, $subject, "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
+    }
+    public function verifikasi($id){
+        $q = $this->pengguna->select("*", "WHERE verification='$id'");
+        if($q[0] > 0 ){
+            $this->pengguna->update(['status' => 1], "WHERE verification='$id'");
+            Response::redirectWithAlert('pengguna/login', ['info', 'Verifikasi Akun Berhasil']);
+        }else{
+            Response::redirectWithAlert('pengguna/login', ['info', 'Verifikasi Akun Gagal']);
         }
     }
     public function notifikasi_pembayaran($from, $to, $kode){
@@ -161,5 +153,41 @@ class SettingController {
     }
     public function tampil(){
         echo "ada ada aja";
+    }
+    public function send($from, $to, $subject, $body){
+        $mail = new PHPMailer;
+
+        //$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'rezamufti24@gmail.com';                 // SMTP username
+        $mail->Password = 'rezaraihanreksa24';                           // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 465;                                    // TCP port to connect to
+
+        $mail->setFrom($from, 'papikos');
+        $mail->addAddress($to, 'User');     // Add a recipient
+        // $mail->addAddress('ellen@example.com');               // Name is optional
+        // $mail->addReplyTo('info@example.com', 'Information');
+        // $mail->addCC('cc@example.com');
+        // $mail->addBCC('bcc@example.com');
+
+        // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+        // $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->IsHTML(true); 
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->AltBody = 'jangan lupa';
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
     }
 }
