@@ -7,13 +7,7 @@
                 <!-- Single Blog Details -->
                 <article class="single-blog-details">
                     <!-- Blog Thumb -->
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Library</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data</li>
-                        </ol>
-                    </nav>
+                    <!-- <?php App::breadcrumb()?> -->
                     <div class="row">
                         <div class="col-md-5">
                             <div class="blog-thumb">
@@ -33,6 +27,7 @@
                             <div class="slider-image margin-18">
                                 <?php
                                     $no = 1;
+                                    // print_r($media);
                                     foreach($media as $m){
                                 ?>
                                     <div class="image-slide">
@@ -91,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-sm-2">
+                                        <!-- <div class="col-md-2 col-sm-2">
                                             <div class="row">
                                                 
                                                 <div class="col-md-12 text-center">
@@ -99,7 +94,7 @@
                                                     <p>20</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4 col-sm-4">
                                             <div class="row">
                                                 

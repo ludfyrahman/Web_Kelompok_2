@@ -82,7 +82,9 @@
                         <p class="grid-header">Foto / Video</p>
                         <div class="grid-body">
                             <div class="item-wrapper">
-                                <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg untuk video dengan type mp4 dengan ukuran maksimal 4MB</div>
+                                <input type="hidden" value="<?= $data['id'] ?>" id="id">
+                                <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg </div>
+                                <!-- untuk video dengan type mp4 dengan ukuran maksimal 4MB -->
                                 <div class="dropzone dropzone-previews">
                                     <div class="fallback">
                                         <input name="file" type="file" multiple />
@@ -102,7 +104,7 @@
                     </div>
                 </div>
                 <div class="equal-grid">
-                <button type="submit" class="simpan btn btn-sm btn-primary pull-right"><?=$type?></button>
+                <button type="submit" class="simpan btn btn-sm btn-primary pull-right <?= ($type != 'Tambah' ? 'update' : '')  ?>" ><?=$type?></button>
                 </div>
             </div>
         </form>

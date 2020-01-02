@@ -3,7 +3,7 @@
     <a href="index.html">
         <!-- <img class="logo" src="../assets/images/logo.svg" alt=""> -->
         <!-- <img class="logo-mini" src="../assets/images/logo_mini.svg" alt=""> -->
-        <h3 style="color:#777">Papikos</h3>
+        <a href="<?= BASEURL ?>" target="_blank"><h3 style="color:#777">Papikos</h3></a>
     </a>
     </div>
     <div class="t-header-content-wrapper">

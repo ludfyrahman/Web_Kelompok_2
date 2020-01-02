@@ -25,38 +25,30 @@ var currentFile = null;
 
 var lat = getCookie("lat");
 var long = getCookie("long");
-$(".simpan").click(function(){
-    // alert(nama);
-    // myDropzone.processQueue();
+$(".update").click(function(){
+    console.log(BASEADM+"kost/uploadFile/"+id);
+    myDropzone.processQueue();
 })
 var formData = new FormData();
 Dropzone.autoDiscover = false;
+var id = $("#id").val();
 var myDropzone = new Dropzone(".dropzone", {
     addRemoveLinks: true,
-    url: BASEADM+"kost/add",
-    maxFiles:1,
+    url: BASEADM+"kost/uploadFile/"+id,
+    maxFiles:3,
     method :"POST",
     paramName: 'file',
-    params: {
-            nama:$("input[name='nama']").val(),
-            jumlah_kamar: $("input[name='jumlah_kamar']").val(),
-            jenis_kos: $("select[name='jenis_kos']").val(),
-            harga: $("input[name='harga']").val(),
-            deskripsi: $("textarea[name='deskripsi']").val(),
-            id_kategori: $("select[name='kategori']").val(),
-            latitude: lat,
-            longitude: long,
-        },
+
     clickable: true,
-    uploadMultiple: false,
+    uploadMultiple: true,
     autoProcessQueue: false,
-  dictDefaultMessage: 'Unggah file anda disini',
-  success: function(file, response)
+    dictDefaultMessage: 'Unggah file anda disini',
+    success: function(file, response)
     {
         console.log(file);
         console.log(response);
     },
-  init: function() {
+    init: function() {
     this.on("addedfile", function(file) {
         console.log(file);
         formData.append("file", file);

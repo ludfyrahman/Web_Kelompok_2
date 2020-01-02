@@ -148,7 +148,7 @@ class PenggunaController {
             }
             $this->pengguna->Update($arr, "WHERE id = $id");
 
-            // Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil diedit']);
+            Response::redirectWithAlert('admin/pengguna/', ['info', 'pengguna berhasil diedit']);
         }
         catch(Exception $e) {
             if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -374,6 +374,7 @@ class PenggunaController {
                 $this->pengguna->update($arr, "WHERE id=".Account::get('id'));
                 // $this->pengguna->update($arr, "WHERE id=1");
                 return true;
+                // print_r($arr);
         }catch(Exception $e){
             print_r($e);
         }

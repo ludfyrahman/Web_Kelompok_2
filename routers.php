@@ -9,10 +9,11 @@
     Router::resource('/admin/pengguna', 'PenggunaController');
     // kos
     Router::resource('/admin/kost', 'KosController');
-    Router::post('/admin/kos/uploadFile/:id', 'KosController@storeFile');
+    Router::post('/admin/kost/uploadFile/:id', 'KosController@storeFile');
     // end kos
     Router::resource('/admin/fasilitas', 'FasilitasController');
-    Router::resource('/admin/fasilitas/sub_fasilitas', 'SubFasilitasController');
+    Router::resource('/admin/sub_fasilitas', 'Sub_FasilitasController');
+    // Router::resource('/admin/fasilitas/sub_fasilitas', 'SubFasilitasController');
     Router::resource('/admin/kategori', 'KategoriController');
     // Router::resource('/admin/kategori/sub_kategori', 'SubKategoriController');
 

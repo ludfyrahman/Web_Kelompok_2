@@ -23,17 +23,24 @@
                 $data_pesanan[2]+=$k['dp'];
                 $data_pesanan[3]+=$k['lunas'];
             }
+            $wherefirst = "";
+            $wherelast = "";
+            if (Account::get('level') !=1) {
+                $wherelast = " AND pg.id =".Account::get('id');
+                $wherefirst = " WHERE pg.id =".Account::get('id');
+            }
             $kategori   = $this->kategori->Select("*", "");
             $pengguna   = $this->pengguna->Select("*", "");
-            $pemesanan  = $this->pemesanan->Select("*", "");
-            $pesanan_bulan_ini  = $this->pemesanan->Select("*", "WHERE tanggal_pemesanan BETWEEN '$now-01' and '$next_month-01'");
+            $pemesanan  = $this->pemesanan->Select("*", "p JOIN kos k ON p.id_kos=k.id JOIN pengguna pg ON k.ditambahkan_oleh=pg.id $wherefirst");
+            $pesanan_bulan_ini  = $this->pemesanan->Select("*", "p JOIN kos k ON p.id_kos=k.id JOIN pengguna pg ON k.ditambahkan_oleh=pg.id WHERE p.tanggal_pemesanan BETWEEN '$now-01' and '$next_month-01' $wherelast");
             $fasilitas  = $this->fasilitas->Select("*", "");
-            $pemesanan_lunas  = $this->pemesanan->Select("p.*, SUM(pp.jumlah) as jumlah, pg.nama, pg.no_hp", "p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN pengguna pg on p.id_pengguna=pg.id", "where p.status=3 and pp.status=1 GROUP BY p.id");
-            $pemesanan_pembayaran_lunas  = $this->pemesanan->Select("SUM(pp.jumlah) as jumlah", "p JOIN pembayaran pp on pp.id_pemesanan=p.id where p.status=3 and pp.status=1");
+            $pemesanan_lunas  = $this->pemesanan->Select("p.*, SUM(pp.jumlah) as jumlah, pg.nama, pg.no_hp", "p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN pengguna pg on p.id_pengguna=pg.id ", "where p.status=3 and pp.status=1 $wherelast GROUP BY p.id");
+            $pemesanan_pembayaran_lunas  = $this->pemesanan->Select("SUM(pp.jumlah) as jumlah", "p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN kos k ON k.id=p.id_kos JOIN pengguna pg ON k.ditambahkan_oleh=pg.id where p.status=3 and pp.status=1 $wherelast");
+            // echo "SELECT SUM(pp.jumlah) as jumlah FROM pemesanan p JOIN pembayaran pp on pp.id_pemesanan=p.id JOIN kos k ON k.id=p.id_kos JOIN pengguna pg ON k.ditambahkan_oleh=pg.id where p.status=3 and pp.status=1 $wherelast";
             $pembayaran = $this->pembayaran->Select("*", "");
             $kos        = $this->kos->Select("*", "");
             $tahun = date('Y');
-            $pemesanan_chart  = $this->pemesanan->Select("COUNT(*) as jumlah, DATE_FORMAT(tanggal_pemesanan, '%m') as tanggal", " WHERE YEAR(tanggal_pemesanan) = $tahun ", "GROUP BY tanggal")[1];
+            $pemesanan_chart  = $this->pemesanan->Select("COUNT(*) as jumlah, DATE_FORMAT(p.tanggal_pemesanan, '%m') as tanggal", "p JOIN kos k ON p.id_kos=k.id JOIN pengguna pg ON k.ditambahkan_oleh=pg.id WHERE YEAR(tanggal_pemesanan) = $tahun $wherelast", "GROUP BY tanggal")[1];
             $jumlah_pemesanan = [];
             $bulan_pemesanan = [];
             foreach ($pemesanan_chart as $p) {

@@ -7,7 +7,7 @@
             ?>
             <div class="col-12 col-lg-9">
                 <article class="single-blog-details">
-                    <h2 class="margin-top-bottom-12">Daftar Transaksi</h2>
+                    <h2 class="margin-top-bottom-12">Daftar Favorit</h2>
                     <form action="" method="POST">
                         <div class="row">
                             <div class="col-md-4">

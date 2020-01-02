@@ -44,7 +44,10 @@
             </a>
             <ul class="collapse navigation-submenu" id="fasilitas">
                 <li>
-                <a href="<?= BASEADM."fasilitas" ?>">Fasilitas</a>
+                    <a href="<?= BASEADM."fasilitas" ?>">Fasilitas</a>
+                </li>
+                <li>
+                    <a href="<?= BASEADM."sub_fasilitas" ?>">Sub Fasilitas</a>
                 </li>
                 <!-- <li>
                     <a href="pages/sample-pages/error_2.html" target="_blank">Sub Fasilitas</a>
@@ -75,12 +78,12 @@
             </a>
         </li>
         <li class="nav-category-divider">Pengaturan</li>
-        <li>
+        <!-- <li>
             <a href="<?= BASEADM."setting" ?>">
                 <span class="link-title">Pengaturan</span>
                 <i class="mdi mdi-settings link-icon"></i>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?= BASEURL."pengguna/profil" ?>">
                 <span class="link-title">Profil</span>

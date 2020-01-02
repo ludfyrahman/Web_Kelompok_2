@@ -77,21 +77,7 @@ class SettingController {
         $kode = App::RandomString(5);
         $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
         $subject = "Verifikasi Email";
-        $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom($from, "Verifikasi Email Papikos");
-        $email->setSubject($subject);
-        $email->addTo($to, "Verifikasi Akun");
-        $email->addContent("text/html", "<h1>Verifikasi Akun ".Account::get("nama")."</h1><p>masukkan kode <b>".$kode." untuk verifikasi akun anda<p>");
-        $sg = new \SendGrid(SENDGRID_API_KEY);
-
-        $response = $sg->client->mail()->send()->post($email);
-                
-        if ($response->statusCode() == 202) {
-            // Successfully sent
-            echo 'done';
-        } else {
-            echo 'false';
-        }
+        $this->send("rezamufti24@gmail.com", $to, $subject, "<h1>Verifikasi Akun ".Account::get("nama")."</h1><p>masukkan kode <b>".$kode." untuk verifikasi akun anda<p>");
     }
     public function lupa_password_email($from, $to){
         $this->send("rezamufti24@gmail.com", $to, $subject, "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");

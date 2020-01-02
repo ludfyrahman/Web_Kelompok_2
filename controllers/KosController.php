@@ -86,12 +86,15 @@ class KosController {
 
     public function storeFile($id){
         $f = $_FILES;
+        print_r($f);
+        $index = 0;
         foreach ($f["file"] as $key => $arrDetail) 
         {
-            foreach ($arrDetail as $index => $detail) {
+            echo "berhasil";
+            // foreach ($arrDetail as $index => $detail) {
                 $targetDir = BASEPATH."assets/images/upload/kos/";
                 $type = explode('/', $f['file']['type'][$index]);
-                $fileName = date('y-m-d').".".$type[1];
+                $fileName = date('YmdHis').".".$type[1];
                 $targetFile = $targetDir.$fileName;
 
                 if(move_uploaded_file($_FILES["file"]['tmp_name'][$index],$targetFile))
@@ -101,7 +104,8 @@ class KosController {
                 }else{
                     return "File not uploaded.";
                 }
-            }
+                $index++;
+            // }
         }
     }
 

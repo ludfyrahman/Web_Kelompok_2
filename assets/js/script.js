@@ -138,8 +138,9 @@ $("#btn_simpan_data_diri").click(function(){
         data: {nama: nama, email:email, no_hp:no_hp, tanggal_lahir:tanggal_lahir, alamat:alamat, jenis_kelamin:jenis_kelamin},
         dataType: "text",
         success: function(resultData) { 
-            alert("berhasil mengubah profil");
-            $('#akun').modal('hide');
+            console.log(resultData);
+            // alert("berhasil mengubah profil");
+            // $('#akun').modal('hide');
         },
         error:function(res){console.log(res)}
   });
