@@ -81,7 +81,18 @@ class PemesananController {
         $lunas = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='2'")[1];
         $selesai = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='3'")[1];
         // echo "<pre>";
-        // print_r($dp);
+        $now = date('Y-m-d');
+        foreach ($dp as $d) {
+            if (strtotime($now) > strtotime($d['tanggal_pemesanan']. ' +1 day')) {
+                $this->pemesanan->update(['status' => 0], "WHERE id='$d[id_pemesanan]'");
+            }
+        }
+        foreach ($lunas as $l) {
+            // print_r($l);
+            if (strtotime($now) > strtotime($l['tanggal_pemesanan']. ' +4 day')) {
+                $this->pemesanan->update(['status' => 0], "WHERE id='$l[id_pemesanan]'");
+            }
+        }
         Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'dp' => $dp, 'lunas' => $lunas, 'dibatalkan' => $dibatalkan, 'selesai' => $selesai]);
     }
     public function detail($id){

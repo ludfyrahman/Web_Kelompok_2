@@ -48,7 +48,7 @@
                                     <h4 class="margin-top-bottom-12"><?= $p['nama'] ?></h4>
                                     <p class="margin-top-bottom-12">Total : <b class="color-primary"><?= App::price($p['harga']) ?></b> Tanggal Pembelian : <b><?= App::Date($p['tanggal_pemesanan'], 'd M Y') ?></b></p>
                                     <div class="alert alert-warning margin-top-bottom-12">
-                                        <p>Bayar Sebelum <?= (date('d M Y H:i:s', strtotime($p['tanggal_pemesanan']. ' +7 day')))?></p>
+                                        <p>Bayar Sebelum <?= (date('d M Y H:i:s', strtotime($p['tanggal_pemesanan']. ' +4 day')))?></p>
                                     </div>
                                     <p class="margin-top-bottom-12">Kode Pemesanan : <a href="<?= BASEURL."akun/pemesanan/detail/".$p['id_pemesanan'] ?>"><b><?= invoice_code."".$p['id_pemesanan'] ?></b></a></p>
                                 </div>
