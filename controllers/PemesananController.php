@@ -22,6 +22,8 @@ class PemesananController {
         }else{
             $lists = $this->pemesanan->dataPemesanan()[1];
         }
+        // echo "<pre>";
+        // print_r($lists);
         Response::render ('back/index', ['title' => 'Daftar pemesanan', 'content' => 'pemesanan/index', 'list' => $lists]);
 
     }
