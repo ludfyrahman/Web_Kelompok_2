@@ -45,7 +45,7 @@
                                         <ul>
                                             <li class="d-inline-block p-2">Pemilik Kos <b><?= $data['nama'] ?></b></li>
                                             <li class="d-inline-block p-2">Diubah <?= App::date($data['tanggal_diubah'], "d M Y, H:i") ?></li>
-                                            <li class="d-inline-block p-2"><a href="#">2 Comments</a></li>
+                                            <!-- <li class="d-inline-block p-2"><a href="#">2 Comments</a></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p style="text-align:right">Batas maksimal pembayaran dp 1 x 24 jam</p>
-                                    <a href="<?= BASEURL."kos/pesanAction/".$data['id'] ?>" class='pesan'><button class="btn btn-success float-right" >Pesan Kos</button></a>
+                                    <a href="<?= BASEURL."kos/pesanAction/".$data['id']."/".App::uri(5) ?>" class='pesan'><button class="btn btn-success float-right" >Pesan Kos</button></a>
                                 </div>
                             </div>
                         </div>

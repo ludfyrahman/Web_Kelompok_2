@@ -36,7 +36,7 @@ class ReportController {
         LEFT JOIN (SELECT DATE(tanggal_pemesanan) dt, COUNT(*) dp FROM pemesanan p JOIN kos k ON p.id_kos=k.id JOIN pengguna pg ON pg.id=k.ditambahkan_oleh WHERE p.status = 2 $where GROUP BY DATE(tanggal_pemesanan)) c ON c.dt = tgl
         LEFT JOIN (SELECT DATE(tanggal_pemesanan) dt, COUNT(*) lunas FROM pemesanan p JOIN kos k ON p.id_kos=k.id JOIN pengguna pg ON pg.id=k.ditambahkan_oleh WHERE p.status = 3 $where GROUP BY DATE(tanggal_pemesanan)) d ON d.dt = tgl
 
-        LEFT JOIN (SELECT DATE(tanggal_pemesanan) dt, SUM(k.harga) harga FROM pemesanan p JOIN kos k ON p.id_kos = k.id GROUP BY DATE(tanggal_pemesanan)) f ON f.dt = tgl
+        LEFT JOIN (SELECT DATE(tanggal_pemesanan) dt, SUM(dk.harga) harga FROM pemesanan p JOIN kos k ON p.id_kos = k.id JOIN (Select * from detail_kos) dk on k.id=dk.id_kos GROUP BY dk.id and DATE(tanggal_pemesanan))  f ON f.dt = tgl
         WHERE tgl BETWEEN '$start_date' and '$end_date'
         ORDER by tgl ASC
         ");

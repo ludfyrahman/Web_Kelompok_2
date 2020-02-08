@@ -1,3 +1,12 @@
+$(".duplicate").click(function(){
+  // alert();
+  var forms = $(".detail-item");
+  var form_count = forms.length;
+  console.log(form_count);
+  // $(this).insertAfter(this).find('.old_sub_fasilitas').attr("name", "old_sub_fasilitas["+form_count+"][]");
+  $(".detail-item:first").clone().insertBefore(this).find('.sub_fasilitas').attr("name", "sub_fasilitas["+(form_count)+"][]");
+  $(".detail-item:last-child").find('.old_sub_fasilitas').attr("name", "old_sub_fasilitas["+(form_count)+"][]");
+})
 // console.log(getCookie("lat"));
 $(".mdi-delete-forever").click(function(){
   return confirm("Apakah anda yakin");
@@ -26,7 +35,7 @@ var currentFile = null;
 var lat = getCookie("lat");
 var long = getCookie("long");
 $(".update").click(function(){
-    console.log(BASEADM+"kost/uploadFile/"+id);
+    // console.log(BASEADM+"kost/uploadFile/"+id);
     myDropzone.processQueue();
 })
 var formData = new FormData();

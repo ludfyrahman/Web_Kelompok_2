@@ -14,6 +14,7 @@
                   <tr>
                     <th>No</th>
                     <th class='text-left'>Nama</th>
+                    <th class='text-left'>Fasilitas</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -25,6 +26,7 @@
                   <tr>
                     <td><?=$no?></td>
                     <td class='text-left'><?=$l['nama']?></td>
+                    <td class='text-left'><?=$l['fasilitas']?></td>
                     <td>
                       <a href="<?=BASEADM.'sub_fasilitas/'.$l['id'].'/edit' ?>" >
                         <i class="mdi mdi-pencil-box-outline"></i>

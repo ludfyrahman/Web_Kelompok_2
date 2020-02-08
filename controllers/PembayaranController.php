@@ -1,6 +1,6 @@
 <?php
 include "SettingController.php";
-App::loadModels(['Pemesanan', 'media']);
+App::loadModels(['pemesanan', 'media']);
 class pembayaranController {
     private $pembayaran, $pemesanan, $media, $setting;
 

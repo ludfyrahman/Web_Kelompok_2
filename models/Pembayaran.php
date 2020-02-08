@@ -19,7 +19,7 @@ class Pembayaran extends ORM {
         if(Account::get('level') == 2){
             $range.=" AND k.ditambahkan_oleh=".Account::get('id');
         }
-        $q = $this->Select("p.id,pg.nama as nama_pemesan, p.tipe, p.jumlah, p.bukti_bayar, p.tanggal_pembayaran,k.harga, p.id_pemesanan ", " p JOIN pemesanan pm ON p.id_pemesanan=pm.id JOIN pengguna pg ON pm.id_pengguna=pg.id JOIN kos k ON pm.id_kos=k.id", " $range ");
+        $q = $this->Select("p.id,pg.nama as nama_pemesan, p.tipe, p.jumlah, p.bukti_bayar, p.tanggal_pembayaran, p.id_pemesanan ", " p JOIN pemesanan pm ON p.id_pemesanan=pm.id JOIN pengguna pg ON pm.id_pengguna=pg.id JOIN kos k ON pm.id_kos=k.id", " $range ");
         return $q;
     }
 

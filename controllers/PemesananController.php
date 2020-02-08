@@ -1,5 +1,5 @@
 <?php
-App::loadModels(["Media", 'pembayaran']);
+App::loadModels(["media", 'pembayaran']);
 use Dompdf\Dompdf;
 class PemesananController {
     private $pemesanan, $media;
@@ -55,9 +55,9 @@ class PemesananController {
             print_r($e->errorInfo[2]);
         }
     }
-    public function doOrder($id){
+    public function doOrder($id, $id_detail = null){
         $arr = [
-            'id_kos' => $id,
+            'id_kos' => $id_detail,
             'id_pengguna' => Account::Get("id"),
         ];
         $this->pemesanan->insert($arr);
@@ -67,9 +67,9 @@ class PemesananController {
     public function detailPemesananUser($id){
         $data = $this->pemesanan->detailPemesanan($id)[1][0];
         // print_r($data);
-        $media = $this->media->Select("*", "WHERE id_kos='$data[id_kos]' LIMIT 1")[1][0];
+        $media = $this->media->Select("*", "WHERE id_kos='$data[id_detail]' LIMIT 1")[1][0];
         // echo "<pre>";
-        // print_r($media);
+        // print_r($data);
         Response::render('front/index', ['title' => 'Detail pemesanan', 'content' => 'pemesanan/detail', 'data' => $data, 'media' => $media]);
     }
     public function invoice($id){
@@ -78,10 +78,10 @@ class PemesananController {
     }
     public function transaction(){
         $id = Account::Get('id');
-        $dp = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='1'")[1];
-        $dibatalkan = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='0'")[1];
-        $lunas = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='2'")[1];
-        $selesai = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*", " p JOIN kos k on p.id_kos=k.id ", " WHERE id_pengguna='$id' and status='3'")[1];
+        $dp = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*, dk.*", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id", " WHERE id_pengguna='$id' and status='1' GROUP BY dk.id_kos")[1];
+        $dibatalkan = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*, dk.*", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id", " WHERE id_pengguna='$id' and status='0' GROUP BY dk.id_kos")[1];
+        $lunas = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*, dk.*", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id", " WHERE id_pengguna='$id' and status='2' GROUP BY dk.id_kos")[1];
+        $selesai = $this->pemesanan->Select("p.id as id_pemesanan, p.*, k.*, dk.*", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id", " WHERE id_pengguna='$id' and status='3' GROUP BY dk.id_kos")[1];
         // echo "<pre>";
         $now = date('Y-m-d');
         foreach ($dp as $d) {

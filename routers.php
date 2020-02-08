@@ -64,8 +64,10 @@
 
     
     // pemesanan
+    Router::get('/kos/detail/:id/:id_detail', 'KosController@detail');
     Router::get('/kos/detail/:id', 'KosController@detail');
     Router::get('/kos/pesan/:id', 'KosController@pesan');
+    Router::get('/kos/pesan/:id/:id_detail', 'KosController@pesan');
     Router::get('/kos/semua', 'KosController@semua');
     Router::post('/kos/semua', 'KosController@semua');
     // rating / review
@@ -73,6 +75,7 @@
         Router::get('/ulasan/:id', 'KosController@reviewExist');
     // end rating
     Router::get('/kos/pesanAction/:id', 'PemesananController@doOrder');
+    Router::get('/kos/pesanAction/:id/:id_detail', 'PemesananController@doOrder');
     Router::get('/akun/pemesanan/detail/:id', 'PemesananController@detailPemesananUser');
     // notifikasi
         Router::get("/pembayaran/notifikasi", "PembayaranController@notifikasi");

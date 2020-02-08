@@ -10,7 +10,7 @@ class Sub_FasilitasController {
     }
 
     public function index() {
-        $lists = $this->sub_fasilitas->Select("*", "", "ORDER By id desc");
+        $lists = $this->sub_fasilitas->Select("sb.*, f.nama as fasilitas", " sb JOIN fasilitas f ON f.id=sb.id_fasilitas", "ORDER By id desc");
         Response::render('back/index', ['title' => 'Daftar Fasilitas', 'content' => 'sub_fasilitas/index', 'list' => $lists[1]]);
 
     }
