@@ -205,7 +205,7 @@ class KosController {
         foreach ($rate as $key) {
             $max+=$key['rating'];
         }
-        $rate = $max / count($rate);
+        $rate = $max / (count($rate) == 0 ? 1 : count($rate));
         $subfas = array();
         
         // echo "<pre>";
@@ -244,12 +244,8 @@ class KosController {
     public function semua(){
         $d = $_POST;
         $pencarian = " ";
-        $lat = $_COOKIE['lat'];
-        $long = $_COOKIE['long'];
-        // echo $_COOKIE['long'];
-        // echo "<pre>";
-        // print_r($d);
-        // echo "</pre>";
+        $lat = (isset($_COOKIE['lat']) ? $_COOKIE['lat'] :0 );
+        $long = (isset($_COOKIE['long']) ? $_COOKIE['long'] : 0);
         $urut = "";
         if (isset($d['jarak'])) {
             if($d['jarak'] != ''){
@@ -299,13 +295,12 @@ class KosController {
             // 1 mile = 1,609 
             //key latitude and $user longitude
         }
-        $long = $_COOKIE['long'];
-        $lat    = $_COOKIE['lat'];
-        // echo "$pencarian";
-        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 6371 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
-        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos AND k.id  $urut");
-        
+        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 3959 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
+        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos, k.id  $urut");
+        // echo "k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 6371 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos $pencarian GROUP BY m.id_kos AND k.id  $urut";
         $kategori = $this->kategori->Select("*", '')[1];
+        // echo "<pre>";
+        // print_r($kos);
         Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);
     }
     public function favorit($id){

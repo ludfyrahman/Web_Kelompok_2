@@ -44,10 +44,20 @@
                                         <option value="3" <?= (Input::postOrOr('urut') == 3 ? "selected" : "") ?>>Tertinggi</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="">Jarak (m)</label>
                                     <input type="text" placeholder="jarak" name="jarak" value="<?= Input::postOrOr('jarak') ?>">
-                                </div>
+                                </div> -->
+                                <!-- <div class="form-group">
+                                    <label for="">Fasilitas</label>
+                                    <?php
+                                    foreach($fasilitas as $f){
+                                    ?>
+                                    <input type="checkbox" ><?= $f[''] ?>
+                                    <?php
+                                    }
+                                    ?>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="">Rentang Harga</label>
                                     <div class="row">
@@ -100,7 +110,9 @@
                             <h3 class="blog-title my-3"><a href="#"><?= substr($k['nama'], 0,15)."..." ?></a></h3>
                             <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
                             <p><?= App::price($k['harga']) ?></p>
-                            <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya</a>
+                            <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya 
+                            <!-- <?= $k['distance'] ?> -->
+                            </a>
                             <?php
                             if(isset($_SESSION['userid'])){
                             ?>
