@@ -86,11 +86,11 @@
                                             <input type="hidden" value="<?= $data['id'] ?>" id="id">
                                             <div class="alert alert-warning"><b>Perhatian</b>. unggah file dengan type png, jpg, dan jpeg </div>
                                             <!-- untuk video dengan type mp4 dengan ukuran maksimal 4MB -->
-                                            <div class="dropzone dropzone-previews">
-                                                <div class="fallback">
-                                                    <input name="file" type="file" multiple />
-                                                </div>
-                                            </div>
+                                            <!-- <div class="dropzone dropzone-previews">
+                                                <div class="fallback"> -->
+                                                    <input name="file[]" type="file" multiple />
+                                                <!-- </div>
+                                            </div> -->
                                         </div>
                                         <div class="item-wrapper col-md-12">
                                             <label for="">Fasilitas</label>

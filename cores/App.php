@@ -27,6 +27,12 @@ class App {
         move_uploaded_file($img['tmp_name'], BASEPATH . $path);
         chmod($path, 0755);
     }
+    public static function UploadMultiImage($img, $path, $index) {
+        $images = $img['name'][$index];
+        $path = "assets/images/upload/$path/$images";
+        move_uploaded_file($img['tmp_name'][$index], BASEPATH . $path);
+        chmod($path, 0755);
+    }
     public static function uri($index){
         $var = explode('/', "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
         return $var[$index];

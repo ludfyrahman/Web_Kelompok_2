@@ -34,9 +34,11 @@
                       <a href="<?=BASEADM.'kost/'.$l['id'].'/edit' ?>" >
                         <i class="mdi mdi-pencil-box-outline"></i>
                       </a>
-                      
                       <a href="<?=BASEADM.'kost/'.$l['id'].'/delete' ?>" >
                         <i class="mdi mdi-delete-forever"></i>
+                      </a>
+                      <a href="<?=BASEURL.'kos/detail/'.$l['id'].'' ?>" target="_blank">
+                        <i class="mdi mdi-book"></i>
                       </a>
 
                     </td>

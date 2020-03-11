@@ -122,8 +122,8 @@ class KosController {
                 'longitude' => $_COOKIE['long'],
                 'ditambahkan_oleh' =>  Account::Get('id')
             ];
-            echo "<pre>";
-            // print_r($arr);
+            // echo "<pre>";
+            // print_r($_FILES);
             $this->kos->Insert($arr);
             $id = $this->kos->lastInsertId();
             foreach ($d['type'] as $index => $t) {
@@ -131,9 +131,10 @@ class KosController {
                     'id_kos' => $id,
                     'type' => $t,
                     'jumlah_kamar' => $d['jumlah_kamar'][$index],
-                    'harga' => $d['harga'][$index]
+                    'harga' => $d['harga'][$index],
                 ];
                 $this->kos->insert($arraytype, 'detail_kos');
+                
                 $id_detail = $this->kos->lastInsertId();
                 $this->kos->add_sub($id_detail, $index);
                 // print_r($arraytype);
@@ -150,7 +151,7 @@ class KosController {
             //     // print_r($array);
             // }
 
-            Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil ditambahkan']);
+            // Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -295,7 +296,9 @@ class KosController {
             // 1 mile = 1,609 
             //key latitude and $user longitude
         }
-        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 3959 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
+        // $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 3959 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
+        // " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos, k.id  $urut");
+        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media", 
         " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos, k.id  $urut");
         // echo "k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 6371 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos $pencarian GROUP BY m.id_kos AND k.id  $urut";
         $kategori = $this->kategori->Select("*", '')[1];

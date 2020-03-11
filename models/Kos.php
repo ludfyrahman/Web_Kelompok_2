@@ -21,9 +21,19 @@ class Kos extends ORM {
             $ins = array_diff($sub_fasilitas[$index], $old_sub_fasilitas[$index]);
             $del = array_diff($old_sub_fasilitas[$index], $sub_fasilitas[$index]);
             // echo "batas <br>";
+            $in = 0;
             foreach($ins as $i) {
                 // print_r(['id_fasilitas' => $i, 'id_kos' => $id]);
+                $this->Insert($arraymedia = [
+                    'link_media' => $_FILES['file']['name'][$in],
+                    'id_kos' => $id,
+                    'type' => 1,
+                ], 'media');
+                echo "<pre>";
+                // print_r($_FILES['file']);
+                App::UploadMultiImage($_FILES['file'], "kos", $in);
                 $this->Insert(['id_fasilitas' => $i, 'id_kos' => $id], "fasilitas_kos");
+                $in++;
             }
             foreach($del as $i) {
                 // echo "WHERE id_kos = $id AND id_fasilitas = $i ";
