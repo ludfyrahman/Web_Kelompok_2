@@ -9,41 +9,39 @@
                         <div class="grid-body">
                             <div class="item-wrapper">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="inputEmail1">Nama</label>
-                                            <input type="text" id="nama" name="nama" class="form-control" value="<?=Input::postOrOr('nama', $data['nama'])?>" placeholder="Masukkan nama kos" required>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="inputPassword1">Jenis Kos</label>
-                                            <select class="custom-select" name="jenis" id="jenis" required>
-                                            <option value=' '>Pilih Jenis</option>
-                                            <?php
-                                            $jen = Input::postOrOr('jenis', $data['jenis']);
-                                            ?>
-                                                <option <?=($jen == '1' ? 'selected' : '')?> value='1'>Laki laki</option>
-                                                <option <?=($jen == '2' ? 'selected' : '')?> value='2'>Perempuan</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword1">Deskripsi</label>
-                                            <textarea name="deskripsi" id="ckedtor deskripsi" name="deskripsi" class=" ckeditor form-control" cols="30" rows="10" required><?=Input::postOrOr('deskripsi', $data['deskripsi'])?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword1">Kategori</label>
-                                            <select class="custom-select" name="kategori" id="kategori" required>
-                                            <option value=' '>Pilih Kategori</option>
-                                            <?php
-                                            $kat = Input::postOrOr('kategori', $data['id_kategori']);
-                                            foreach($kategori as $k){
-                                            ?>
-                                                <option <?=($k['id'] == $kat ? 'selected' : '')?> value='<?= $k['id'] ?>'><?= $k['nama'] ?></option>
-                                            <?php } ?>
-                                            </select>
-                                        </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="inputEmail1">Nama</label>
+                                        <input type="text" id="nama" name="nama" class="form-control" value="<?=Input::postOrOr('nama', $data['nama'])?>" placeholder="Masukkan nama kos" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    
+                                    <div class="form-group col-md-12">
+                                        <label for="inputPassword1">Jenis Kos</label>
+                                        <select class="custom-select" name="jenis" id="jenis" required>
+                                        <option value=' '>Pilih Jenis</option>
+                                        <?php
+                                        $jen = Input::postOrOr('jenis', $data['jenis']);
+                                        ?>
+                                            <option <?=($jen == '1' ? 'selected' : '')?> value='1'>Laki laki</option>
+                                            <option <?=($jen == '2' ? 'selected' : '')?> value='2'>Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="inputPassword1">Deskripsi</label>
+                                        <textarea name="deskripsi" id="ckedtor deskripsi" name="deskripsi" class=" ckeditor form-control" cols="30" rows="10" required><?=Input::postOrOr('deskripsi', $data['deskripsi'])?></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="inputPassword1">Kategori</label>
+                                        <select class="custom-select" name="kategori" id="kategori" required>
+                                        <option value=' '>Pilih Kategori</option>
+                                        <?php
+                                        $kat = Input::postOrOr('kategori', $data['id_kategori']);
+                                        foreach($kategori as $k){
+                                        ?>
+                                            <option <?=($k['id'] == $kat ? 'selected' : '')?> value='<?= $k['id'] ?>'><?= $k['nama'] ?></option>
+                                        <?php } ?>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="col-md-6">
                                         <p><b>Lokasi Kos</b></p>
                                         <div class="grid-body">
                                             <div class="item-wrapper">
@@ -53,7 +51,7 @@
                                                 </div>                    
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -88,7 +86,7 @@
                                             <!-- untuk video dengan type mp4 dengan ukuran maksimal 4MB -->
                                             <!-- <div class="dropzone dropzone-previews">
                                                 <div class="fallback"> -->
-                                                    <input name="file[]" type="file" multiple />
+                                                    <input name="file[]" type="file" multiple required/>
                                                 <!-- </div>
                                             </div> -->
                                         </div>
