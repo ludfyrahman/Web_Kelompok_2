@@ -38,5 +38,27 @@ class SiteController {
         $favorit = $this->favorit->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, k.tanggal_ditambahkan ', " f JOIN kos k ON f.id_kos=k.id JOIN pengguna p on f.id_pengguna=p.id  JOIN (Select * from media) m on k.id=m.id_kos $where ", "GROUP BY m.id_kos");
         Response::render('front/index', ['title' => 'Profil '.Account::Get('nama'), 'content' => 'user/wishlist', 'data' => $favorit[1]]);
     }
+    public function coba(){
+        $pages = new Paging('2','page');
+        //get number of total records
+        $stmt = $this->favorit->select("*");
+        // $row = $stmt->fetch(PDO::FETCH_NUM);
+        $total = $stmt[0];
+        echo "<pre>";
+        // //pass number of records to
+        $pages->set_total($total); 
+        $data = $this->favorit->select("*", $pages->get_limit())[1];
+        // $data = $db->query('SELECT * FROM table '.$pages->get_limit());
+        foreach($data as $row) {
+            
+            print_r($row['id']);
+            echo "<br>";
+            //display the records here
+        }
+
+        // //create the page links
+        echo $pages->page_links(BASEURL."coba/");
+        // echo App::uri(3);
+    }
     
 }

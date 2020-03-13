@@ -6,6 +6,7 @@ require 'cores/Response.php';
 require 'cores/Router.php';
 require 'cores/Input.php';
 require 'cores/App.php';
+require 'cores/Paging.php';
 require 'helpers/Account.php';
 require 'vendor/autoload.php';
 require 'helpers/google-login-api.php';

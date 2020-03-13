@@ -62,7 +62,7 @@
                                     <label for="">Rentang Harga</label>
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <input type="text" placeholder="harga awal" name="harga_awal" class="form-control" value="<?= Input::postOrOr('harga_awal') ?>">
+                                            <input type="text" placeholder="harga awal"  name="harga_awal" class="form-control" value="<?= Input::postOrOr('harga_awal', '100000') ?>">
                                         </div>
                                         <div class="col-md-1">
                                             -
@@ -100,14 +100,15 @@
                             <img style="height:200px" src="<?=BASEASSET?>/images/upload/kos/<?= $k['link_media'] ?>" alt="">
                         </div>
                         <!-- Blog Content -->
-                        <div class="blog-content p-4">
+                        <div class="blog-content p-4" >
                             <!-- Meta Info -->
-                            <ul class="meta-info d-flex justify-content-between">
+                            <ul class="meta-info d-flex justify-content-between" style="min-height:85px">
                                 <li>By <a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= $nama[0] ?></a></li>
                                 <li><a href="<?= BASEURL."kos/detail/".$k['id'] ?>"><?= App::Date($k['tanggal_ditambahkan'], 'd M Y') ?></a></li>
                             </ul>
                             <!-- Blog Title -->
                             <h3 class="blog-title my-3"><a href="#"><?= substr($k['nama'], 0,15)."..." ?></a></h3>
+                            <span class="badge badge-secondary"><?= $k['kategori'] ?></span></h3>
                             <p><?= substr($k['deskripsi'], 0, 30)."..." ?></p>
                             <p><?= App::price($k['harga']) ?></p>
                             <a href="<?= BASEURL."kos/detail/".$k['id'] ?>" class="blog-btn mt-3">Selengkapnya 

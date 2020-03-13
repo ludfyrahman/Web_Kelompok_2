@@ -65,4 +65,5 @@ class App {
     public static function breadcrumb(){
         Response::part('breadcrumb');
     }
+    
 }

@@ -34,6 +34,8 @@
 
 // front end 
     Router::get('/', 'SiteController@home');
+    Router::get('/coba', 'SiteController@coba');
+    Router::get('/coba/page/:val', 'SiteController@coba');
     Router::get('/filter', 'SiteController@filter');
 
     // pengguna

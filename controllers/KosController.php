@@ -298,12 +298,13 @@ class KosController {
         }
         // $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 3959 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance", 
         // " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos, k.id  $urut");
-        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media", 
-        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos", " $pencarian GROUP BY m.id_kos, k.id  $urut");
+        $kos = $this->kos->Select("k.nama, k.id, k.deskripsi,k.id_kategori, kk.nama as kategori, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media", 
+        " k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN kategori kk on k.id_kategori=kk.id JOIN (Select * from detail_kos) dk on k.id=dk.id_kos LEFT JOIN (Select * from media) m on dk.id=m.id_kos ", " $pencarian GROUP BY  k.id  $urut");
         // echo "k.nama, k.id, k.deskripsi, k.tanggal_ditambahkan, p.nama as nama_pemilik, dk.harga, m.link_media, ( 6371 * acos ( cos ( radians($lat) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians($lat) ) + sin ( radians($long) ) * sin( radians( latitude ) ) ) ) AS distance k LEFT JOIN pengguna p on k.ditambahkan_oleh=p.id LEFT JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos $pencarian GROUP BY m.id_kos AND k.id  $urut";
         $kategori = $this->kategori->Select("*", '')[1];
         // echo "<pre>";
         // print_r($kos);
+        // echo "</pre>";
         Response::render('front/index', ['title' => 'Semua Kos', 'content' => 'kos/semua','data' => $kos[1], 'kategori' => $kategori]);
     }
     public function favorit($id){
