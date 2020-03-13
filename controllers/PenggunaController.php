@@ -19,7 +19,6 @@ class PenggunaController {
         $lists = $this->pengguna->Select('*', "", "ORDER BY id DESC");
         Response::render('back/index', ['title' => 'Daftar pengguna', 'content' => 'pengguna/index', 'list' => $lists[1]]);
     }
-
     public function add() {
         Response::render('back/index', ['title' => 'Tambah pengguna', 'content' => 'pengguna/_form', 'type' => 'Tambah', 'data' => null]);
     }
@@ -84,7 +83,7 @@ class PenggunaController {
                     $this->add();
                 }
             }
-            
+            Response::redirectWithAlert('admin/pengguna/', ['info', 'Berhasil Simpan Data']);
 
         }
         catch(Exception $e) {
