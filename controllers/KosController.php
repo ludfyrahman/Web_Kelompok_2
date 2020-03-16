@@ -54,34 +54,60 @@ class KosController {
     public function edit($id) {
         $kategori = $this->kategori->Select("*", "", "ORDER by id asc");
         $fasilitas = $this->fasilitas->Select("*", "")[1];
-        $index = 0;
-        $index = 0;
-        $subfas = array();
-        foreach($fasilitas as $f){
-            $subfas[$index] = $f;
-            $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
-            $in = 0;
-            $subfas[$index]['sub'][$in] = '';
-            foreach($sub_fasilitas as $sub){
-                $subfas[$index]['sub'][$in] = $sub;
-                $in++;
-            }
-            $inde = 0;
-            $subfas[$index]['old_sub'][$inde] = '';
-            $sf = $this->fasilitas_kos->select("sf.id", " fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id", "WHERE id_kos=$id and sf.id_fasilitas=$f[id]")[1];
-            foreach ($sf as $sfv) {
-                $subfas[$index]['old_sub'][$inde] = $sfv['id'];
-                $inde++;
-            }
-            $index++;
-        }
         
         
         $data = $this->kos->select("*", "WHERE id=$id")[1];
+        $detail = $this->kos->CustomSelect("SELECT * FROM detail_kos WHERE id_kos=$id");
+        $subfas = array();
+        // foreach ($detail as $d) {
+        //     $index = 0;
+        //     foreach($fasilitas as $f){
+        //         $subfas[$index] = $f;
+        //         $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
+        //         $in = 0;
+        //         $subfas[$index]['sub'][$in] = '';
+        //         foreach($sub_fasilitas as $sub){
+        //             $subfas[$index]['sub'][$in] = $sub;
+        //             $in++;
+        //         }
+        //         $inde = 0;
+        //         $subfas[$index]['old_sub'][$inde] = '';
+        //         $sf = $this->fasilitas_kos->select("sf.id", " fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id", "WHERE id_kos=$d[id] and sf.id_fasilitas=$f[id]")[1];
+        //         foreach ($sf as $sfv) {
+        //             $subfas[$index]['old_sub'][$inde] = $sfv['id'];
+        //             $inde++;
+        //         }
+        //         $index++;
+        //     }
+        // }
+        
+            $index = 0;
+            foreach($fasilitas as $f){
+                $subfas[$index] = $f;
+                $sub_fasilitas = $this->sub_fasilitas->Select("*", "WHERE id_fasilitas='$f[id]'")[1];
+                $in = 0;
+                $subfas[$index]['sub'][$in] = '';
+                foreach($sub_fasilitas as $sub){
+                    $subfas[$index]['sub'][$in] = $sub;
+                    $in++;
+                }
+                $i = 0;
+                foreach ($detail as $d) {
+                    $inde = 0;
+                    $subfas[$i][$index]['old_sub'][$inde] = '';
+                    $sf = $this->fasilitas_kos->select("sf.id", " fk JOIN sub_fasilitas sf ON fk.id_fasilitas=sf.id", "WHERE id_kos=$d[id] and sf.id_fasilitas=$f[id]")[1];
+                    foreach ($sf as $sfv) {
+                        $subfas[$i][$index]['old_sub'][$inde] = $sfv['id'];
+                        $inde++;
+                    }
+                    $i++;
+                }
+                $index++;
+            }
         // echo "<pre>";
         // print_r($subfas);
         // echo "</pre>";
-        Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'subfas' => $subfas, 'kategori' => $kategori[1]]);
+        Response::render('back/index', ['title' => 'Edit Kos', 'content' => 'kos/_form', 'type' => 'Edit', 'data' => $data[0], 'subfas' => $subfas, 'kategori' => $kategori[1], 'detail' => $detail]);
     }
 
     public function storeFile($id){
@@ -151,7 +177,7 @@ class KosController {
             //     // print_r($array);
             // }
 
-            // Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil ditambahkan']);
+            Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil ditambahkan']);
         }
         catch(Exception $e) {
             // if($e->errorInfo[2] == "Duplicate entry '$d[email]' for key 'email'")
@@ -168,18 +194,29 @@ class KosController {
             $arr = [
                 'nama' => $d['nama'], 
                 'deskripsi' => $d['deskripsi'], 
-                'harga' => $d['harga'],
+                'jenis' => $d['jenis'],
                 'id_kategori' => $d['kategori'],
             ];
-
-
             $this->kos->Update($arr, "WHERE id = $id");
-
+            foreach ($d['type'] as $index => $t) {
+                $arraytype = [
+                    'type' => $t,
+                    'jumlah_kamar' => $d['jumlah_kamar'][$index],
+                    'harga' => $d['harga'][$index],
+                ];
+                $kode = $d['id'][$index];
+                $this->kos->update($arraytype, "WHERE id='$kode'", 'detail_kos');
+                
+                // $id_detail = $this->kos->lastInsertId();
+                // $this->kos->add_sub($id_detail, $index);
+                // print_r($arraytype);
+            }
             Response::redirectWithAlert('admin/kost/', ['info', 'Kos berhasil diedit']);
         }
         catch(Exception $e) {
-
-            $this->edit($id);
+            echo "<pre>";
+            print_r($e);
+            // $this->edit($id);
         }
     }
 
