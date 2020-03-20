@@ -82,7 +82,6 @@
                                                 <img src="<?= BASEASSET."images/logo.png" ?>">
                                             </td>
                                         </tr>
-                                        
                                         <tr>
                                             <td colspan="2" style="font-size: 14px;">
                                                 <span style="font-weight: 600">Nomor Invoice</span> : <span style="color: #42b549; font-weight: 600;"><?= invoice_code."".$data['id'] ?></span>
@@ -101,15 +100,10 @@
                                                 <b><?= $data['nama_pemilik'] ?></b>
                                             </td>
                                         </tr>
-                                        
                                         <tr>
                                             <td style="font-size: 12px; font-weight: 600; padding-bottom: 6px; width: 80px;">Tanggal</td>
                                             <td style="font-size: 12px; padding-bottom: 6px;"><?= $data['tanggal_pemesanan'] ?></td>
                                         </tr>
-                                        
-                                        
-                                        
-                                        
                                     </table>
                                 </td>
                                 <td style="width: 43%; vertical-align: top; padding-left: 30px;">

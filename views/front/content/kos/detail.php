@@ -160,9 +160,9 @@
                                         <?php } ?>
                                         <!-- <h4 class="margin-top-bottom-12">Lokasi Kos</h4> -->
                                         <div style="clear:both"></div>
-                                        <!-- <div id="map">
+                                        <div id="map">
                                             
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">
