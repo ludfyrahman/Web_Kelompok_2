@@ -7,7 +7,9 @@
  * Time: 10:02
  */
 class Pemesanan extends ORM {
+    
     public function dataPemesanan($date = []){
+        $this->load->database();
         $range = "";
         if (count($date) > 0) {
             
@@ -19,7 +21,7 @@ class Pemesanan extends ORM {
         if(Account::get('level') == 2){
             $range.=" AND k.ditambahkan_oleh=".Account::get('id');
         }
-        $q = $this->Select("p.id, pg.nama_rekening, pg.nama_bank, pg.no_rekening, k.nama as nama_kos, p.status as status_code, dk.jumlah_kamar, dk.harga, pg.nama as nama_pemesan,p.tanggal_pemesanan, (CASE WHEN p.status = 0 THEN 'Ditolak' WHEN p.status = 1 THEN 'Pending' WHEN p.status = 2 THEN 'Dp' WHEN p.status = 3 THEN 'Lunas' END) as status ", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id JOIN pengguna pg on p.id_pengguna=pg.id", " $range ORDER BY p.id DESC");
+        $q = $this->db->query("p.id, pg.nama_rekening, pg.nama_bank, pg.no_rekening, k.nama as nama_kos, p.status as status_code, dk.jumlah_kamar, dk.harga, pg.nama as nama_pemesan,p.tanggal_pemesanan, (CASE WHEN p.status = 0 THEN 'Ditolak' WHEN p.status = 1 THEN 'Pending' WHEN p.status = 2 THEN 'Dp' WHEN p.status = 3 THEN 'Lunas' END) as status ", " p  JOIN (Select * from detail_kos) dk on dk.id=p.id_kos JOIN kos k on dk.id_kos=k.id JOIN pengguna pg on p.id_pengguna=pg.id", " $range ORDER BY p.id DESC");
         return $q;
     }
     public function detailPemesanan($id){

@@ -225,7 +225,7 @@ class KosController {
         Response::redirectWithAlert('admin/kost/', ['info', "Berhasil menghapus akun"]);
     }
 
-    public function detail($id, $id_detail = null){
+    public function detail($id, $id_detail = null){ 
         $detail_kos = $this->kos->CustomSelect("SELECT * FROM detail_kos WHERE id_kos='$id'");
         $id_detail_kos= ($id_detail == null ? $detail_kos[0]['id'] : $id_detail);
         $data = $this->kos->Select("k.id, k.nama as nama_kos, k.dilihat,k.jenis, k.tanggal_diubah, k.latitude, k.longitude, k.deskripsi, dk.jumlah_kamar, dk.harga, k.tanggal_ditambahkan, p.nama", " k JOIN pengguna p ON k.ditambahkan_oleh=p.id JOIN (Select * from detail_kos) dk on k.id=dk.id_kos ", "WHERE k.id='$id' and dk.id=$id_detail_kos GROUP BY k.id")[1][0];

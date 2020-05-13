@@ -23,7 +23,6 @@ class PenggunaController {
         Response::render('back/index', ['title' => 'Tambah pengguna', 'content' => 'pengguna/_form', 'type' => 'Tambah', 'data' => null]);
     }
 
-
     public function edit($id) {
         $data = $this->pengguna->Select("*", "WHERE id = $id")[1];
 
