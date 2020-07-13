@@ -195,6 +195,7 @@ class PenggunaController {
         $d = $_POST;
         $c = $this->pengguna->select("*", "WHERE email='$d[email]'");
         if($c[0] > 0 ){
+            $c = $c[1][0];
             $this->setting->lupa_password_email("papikos@gmail.com", $c['email']);
             // echo "ada cek email";
             $_SESSION['alert'] = ['info', 'Verifikasi Terkirim ke email '.$c['email']];

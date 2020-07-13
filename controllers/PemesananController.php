@@ -95,7 +95,9 @@ class PemesananController {
                 $this->pemesanan->update(['status' => 0], "WHERE id='$l[id_pemesanan]'");
             }
         }
-        Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'dp' => $dp, 'lunas' => $lunas, 'dibatalkan' => $dibatalkan, 'selesai' => $selesai]);
+        echo "<pre>";
+        print_r($dibatalkan);
+        // Response::render('front/index', ['title' => 'Daftar Transaksi', 'content' => 'pemesanan/index', 'dp' => $dp, 'lunas' => $lunas, 'dibatalkan' => $dibatalkan, 'selesai' => $selesai]);
     }
     public function detail($id){
         $data = $this->pemesanan->detailPemesanan($id)[1][0];

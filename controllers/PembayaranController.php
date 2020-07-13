@@ -24,6 +24,8 @@ class pembayaranController {
         }else{
             $lists = $this->pembayaran->datapembayaran()[1];
         }
+        // echo "<pre>";
+        // print_r($lists);
         Response::render('back/index', ['title' => 'Daftar pembayaran', 'content' => 'pembayaran/index', 'list' => $lists]);
 
     }

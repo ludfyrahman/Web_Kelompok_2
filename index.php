@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 require 'define.php';
 require 'cores/ORM.php';
 require 'cores/Response.php';

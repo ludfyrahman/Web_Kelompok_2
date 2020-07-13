@@ -35,7 +35,7 @@ class SiteController {
             $where.=" and k.nama like '%$cari%' ";
         }
         // print_r($where);
-        $favorit = $this->favorit->Select('k.nama, k.id, k.deskripsi, k.jumlah_kamar, k.harga, m.link_media, k.tanggal_ditambahkan ', " f JOIN kos k ON f.id_kos=k.id JOIN pengguna p on f.id_pengguna=p.id  JOIN (Select * from media) m on k.id=m.id_kos $where ", "GROUP BY m.id_kos");
+        $favorit = $this->favorit->Select('k.nama, k.id, k.deskripsi, dk.jumlah_kamar, dk.harga, m.link_media, k.tanggal_ditambahkan ', " f JOIN kos k ON f.id_kos=k.id JOIN pengguna p on f.id_pengguna=p.id  JOIN (Select * from media) m on k.id=m.id_kos JOIN (Select * from detail_kos) dk on k.id=dk.id_kos $where ", "GROUP BY m.id_kos");
         Response::render('front/index', ['title' => 'Profil '.Account::Get('nama'), 'content' => 'user/wishlist', 'data' => $favorit[1]]);
     }
     public function coba(){

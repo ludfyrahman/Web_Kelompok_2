@@ -87,6 +87,7 @@
 
     // authentication
     Router::get("/admin/setting", 'SettingController@index');
+    Router::get("/send/:id/:id/:id/:id", 'SettingController@send');
     // pembayaran
     Router::get('/pemesanan/bayar/:id/:status', 'PembayaranController@bayar');
     Router::post('/bayar/uploadBukti/:id', 'PembayaranController@doPay');

@@ -77,10 +77,12 @@ class SettingController {
         $kode = App::RandomString(5);
         $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
         $subject = "Verifikasi Email";
-        $this->send("rezamufti24@gmail.com", $to, $subject, "<h1>Verifikasi Akun ".Account::get("nama")."</h1><p>masukkan kode <b>".$kode." untuk verifikasi akun anda<p>");
+        $this->send("dawiyahrubi@gmail.com", $to, $subject, "<h1>Verifikasi Akun ".Account::get("nama")."</h1><p>masukkan kode <b>".$kode." untuk verifikasi akun anda<p>");
     }
     public function lupa_password_email($from, $to){
-        $this->send("rezamufti24@gmail.com", $to, $subject, "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
+        $kode = App::RandomString(5);
+        $this->pengguna->update(["verification" => $kode], "WHERE email='$to'");
+        $this->send("dawiyahrubi@gmail.com", $to, "Subject", "<h1>Verifikasi Password $to </h1><p>klik link <b><a href=".BASEURL."ubah_password/$kode".">".$kode."</a> untuk mengubah password anda<p>");
     }
     public function verifikasi($id){
         $q = $this->pengguna->select("*", "WHERE verification='$id'");
@@ -126,10 +128,18 @@ class SettingController {
         }
     }
     public function verification_code_hp($to){
-        $kode = App::RandomString(5);
-        $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
-        $sms = new NexmoMessage(NEXMO_API_KEY, NEXMO_API_SECRET);
-        $sms->sendText( $to, 'Papikos', 'Kode Verifikasi '.$kode." " );
+        // $kode = App::RandomString(5);
+        // // $this->pengguna->update(["verification" => $kode], "WHERE id=".Account::get("id"));
+        // $sms = new NexmoMessage(NEXMO_API_KEY, NEXMO_API_SECRET);
+        // $sms->sendText( $to, 'Papikos', 'Kode Verifikasi '.$kode." " );
+        $basic  = new \Nexmo\Client\Credentials\Basic('68206d0a', 'H9nFINin9ytRgmeT');
+        $client = new \Nexmo\Client($basic);
+
+        $message = $client->message()->send([
+            'to' => '6282231425636',
+            'from' => 'Vonage APIs',
+            'text' => 'Hello from Vonage SMS API'
+        ]);
     }
     public function notifikasi_pembayaran_noHp($to){
         $kode = App::RandomString(5);
@@ -148,8 +158,8 @@ class SettingController {
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'rezamufti24@gmail.com';                 // SMTP username
-        $mail->Password = 'rezaraihanreksa24';                           // SMTP password
+        $mail->Username = 'dawiyahrubi@gmail.com';                 // SMTP username
+        $mail->Password = 'rubilemupanda';                           // SMTP password
         $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 465;                                    // TCP port to connect to
 
